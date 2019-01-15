@@ -16,6 +16,8 @@ Thumbs.db
 
 /vendor
 
+/config/db.php
+
 # composer itself is not needed
 composer.phar
 

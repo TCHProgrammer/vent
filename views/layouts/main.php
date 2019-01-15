@@ -589,6 +589,11 @@ AppAsset::register($this);
             });
         }
 	});
+
+    $('body').on('click','.sure-closes', function(e){
+        $('.add-brands__input input[name="name"]').attr('readonly',false);
+        $('.add-brands__input input[name="brand_name"]').attr('readonly',false);
+    });
 	
 </script>
 
