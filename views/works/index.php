@@ -151,6 +151,322 @@ use app\models\Period;
     </div>
 </div>
 <div class="main-content__works">
+
+    <? if(isset($_GET['brands_id']) && is_numeric(($_GET['brands_id']))): ?>
+
+    <?$brands_id = (int)$_GET['brands_id'];?>
+
+    <? $works_map = Works::getWorksMapByBrandId($brands_id); ?>
+
+
+    <? foreach($works_map as $workers_type_id=>$workers_type_data): ?>
+
+    <div class="main-content__works-item" data-linked="<?=$work->symbol_code;?>">
+        <div class="item-control">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="8" viewBox="0 0 13 8"><defs><path id="ldxya" d="M334.59 239.531a1.5 1.5 0 0 1-2.121-2.121l4.961-4.962a1.495 1.495 0 0 1 1.07-.439c.387-.002.775.144 1.07.44l4.961 4.96a1.5 1.5 0 0 1-2.121 2.122l-3.91-3.91z"/></defs><g><g transform="translate(-332 -232)"><use fill="#232226" xlink:href="#ldxya"/></g></g></svg>
+            </div>
+            <div class="title">Механики</div>
+        </div>
+
+
+
+        <div class="item-content opened">
+            <div class="wrap" data-linked="passport">
+                <a href="#" class="to-add-work">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="2ehra" d="M252.5 315a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H254v3.5a1.5 1.5 0 0 1-3 0V323h-3.5a1.5 1.5 0 0 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-246 -315)"><use fill="#fff" xlink:href="#2ehra"/></g></g></svg>
+                </a>
+                <div class="table-control rotating">
+                    <?=WorkerTypes::findOne($workers_type_id)->name;?>
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="6" viewBox="0 0 10 6"><defs><path id="9luoa" d="M546.705 383.3a.99.99 0 0 0-1.4 0l-3.3 3.3-3.3-3.3a.99.99 0 0 0-1.4 1.4l3.994 3.994c.195.194.45.29.706.288a.986.986 0 0 0 .706-.288l3.994-3.994a.99.99 0 0 0 0-1.4z"/></defs><g><g transform="translate(-537 -383)"><use fill="#d4d6d9" xlink:href="#9luoa"/></g></g></svg>
+                    </div>
+                </div>
+                <div class="table table-opened">
+                    <div class="wrapper">
+                        <table>
+                            <thead>
+                            <td class="name active">Наименование работы</td>
+                            <td class="week" data-filter="one">Еженедельно</td>
+                            <td class="month" data-filter="two">Ежемесячно</td>
+                            <td class="kvar" data-filter="three">Квартально</td>
+                            <td class="polu" data-filter="four">Полугодично</td>
+                            <td class="year" data-filter="five">Раз в год</td>
+                            </thead>
+
+                            <? foreach($workers_type_data as $works_type_id=>$works_type_data): ?>
+
+
+
+                            <tr data-filter-one="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span><?=WorkTypes::findOne($work_type_id)->name;?></span>
+                                </td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                            </tr>
+
+                            <? endforeach; ?>
+
+                            <!--
+                            <tr data-filter-four="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span>Проверка электропитания по фазам (дисбаланс по напряжению, дисбаланс по току)</span>
+                                </td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                                <td class="checks"></td>
+                            </tr>
+                            <tr data-filter-five="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span>Чистка жалюзийных решеток</span>
+                                </td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                            </tr>
+                            <tr data-filter-one="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span>Проверка виброизолирующих опор</span>
+                                </td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                            </tr>
+                            <tr data-filter-three="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span>Проверка состояний силовых и управляющих цепей оборудования</span>
+                                </td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                            </tr>
+                            <tr data-filter-two="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span>Смазка подшипников вытяжной установки, замена при необходимости</span>
+                                </td>
+                                <td class="checks"></td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                            </tr>
+                            <tr data-filter-two="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span>Смазка подшипников вытяжной установки, замена при необходимости</span>
+                                </td>
+                                <td class="checks"></td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                            </tr>
+                            <tr data-filter-four="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span>Пмазка подшипников вытяжной установки, замена при необходимости</span>
+                                </td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                                <td class="checks"></td>
+                            </tr>
+                            <tr data-filter-five="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span>Ымазка подшипников вытяжной установки, замена при необходимости</span>
+                                </td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                            </tr>
+                            <tr data-filter-one="true">
+                                <td class="named">
+                                    <div class="button">
+                                        <div class="open-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+
+                                            <div class="tooltip">
+                                                <button class="delete">
+                                                    <div class="icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                                                    </div>
+                                                    <div class="text">Удалить</div>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span>Ямазка подшипников вытяжной установки, замена при необходимости</span>
+                                </td>
+                                <td class="checks"><img src="img/checks.png" alt=""></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                                <td class="checks"></td>
+                            </tr>
+                            -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <? endforeach; ?>
+
+
+    <? //endforeach; ?>
+
+
+    <? endif; ?>
+<!--
     <div class="main-content__works-item" data-linked="mech">
         <div class="item-control">
             <div class="icon">
@@ -1417,5 +1733,7 @@ use app\models\Period;
             </div>
         </div>
     </div>
+    -->
 </div>
+
 </div>

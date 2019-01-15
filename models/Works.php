@@ -44,6 +44,42 @@ class Works extends \yii\db\ActiveRecord
         return 'works';
     }
 
+
+    public static function getWorksMapByBrandId($brands_id){
+
+        $brand = Brands::findOne($brands_id);
+
+        if($brand){
+
+
+            $worker_types = WorkerTypes::find()->orderBy('priority')->all();
+
+
+            $work_types = WorkTypes::find()->orderBy('priority')->all();
+
+            $result = array();
+
+            foreach($worker_types as $worker_type){
+
+                $result[$worker_type->id] = array();
+
+                foreach($work_types as $work_type){
+                    $result[$worker_type->id][$work_type->id] = $brand->getWorksByTypes($worker_type->id,$work_type->id);
+                }
+            }
+
+
+
+        } else {
+            return array();
+        }
+
+
+        return $result;
+
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -59,6 +95,8 @@ class Works extends \yii\db\ActiveRecord
             [['worker_types_id'], 'exist', 'skipOnError' => true, 'targetClass' => WorkerTypes::className(), 'targetAttribute' => ['worker_types_id' => 'id']],
         ];
     }
+
+
 
     /**
      * {@inheritdoc}
@@ -117,37 +155,5 @@ class Works extends \yii\db\ActiveRecord
         return $this->hasOne(WorkerTypes::className(), ['id' => 'worker_types_id']);
     }
 
-    public function getWorksMapByBrandId($brand_id){
 
-        $brand = Brands::findOne($brand_id);
-
-        if($brand){
-            $allworks = $brand->works;
-
-            $worker_types = WorkerTypes::find()->orderBy('priority')->all();
-
-
-            $work_types = WorkTypes::find()->orderBy('priority')->all();
-
-            $result = array();
-
-            foreach($worker_types as $worker_type){
-
-                $result[$worker_type->id] = array();
-
-                foreach($work_types as $work_type){
-                    $result[$worker_type->id][$work_type->id] = $brand->getWorksByTypes($worker_type->id,$work_type->id);
-                }
-            }
-
-
-
-        } else {
-            return array();
-        }
-
-
-        return $result;
-
-    }
 }
