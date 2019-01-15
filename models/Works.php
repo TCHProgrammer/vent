@@ -22,6 +22,18 @@ use Yii;
  * @property ReportForms $reportForms
  * @property WorkerTypes $workerTypes
  */
+
+
+use app\models\Categories;
+use app\models\Brands;
+use app\models\WorkTypes;
+use app\models\WorkerTypes;
+use app\models\WorkContents;
+use app\models\ReportForms;
+use app\models\Period;
+
+
+
 class Works extends \yii\db\ActiveRecord
 {
     /**
@@ -103,5 +115,39 @@ class Works extends \yii\db\ActiveRecord
     public function getWorkerTypes()
     {
         return $this->hasOne(WorkerTypes::className(), ['id' => 'worker_types_id']);
+    }
+
+    public function getWorksMapByBrandId($brand_id){
+
+        $brand = Brands::findOne($brand_id);
+
+        if($brand){
+            $allworks = $brand->works;
+
+            $worker_types = WorkerTypes::find()->orderBy('priority')->all();
+
+
+            $work_types = WorkTypes::find()->orderBy('priority')->all();
+
+            $result = array();
+
+            foreach($worker_types as $worker_type){
+
+                $result[$worker_type->id] = array();
+
+                foreach($work_types as $work_type){
+                    $result[$worker_type->id][$work_type->id] = $brand->getWorksByTypes($worker_type->id,$work_type->id);
+                }
+            }
+
+
+
+        } else {
+            return json_encode(array());
+        }
+
+
+        return $result;
+
     }
 }

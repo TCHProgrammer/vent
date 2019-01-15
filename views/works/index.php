@@ -25,7 +25,11 @@ use app\models\Period;
         <div class="main-content__works-menu_dropdown">
             <div class="main-content__works-menu_dropdown-left" data-scroll>
                 <ul>
-                    <li data-link="one">Вентиляторы радиальные</li>
+                    <? $categories = Categories::find()->orderBy('name')->all(); ?>
+                    <? foreach($categories as $category): ?>
+                        <li data-link="<?=$category->id;?>"><?=$category->name;?></li>
+                    <? endforeach; ?>
+                    <!--<li data-link="one">Вентиляторы радиальные</li>
                     <li data-link="two">Вентиляторы канальные</li>
                     <li data-link="">Вентиляторы крышные</li>
                     <li data-link="">Вентиляторы в форточку</li>
@@ -39,11 +43,17 @@ use app\models\Period;
                     <li data-link="">Вентиляторы в форточку и очень длинное название категории</li>
                     <li data-link="">Вентиляторы радиальные</li>
                     <li data-link="">Вентиляторы канальные</li>
+                    -->
                 </ul>
             </div>
             <div class="main-content__works-menu_dropdown-right" data-scroll>
-                <ul data-menu="one">
-                    <li><a href="#">Вентиляторы радиальные</a></li>
+                <?foreach($categories as $category):?>
+                <ul data-menu="<?=$category->id;?>">
+                    <? $brands = Brands::find()->where(array('category_id'=>$category->id))->orderBy('name')->all(); ?>
+                    <? foreach($brands as $brand): ?>
+                    <li><a href="#"><?=$brand->name;?></a></li>
+                    <? endforeach; ?>
+                    <!--
                     <li><a href="#">Вентиляторы канальные</a></li>
                     <li><a href="#">Вентиляторы крышные</a></li>
                     <li><a href="#">Вентиляторы в форточку</a></li>
@@ -53,7 +63,10 @@ use app\models\Period;
                     <li><a href="#">Вентиляторы крышные</a></li>
                     <li><a href="#">Вентиляторы в форточку</a></li>
                     <li><a href="#">Вентиляторы радиальные</a></li>
+                    -->
                 </ul>
+                <? endforeach; ?>
+                <!--
                 <ul data-menu="two">
                     <li><a href="#">Вентиляторы радиальные</a></li>
                     <li><a href="#">Вентиляторы канальные</a></li>
@@ -70,6 +83,7 @@ use app\models\Period;
                     <li><a href="#">Вентиляторы в форточку</a></li>
                     <li><a href="#">Вентиляторы радиальные</a></li>
                 </ul>
+                -->
             </div>
         </div>
         <div class="main-content__works-menu_selected">
@@ -79,9 +93,33 @@ use app\models\Period;
             <div class="icon">
                 <img src="img/menu-burger.png" alt="">
             </div>
-            <div class="divide">Вентиляторы радиальные</div>
+
+            <?
+                if(isset($categories[0])){
+                    $brands = Brands::find()->where(array('category_id'=>$categories[0]->id))->orderBy('name')->all();
+                    if(isset($brands[0])){
+                        $default_category_name = $categories[0]->name;
+                        $default_category_id = $categories[0]->id;
+
+                        $default_brand_name = $brands[0]->name;
+                        $default_brand_id = $brands[0]->id;
+                    } else {
+                        $default_category_name = '';
+                        $default_category_id = 0;
+                        $default_brand_name = '';
+                        $default_brand_id = 0;
+                    }
+                } else {
+                    $default_category_name = '';
+                    $default_category_id = 0;
+                    $default_brand_name = '';
+                    $default_brand_id = 0;
+                }
+            ?>
+
+            <div class="divide" category_id="<?=$default_category_id;?>"><?=$default_category_name;?></div>
             <span>›</span>
-            <div class="brand">Веза</div>
+            <div class="brand" brand_id="<?=$default_brand_id;?>"><?=$default_brand_name;?></div>
         </div>
     </div>
 </div>
