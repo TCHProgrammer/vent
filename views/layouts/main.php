@@ -99,6 +99,9 @@ AppAsset::register($this);
 			<label>Раздел</label>
 			<select name="razdel" class="select-razdel">
 				<option selected disabled hidden>Выберите из списка</option>
+
+
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -111,6 +114,7 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+				-->
 			</select>
 		</div>
 		<div class="add-works__info disabled">

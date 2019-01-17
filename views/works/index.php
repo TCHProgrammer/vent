@@ -51,7 +51,7 @@ use app\models\Period;
                 <ul data-menu="<?=$category->id;?>">
                     <? $brands = Brands::find()->where(array('category_id'=>$category->id))->orderBy('name')->all(); ?>
                     <? foreach($brands as $brand): ?>
-                    <li><a href="#"><?=$brand->name;?></a></li>
+                    <li brands_id="<?=$brand->id;?>"><a href="<?=Yii::$app->urlManager->createUrl('works')."?brands_id=".$brand->id;?>"><?=$brand->name;?></a></li>
                     <? endforeach; ?>
                     <!--
                     <li><a href="#">Вентиляторы канальные</a></li>
@@ -1765,3 +1765,49 @@ use app\models\Period;
 </div>
 
 </div>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function(){
+        $('.main-content__works-menu_dropdown-right ul').find('li a').click(function(){
+            location.href = $(this).attr('href');
+        });
+
+        $('.work .plus').eq(0).click(function(){
+
+
+
+            $('.add-works__info select.select-razdel li:gt(1)').remove();
+
+            $('ul.mCS_destroyed li:gt(1)').remove();
+
+            $.ajax({
+                type: "POST",
+                url: "<?=Yii::$app->urlManager->createUrl('works/getworkinfo')?>",
+                data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
+            success: function(data){
+
+
+
+                $.each(data.categories_list, function(index,category){
+
+
+
+                    $('.add-works__info select.select-razdel').append('<option value="' + category['id'] + '">' + category['name'] + '</option>');
+
+
+                    alert($('.select-razdel .jq-selectbox__dropdown ul').eq(0).length);
+
+                    $('.select-razdel .jq-selectbox__dropdown ul').eq(0).append('<li category_id="' + category['id'] + '">' + category['name'] + '</li>');
+                });
+
+
+            },
+            dataType: 'json'
+        });
+        });
+    });
+
+
+</script>
