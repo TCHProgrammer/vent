@@ -12,6 +12,9 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
+use app\models\Categories;
+use app\models\Brands;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -100,7 +103,11 @@ AppAsset::register($this);
 			<select name="razdel" class="select-razdel">
 				<option selected disabled hidden>Выберите из списка</option>
 
+                <? $categories = Categories::find()->orderBy('name')->all(); ?>
 
+                <? foreach($categories as $category): ?>
+                    <option value="<?=$category->id;?>"><?=$category->name;?></option>
+                <? endforeach; ?>
                 <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -121,6 +128,15 @@ AppAsset::register($this);
 			<label>Бренд</label>
 			<select name="razdel" class="select-brand">
 				<option selected disabled hidden>Выберите из списка</option>
+
+
+                <? $brands = Brands::find()->orderBy('name')->all(); ?>
+
+                <? foreach($brands as $brand): ?>
+                    <option is_add_work_brand="yes" category_id="<?=$brand->category_id?>"  value="<?=$brand->id;?>"><?=$brand->name;?></option>
+                <? endforeach; ?>
+
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -133,6 +149,8 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+
+				-->
 			</select>
 		</div>
 		<div class="add-works__info">

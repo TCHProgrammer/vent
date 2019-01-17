@@ -1774,13 +1774,27 @@ use app\models\Period;
             location.href = $(this).attr('href');
         });
 
+
+        //alert($('.select-brand .jq-selectbox__trigger').length);
+
+        $('.select-brand').on('click','.jq-selectbox__trigger',{},function(){
+            alert('YES');
+        });
+
+        function onBrandListOpenClick(){
+            //alert('YES');
+        }
+
         $('.work .plus').eq(0).click(function(){
 
 
 
-            $('.add-works__info select.select-razdel li:gt(1)').remove();
 
-            $('ul.mCS_destroyed li:gt(1)').remove();
+            $('.select-brand .jq-selectbox__trigger').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
+
+            //$('.add-works__info select.select-razdel li:gt(1)').remove();
+
+            //$('ul.mCS_destroyed li:gt(1)').remove();
 
             $.ajax({
                 type: "POST",
@@ -1790,17 +1804,17 @@ use app\models\Period;
 
 
 
-                $.each(data.categories_list, function(index,category){
+                //$.each(data.categories_list, function(index,category){
 
 
 
-                    $('.add-works__info select.select-razdel').append('<option value="' + category['id'] + '">' + category['name'] + '</option>');
+                    //$('.add-works__info select.select-razdel').append('<option value="' + category['id'] + '">' + category['name'] + '</option>');
 
 
-                    alert($('.select-razdel .jq-selectbox__dropdown ul').eq(0).length);
 
-                    $('.select-razdel .jq-selectbox__dropdown ul').eq(0).append('<li category_id="' + category['id'] + '">' + category['name'] + '</li>');
-                });
+
+                    //$('.select-razdel .jq-selectbox__dropdown ul').eq(0).append('<li category_id="' + category['id'] + '">' + category['name'] + '</li>');
+                //});
 
 
             },
