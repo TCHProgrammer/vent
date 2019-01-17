@@ -411,14 +411,24 @@ AppAsset::register($this);
 <script src="/js/common.js"></script>
 
 <!--<script src="libs/jquery/jquery-2.1.3.min.js"></script>-->
-<script src="libs/jcfilter.js"></script>
+<!--<script src="libs/jcfilter.js"></script>
 <!--<script src="libs/jquery.mCustomScrollbar.js"></script>-->
 <!--<script src="libs/jquery.formstyler.min.js"></script>-->
 <!--<script src="libs/baron.js"></script>-->
-<script src="libs/jquery.jscrollpane.min.js"></script>
+<!--<script src="libs/jquery.jscrollpane.min.js"></script>-->
 <!--<script src="libs/jquery.mousewheel.js"></script>-->
 <script src="libs/sortElements.js"></script>
 <!--<script src="js/common.js"></script>-->
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 

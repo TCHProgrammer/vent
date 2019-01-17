@@ -127,12 +127,22 @@ use app\models\Period;
     <div class="main-content__filters-specialist">
         <div class="main-content__filters-specialist_title">Специалисты</div>
         <div class="main-content__filters-specialist_buttons">
-            <button class="active" data-id="mech">Механики</button>
+
+            <? $worker_types = WorkerTypes::find()->orderBy('priority')->all(); ?>
+
+            <? foreach($worker_types as $worker_type): ?>
+
+
+            <button class="active" data-id="<?=$worker_type->symbole_code;?>"><?=$worker_type->name;?></button>
+
+            <? endforeach; ?>
+            <!--
             <button class="active" data-id="autom">Автоматчики</button>
             <button class="active" data-id="tepl">Тепловики</button>
             <button class="active">Холодильщики</button>
             <button class="active">Инженеры</button>
             <button class="active">Менеджеры</button>
+            -->
         </div>
         <a href="#" class="main-content__filters-reset">
             <div class="icon">
@@ -166,7 +176,7 @@ use app\models\Period;
 
     <? foreach($works_map as $workers_type_id=>$workers_type_data): ?>
 
-    <div class="main-content__works-item" data-linked="<?=$work->symbol_code;?>">
+    <div class="main-content__works-item" data-linked="<?=WorkerTypes::findOne($workers_type_id)->symbole_code;?>">
         <div class="item-control">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="8" viewBox="0 0 13 8"><defs><path id="ldxya" d="M334.59 239.531a1.5 1.5 0 0 1-2.121-2.121l4.961-4.962a1.495 1.495 0 0 1 1.07-.439c.387-.002.775.144 1.07.44l4.961 4.96a1.5 1.5 0 0 1-2.121 2.122l-3.91-3.91z"/></defs><g><g transform="translate(-332 -232)"><use fill="#232226" xlink:href="#ldxya"/></g></g></svg>
