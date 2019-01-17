@@ -1777,12 +1777,37 @@ use app\models\Period;
 
         //alert($('.select-brand .jq-selectbox__trigger').length);
 
-        $('.select-brand').on('click','.jq-selectbox__trigger',{},function(){
-            alert('YES');
-        });
+        function getSelectedCategoryId(){
+            var result = null;
+
+            $('.select-razdel .jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.select-razdel select.select-razdel option').eq(parseInt(index)).val();
+                }
+            });
+
+            return result;
+        }
 
         function onBrandListOpenClick(){
-            //alert('YES');
+
+            var selectedCategoryId = getSelectedCategoryId();
+
+            
+
+            $('.select-brand select.select-brand option').each(function(index){
+
+                if($(this).attr('category_id') == selectedCategoryId){
+                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display','block');
+                } else {
+                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display','none');
+                }
+
+            });
         }
 
         $('.work .plus').eq(0).click(function(){
