@@ -51,7 +51,7 @@ use app\models\Period;
                 <ul data-menu="<?=$category->id;?>">
                     <? $brands = Brands::find()->where(array('category_id'=>$category->id))->orderBy('name')->all(); ?>
                     <? foreach($brands as $brand): ?>
-                    <li><a href="#"><?=$brand->name;?></a></li>
+                    <li brands_id="<?=$brand->id;?>"><a href="<?=Yii::$app->urlManager->createUrl('works')."?brands_id=".$brand->id;?>"><?=$brand->name;?></a></li>
                     <? endforeach; ?>
                     <!--
                     <li><a href="#">Вентиляторы канальные</a></li>
@@ -127,12 +127,22 @@ use app\models\Period;
     <div class="main-content__filters-specialist">
         <div class="main-content__filters-specialist_title">Специалисты</div>
         <div class="main-content__filters-specialist_buttons">
-            <button class="active" data-id="mech">Механики</button>
+
+            <? $worker_types = WorkerTypes::find()->orderBy('priority')->all(); ?>
+
+            <? foreach($worker_types as $worker_type): ?>
+
+
+            <button class="active" data-id="<?=$worker_type->symbole_code;?>"><?=$worker_type->name;?></button>
+
+            <? endforeach; ?>
+            <!--
             <button class="active" data-id="autom">Автоматчики</button>
             <button class="active" data-id="tepl">Тепловики</button>
             <button class="active">Холодильщики</button>
             <button class="active">Инженеры</button>
             <button class="active">Менеджеры</button>
+            -->
         </div>
         <a href="#" class="main-content__filters-reset">
             <div class="icon">
@@ -144,9 +154,14 @@ use app\models\Period;
     <div class="main-content__filters-priority">
         <div class="main-content__filters-priority_title">Приоритет работ</div>
         <div class="main-content__filters-priority_buttons">
-            <button class="active" data-id="passport">По паспорту</button>
+            <? $work_types = WorkTypes::find()->orderBy('priority')->all(); ?>
+            <? foreach($work_types as $work_type): ?>
+                <button class="active" data-id="<?=$work_type->symbole_code;?>"><?=$work_type->name;?></button>
+            <? endforeach; ?>
+            <!--
             <button class="active" data-id="raschir">Расширенные</button>
             <button class="active" data-id="zhel">Желательное</button>
+            -->
         </div>
     </div>
 </div>
@@ -161,23 +176,23 @@ use app\models\Period;
 
     <? foreach($works_map as $workers_type_id=>$workers_type_data): ?>
 
-    <div class="main-content__works-item" data-linked="<?=$work->symbol_code;?>">
+    <div class="main-content__works-item" data-linked="<?=WorkerTypes::findOne($workers_type_id)->symbole_code;?>">
         <div class="item-control">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="8" viewBox="0 0 13 8"><defs><path id="ldxya" d="M334.59 239.531a1.5 1.5 0 0 1-2.121-2.121l4.961-4.962a1.495 1.495 0 0 1 1.07-.439c.387-.002.775.144 1.07.44l4.961 4.96a1.5 1.5 0 0 1-2.121 2.122l-3.91-3.91z"/></defs><g><g transform="translate(-332 -232)"><use fill="#232226" xlink:href="#ldxya"/></g></g></svg>
             </div>
-            <div class="title">Механики</div>
+            <div class="title"><?=WorkerTypes::findOne($workers_type_id)->name;?></div>
         </div>
 
 
-
+        <? foreach($workers_type_data as $works_type_id=>$works_type_data): ?>
         <div class="item-content opened">
-            <div class="wrap" data-linked="passport">
+            <div class="wrap" data-linked="<?=WorkTypes::findOne($works_type_id)->symbole_code;?>">
                 <a href="#" class="to-add-work">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="2ehra" d="M252.5 315a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H254v3.5a1.5 1.5 0 0 1-3 0V323h-3.5a1.5 1.5 0 0 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-246 -315)"><use fill="#fff" xlink:href="#2ehra"/></g></g></svg>
                 </a>
                 <div class="table-control rotating">
-                    <?=WorkerTypes::findOne($workers_type_id)->name;?>
+                    <?=WorkTypes::findOne($works_type_id)->name;?>
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="6" viewBox="0 0 10 6"><defs><path id="9luoa" d="M546.705 383.3a.99.99 0 0 0-1.4 0l-3.3 3.3-3.3-3.3a.99.99 0 0 0-1.4 1.4l3.994 3.994c.195.194.45.29.706.288a.986.986 0 0 0 .706-.288l3.994-3.994a.99.99 0 0 0 0-1.4z"/></defs><g><g transform="translate(-537 -383)"><use fill="#d4d6d9" xlink:href="#9luoa"/></g></g></svg>
                     </div>
@@ -187,14 +202,25 @@ use app\models\Period;
                         <table>
                             <thead>
                             <td class="name active">Наименование работы</td>
-                            <td class="week" data-filter="one">Еженедельно</td>
-                            <td class="month" data-filter="two">Ежемесячно</td>
-                            <td class="kvar" data-filter="three">Квартально</td>
-                            <td class="polu" data-filter="four">Полугодично</td>
-                            <td class="year" data-filter="five">Раз в год</td>
+
+                            <? $work_periods = Period::find()->orderBy('priority')->all(); ?>
+
+                            <? $word_numbers = array('one','two','three','four','five','six','seven','eight','nine','ten'); ?>
+
+                            <? foreach($work_periods as $k=>$work_period): ?>
+
+                            <td class="<?=$work_period->symbole_code;?>" data-filter="<?=$word_numbers[$k];?>"><?=$work_period->name;?></td>
+
+                            <? endforeach; ?>
+                            <!--
+                            <td class="monthly" data-filter="two">Ежемесячно</td>
+                            <td class="squarely" data-filter="three">Квартально</td>
+                            <td class="halfyear" data-filter="four">Полугодично</td>
+                            <td class="timeinyear" data-filter="five">Раз в год</td>
+                            -->
                             </thead>
 
-                            <? foreach($workers_type_data as $works_type_id=>$works_type_data): ?>
+                            <? foreach($works_type_data as $works_data): ?>
 
 
 
@@ -215,13 +241,14 @@ use app\models\Period;
 
                                         </div>
                                     </div>
-                                    <span><?=WorkTypes::findOne($work_type_id)->name;?></span>
+                                    <span><?=$works_data->name;?></span>
                                 </td>
-                                <td class="checks"><img src="img/checks.png" alt=""></td>
-                                <td class="checks"></td>
-                                <td class="checks"></td>
-                                <td class="checks"></td>
-                                <td class="checks"></td>
+                                <? $work_period = Period::findOne($works_data->period_id); ?>
+                                <td class="checks"><?if($work_period->symbole_code == 'dayly'):?><img src="img/checks.png" alt=""><? endif; ?></td>
+                                <td class="checks"><?if($work_period->symbole_code == 'monthly'):?><img src="img/checks.png" alt=""><? endif; ?></td>
+                                <td class="checks"><?if($work_period->symbole_code == 'squarely'):?><img src="img/checks.png" alt=""><? endif; ?></td>
+                                <td class="checks"><?if($work_period->symbole_code == 'halfyear'):?><img src="img/checks.png" alt=""><? endif; ?></td>
+                                <td class="checks"><?if($work_period->symbole_code == 'timeinyear'):?><img src="img/checks.png" alt=""><? endif; ?></td>
                             </tr>
 
                             <? endforeach; ?>
@@ -458,6 +485,7 @@ use app\models\Period;
                 </div>
             </div>
         </div>
+        <? endforeach; ?>
     </div>
         <? endforeach; ?>
 
@@ -1737,3 +1765,88 @@ use app\models\Period;
 </div>
 
 </div>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function(){
+        $('.main-content__works-menu_dropdown-right ul').find('li a').click(function(){
+            location.href = $(this).attr('href');
+        });
+
+
+        //alert($('.select-brand .jq-selectbox__trigger').length);
+
+        function getSelectedCategoryId(){
+            var result = null;
+
+            $('.select-razdel .jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.select-razdel select.select-razdel option').eq(parseInt(index)).val();
+                }
+            });
+
+            return result;
+        }
+
+        function onBrandListOpenClick(){
+
+            var selectedCategoryId = getSelectedCategoryId();
+
+            
+
+            $('.select-brand select.select-brand option').each(function(index){
+
+                if($(this).attr('category_id') == selectedCategoryId){
+                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display','block');
+                } else {
+                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display','none');
+                }
+
+            });
+        }
+
+        $('.work .plus').eq(0).click(function(){
+
+
+
+
+            $('.select-brand .jq-selectbox__trigger').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
+
+            //$('.add-works__info select.select-razdel li:gt(1)').remove();
+
+            //$('ul.mCS_destroyed li:gt(1)').remove();
+
+            $.ajax({
+                type: "POST",
+                url: "<?=Yii::$app->urlManager->createUrl('works/getworkinfo')?>",
+                data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
+            success: function(data){
+
+
+
+                //$.each(data.categories_list, function(index,category){
+
+
+
+                    //$('.add-works__info select.select-razdel').append('<option value="' + category['id'] + '">' + category['name'] + '</option>');
+
+
+
+
+                    //$('.select-razdel .jq-selectbox__dropdown ul').eq(0).append('<li category_id="' + category['id'] + '">' + category['name'] + '</li>');
+                //});
+
+
+            },
+            dataType: 'json'
+        });
+        });
+    });
+
+
+</script>

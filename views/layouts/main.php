@@ -12,6 +12,9 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
+use app\models\Categories;
+use app\models\Brands;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -99,6 +102,13 @@ AppAsset::register($this);
 			<label>Раздел</label>
 			<select name="razdel" class="select-razdel">
 				<option selected disabled hidden>Выберите из списка</option>
+
+                <? $categories = Categories::find()->orderBy('name')->all(); ?>
+
+                <? foreach($categories as $category): ?>
+                    <option value="<?=$category->id;?>"><?=$category->name;?></option>
+                <? endforeach; ?>
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -111,12 +121,22 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+				-->
 			</select>
 		</div>
 		<div class="add-works__info disabled">
 			<label>Бренд</label>
 			<select name="razdel" class="select-brand">
 				<option selected disabled hidden>Выберите из списка</option>
+
+
+                <? $brands = Brands::find()->orderBy('name')->all(); ?>
+
+                <? foreach($brands as $brand): ?>
+                    <option is_add_work_brand="yes" category_id="<?=$brand->category_id?>"  value="<?=$brand->id;?>"><?=$brand->name;?></option>
+                <? endforeach; ?>
+
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -129,6 +149,8 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+
+				-->
 			</select>
 		</div>
 		<div class="add-works__info">
@@ -411,14 +433,24 @@ AppAsset::register($this);
 <script src="/js/common.js"></script>
 
 <!--<script src="libs/jquery/jquery-2.1.3.min.js"></script>-->
-<script src="libs/jcfilter.js"></script>
+<!--<script src="libs/jcfilter.js"></script>
 <!--<script src="libs/jquery.mCustomScrollbar.js"></script>-->
 <!--<script src="libs/jquery.formstyler.min.js"></script>-->
 <!--<script src="libs/baron.js"></script>-->
-<script src="libs/jquery.jscrollpane.min.js"></script>
+<!--<script src="libs/jquery.jscrollpane.min.js"></script>-->
 <!--<script src="libs/jquery.mousewheel.js"></script>-->
 <script src="libs/sortElements.js"></script>
 <!--<script src="js/common.js"></script>-->
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 
