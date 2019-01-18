@@ -1786,8 +1786,84 @@ use app\models\Period;
                 }
 
                 if($(this).hasClass('selected')){
-                    result = $('.select-razdel select.select-razdel option').eq(parseInt(index)).val();
+                    result = $('.select-razdel select.select-razdel option').eq(index).val();
                 }
+            });
+
+            return result;
+        }
+
+        function getSelectedBrandId(){
+            var result = null;
+
+            $('.select-brand .jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.select-brand select.select-brand option').eq(index).val();
+                }
+            });
+
+            return result;
+        }
+
+        function getSelectedWorkerTypeId(){
+            var result = null;
+
+            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.add-works__info').eq(3).find('select[name="razdel"] option').eq(index).val();
+                }
+            });
+
+            return result;
+        }
+
+        function getSelectedWorkTypeId(){
+            var result = null;
+
+            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.add-works__info').eq(4).find('select[name="razdel"] option').eq(index).val();
+                }
+            });
+
+            return result;
+        }
+
+
+        function getSelectedPeriodId(){
+            var result = null;
+
+            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.add-works__info').eq(5).find('select[name="razdel"] option').eq(index).val();
+                }
+            });
+
+            return result;
+        }
+
+        function getReportFormsIds(){
+
+            var result = [];
+
+            $('.add-works__info .checks input:checked').each(function(){
+                result.push($(this).attr('report_forms_id'));
             });
 
             return result;
@@ -1797,7 +1873,7 @@ use app\models\Period;
 
             var selectedCategoryId = getSelectedCategoryId();
 
-            
+
 
             $('.select-brand select.select-brand option').each(function(index){
 
@@ -1810,12 +1886,171 @@ use app\models\Period;
             });
         }
 
+        function setSelectedCategory(category_id){
+
+            var indexToSelect = 0;
+
+            $('.select-razdel select.select-razdel option').each(function(index){
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).val() == category_id){
+                    indexToSelect = index;
+                }
+            });
+
+            $('.select-razdel .jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
+
+
+           $('.select-razdel .jq-selectbox__select-text').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+           $('.add-works__title .divide').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display','inline');
+
+            $('.add-works__title .check').css('display','inline');
+        }
+
+        function setSelectedBrand(brand_id){
+
+            var indexToSelect = 0;
+
+            $('.select-brand select.select-brand option').each(function(index){
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).val() == brand_id){
+                    indexToSelect = index;
+                }
+            });
+
+            $('.select-brand .jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
+
+
+            $('.select-brand .jq-selectbox__select-text').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+
+            $('.add-works__title .brand').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display','inline');
+            $('.add-works__title .check').css('display','inline');
+        }
+
+        function setSelectedWorkerType(worker_types_id){
+
+            var indexToSelect = 0;
+
+            $('.add-works__info').eq(3).find('select option').each(function(index){
+
+
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).val() == worker_types_id){
+                    indexToSelect = index;
+                }
+            });
+
+
+
+
+            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
+
+
+            $('.add-works__info').eq(3).find('.jq-selectbox__select-text').text($('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+
+
+        }
+
+        function setSelectedWorkType(work_types_id){
+
+            var indexToSelect = 0;
+
+            $('.add-works__info').eq(4).find('select option').each(function(index){
+
+
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).val() == work_types_id){
+                    indexToSelect = index;
+                }
+            });
+
+
+
+
+            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
+
+
+            $('.add-works__info').eq(4).find('.jq-selectbox__select-text').text($('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+
+
+        }
+
+        function setSelectedPeriod(period_id){
+
+            var indexToSelect = 0;
+
+            $('.add-works__info').eq(5).find('select option').each(function(index){
+
+
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).val() == period_id){
+                    indexToSelect = index;
+                }
+            });
+
+
+
+
+            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
+
+
+            $('.add-works__info').eq(5).find('.jq-selectbox__select-text').text($('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+
+
+        }
+
+        function setReportFormsChecked(report_forms_id){
+
+
+
+            $('.add-works__info .checks input[report_forms_id="' + report_forms_id + '"]').attr('checked',true);
+
+            if($('.add-works__info .checks input[report_forms_id="' + report_forms_id + '"]').attr('id') == 'form'){
+                $('.new-form[report_forms_id="' + report_forms_id + '"]').css('display','block');
+            }
+        }
+
+
         $('.work .plus').eq(0).click(function(){
 
 
 
 
-            $('.select-brand .jq-selectbox__trigger').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
+            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
 
             //$('.add-works__info select.select-razdel li:gt(1)').remove();
 
@@ -1828,19 +2063,31 @@ use app\models\Period;
             success: function(data){
 
 
+                setSelectedCategory(17);
 
-                //$.each(data.categories_list, function(index,category){
+                $('.add-works__info').eq(1).removeClass('disabled').addClass('active');
 
+                //alert(getSelectedCategoryId());
 
+                setSelectedBrand(12);
 
-                    //$('.add-works__info select.select-razdel').append('<option value="' + category['id'] + '">' + category['name'] + '</option>');
+                //alert(getSelectedBrandId());
 
+                setSelectedWorkerType(1);
 
+                //alert(getSelectedWorkerTypeId());
 
+                setSelectedWorkType(1);
 
-                    //$('.select-razdel .jq-selectbox__dropdown ul').eq(0).append('<li category_id="' + category['id'] + '">' + category['name'] + '</li>');
-                //});
+                //alert(getSelectedWorkTypeId());
 
+                setSelectedPeriod(1);
+
+                //alert(getSelectedPeriodId());
+
+                setReportFormsChecked(2);
+
+                alert(getReportFormsIds());
 
             },
             dataType: 'json'
