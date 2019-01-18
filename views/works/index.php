@@ -1858,6 +1858,10 @@ use app\models\Period;
             return result;
         }
 
+        function getReportFormIds(){
+            return $('.add-works__info .checks input:checked').attr('report_form_id');
+        }
+
         function onBrandListOpenClick(){
 
             var selectedCategoryId = getSelectedCategoryId();
@@ -2062,6 +2066,8 @@ use app\models\Period;
                 setSelectedPeriod(1);
 
                 alert(getSelectedPeriodId());
+
+                alert(getReportFormIds());
 
             },
             dataType: 'json'

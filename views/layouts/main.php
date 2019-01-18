@@ -17,6 +17,7 @@ use app\models\Brands;
 use app\models\WorkerTypes;
 use app\models\WorkTypes;
 use app\models\Period;
+use app\models\ReportForms;
 
 AppAsset::register($this);
 ?>
@@ -370,10 +371,17 @@ AppAsset::register($this);
 				Форма отчетности <br> исполнителей
 			</label>
 			<div class="checks">
+
+                <? $report_forms = ReportForms::find()->orderBy('priority')->all(); ?>
+                <? foreach($report_forms as $report_form): ?>
 				<div>
-					<input type="checkbox" id="file" checked>
-					<label for="file">Приложить файл / фото / видео</label>
+					<input type="checkbox" id="<?=$report_form->symbole_code;?>" report_form_id="<?=$report_form->id;?>" checked>
+					<label for="<?=$report_form->symbole_code;?>"><?=$report_form->name;?></label>
 				</div>
+
+                <? endforeach; ?>
+
+                <!--
 				<div>
 					<input type="checkbox" id="form">
 					<label for="form">Форма ввода данных</label>
@@ -388,6 +396,7 @@ AppAsset::register($this);
 					<input type="checkbox" id="gal">
 					<label for="gal">Поставить галочку</label>
 				</div>
+				-->
 			</div>
 		</div>
 		<div class="add-brands__button">
