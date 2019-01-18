@@ -1858,8 +1858,15 @@ use app\models\Period;
             return result;
         }
 
-        function getReportFormIds(){
-            return $('.add-works__info .checks input:checked').attr('report_form_id');
+        function getReportFormsIds(){
+
+            var result = [];
+
+            $('.add-works__info .checks input:checked').each(function(){
+                result.push($(this).attr('report_forms_id'));
+            });
+
+            return result;
         }
 
         function onBrandListOpenClick(){
@@ -2026,6 +2033,17 @@ use app\models\Period;
 
         }
 
+        function setReportFormsChecked(report_forms_id){
+
+
+
+            $('.add-works__info .checks input[report_forms_id="' + report_forms_id + '"]').attr('checked',true);
+
+            if($('.add-works__info .checks input[report_forms_id="' + report_forms_id + '"]').attr('id') == 'form'){
+                $('.new-form[report_forms_id="' + report_forms_id + '"]').css('display','block');
+            }
+        }
+
 
         $('.work .plus').eq(0).click(function(){
 
@@ -2065,9 +2083,11 @@ use app\models\Period;
 
                 setSelectedPeriod(1);
 
-                alert(getSelectedPeriodId());
+                //alert(getSelectedPeriodId());
 
-                alert(getReportFormIds());
+                setReportFormsChecked(2);
+
+                alert(getReportFormsIds());
 
             },
             dataType: 'json'
