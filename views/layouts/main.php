@@ -375,9 +375,19 @@ AppAsset::register($this);
                 <? $report_forms = ReportForms::find()->orderBy('priority')->all(); ?>
                 <? foreach($report_forms as $report_form): ?>
 				<div>
-					<input type="checkbox" id="<?=$report_form->symbole_code;?>" report_form_id="<?=$report_form->id;?>" checked>
+
+					<input type="checkbox" id="<?=$report_form->symbole_code;?>" report_form_id="<?=$report_form->id;?>">
 					<label for="<?=$report_form->symbole_code;?>"><?=$report_form->name;?></label>
 				</div>
+
+                <? if($report_form->symbole_code == 'form'): ?>
+                        <div class="new-form">
+                            <div class="inputs">
+                                <input type="text" placeholder="Введите название поля">
+                            </div>
+                            <a href="#" class="add-input">Добавить поле</a>
+                        </div>
+                <? endif; ?>
 
                 <? endforeach; ?>
 
