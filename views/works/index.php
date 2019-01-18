@@ -1814,23 +1814,46 @@ use app\models\Period;
 
             var indexToSelect = 0;
 
-            $('.select-brand select.select-brand option').each(function(index){
+            $('.select-razdel select.select-razdel option').each(function(index){
 
                 if(indexToSelect){
                     return;
                 }
 
-                if($(this).attr('category_id') == category_id){
+                if($(this).val() == category_id){
                     indexToSelect = index;
                 }
             });
 
             $('.select-razdel .jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
 
-            $('.select-razdel .jq-selectbox__dropdown ul li').eq(parseInt(indexToSelect) - 1).addClass('selected').addClass('sel');
+            $('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
 
 
-           $('.select-razdel .jq-selectbox__select-text').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(parseInt(indexToSelect) - 1).text());
+           $('.select-razdel .jq-selectbox__select-text').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+        }
+
+        function setSelectedBrand(brand_id){
+
+            var indexToSelect = 0;
+
+            $('.select-brand select.select-brand option').each(function(index){
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).attr('brand_id') == brand_id){
+                    indexToSelect = index;
+                }
+            });
+
+            $('.select-brand .jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
+
+
+            $('.select-brand .jq-selectbox__select-text').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
         }
 
 
@@ -1854,6 +1877,8 @@ use app\models\Period;
 
                 setSelectedCategory(17);
                 alert(getSelectedCategoryId());
+
+
 
             },
             dataType: 'json'
