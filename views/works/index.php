@@ -1793,6 +1793,71 @@ use app\models\Period;
             return result;
         }
 
+        function getSelectedBrandId(){
+            var result = null;
+
+            $('.select-brand .jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.select-brand select.select-brand option').eq(index).val();
+                }
+            });
+
+            return result;
+        }
+
+        function getSelectedWorkerTypeId(){
+            var result = null;
+
+            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.add-works__info').eq(3).find('select[name="razdel"] option').eq(index).val();
+                }
+            });
+
+            return result;
+        }
+
+        function getSelectedWorkTypeId(){
+            var result = null;
+
+            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.add-works__info').eq(4).find('select[name="razdel"] option').eq(index).val();
+                }
+            });
+
+            return result;
+        }
+
+
+        function getSelectedPeriodId(){
+            var result = null;
+
+            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').each(function(index){
+                if(result){
+                    return;
+                }
+
+                if($(this).hasClass('selected')){
+                    result = $('.add-works__info').eq(5).find('select[name="razdel"] option').eq(index).val();
+                }
+            });
+
+            return result;
+        }
+
         function onBrandListOpenClick(){
 
             var selectedCategoryId = getSelectedCategoryId();
@@ -1831,6 +1896,10 @@ use app\models\Period;
 
 
            $('.select-razdel .jq-selectbox__select-text').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+           $('.add-works__title .divide').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display','inline');
+
+            $('.add-works__title .check').css('display','inline');
         }
 
         function setSelectedBrand(brand_id){
@@ -1843,7 +1912,7 @@ use app\models\Period;
                     return;
                 }
 
-                if($(this).attr('brand_id') == brand_id){
+                if($(this).val() == brand_id){
                     indexToSelect = index;
                 }
             });
@@ -1854,6 +1923,103 @@ use app\models\Period;
 
 
             $('.select-brand .jq-selectbox__select-text').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+
+            $('.add-works__title .brand').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display','inline');
+            $('.add-works__title .check').css('display','inline');
+        }
+
+        function setSelectedWorkerType(worker_types_id){
+
+            var indexToSelect = 0;
+
+            $('.add-works__info').eq(3).find('select option').each(function(index){
+
+
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).val() == worker_types_id){
+                    indexToSelect = index;
+                }
+            });
+
+
+
+
+            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
+
+
+            $('.add-works__info').eq(3).find('.jq-selectbox__select-text').text($('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+
+
+        }
+
+        function setSelectedWorkType(work_types_id){
+
+            var indexToSelect = 0;
+
+            $('.add-works__info').eq(4).find('select option').each(function(index){
+
+
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).val() == work_types_id){
+                    indexToSelect = index;
+                }
+            });
+
+
+
+
+            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
+
+
+            $('.add-works__info').eq(4).find('.jq-selectbox__select-text').text($('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+
+
+        }
+
+        function setSelectedPeriod(period_id){
+
+            var indexToSelect = 0;
+
+            $('.add-works__info').eq(5).find('select option').each(function(index){
+
+
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).val() == period_id){
+                    indexToSelect = index;
+                }
+            });
+
+
+
+
+            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
+
+
+            $('.add-works__info').eq(5).find('.jq-selectbox__select-text').text($('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+
+
         }
 
 
@@ -1876,9 +2042,26 @@ use app\models\Period;
 
 
                 setSelectedCategory(17);
-                alert(getSelectedCategoryId());
 
+                $('.add-works__info').eq(1).removeClass('disabled').addClass('active');
 
+                //alert(getSelectedCategoryId());
+
+                setSelectedBrand(12);
+
+                //alert(getSelectedBrandId());
+
+                setSelectedWorkerType(1);
+
+                //alert(getSelectedWorkerTypeId());
+
+                setSelectedWorkType(1);
+
+                //alert(getSelectedWorkTypeId());
+
+                setSelectedPeriod(1);
+
+                alert(getSelectedPeriodId());
 
             },
             dataType: 'json'
