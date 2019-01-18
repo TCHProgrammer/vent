@@ -14,6 +14,9 @@ use app\assets\AppAsset;
 
 use app\models\Categories;
 use app\models\Brands;
+use app\models\WorkerTypes;
+use app\models\WorkTypes;
+use app\models\Period;
 
 AppAsset::register($this);
 ?>
@@ -161,6 +164,15 @@ AppAsset::register($this);
 			<label>Должность сотрудника</label>
 			<select name="razdel">
 				<option selected disabled hidden>Выберите из списка</option>
+
+                <? $worker_types = WorkerTypes::find()->orderBy('priority')->all(); ?>
+
+                <? foreach($worker_types as $worker_type): ?>
+
+				<option value="<?=$worker_type->id;?>"><?=$worker_type->name;?></option>
+
+                <? endforeach; ?>
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -172,22 +184,44 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
-				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+
+				-->
 			</select>
 		</div>
 		<div class="add-works__info">
 			<label>Приоритет</label>
 			<select name="razdel">
 				<option selected disabled hidden>Выберите из списка</option>
+
+                <? $work_types = WorkTypes::find()->orderBy('priority')->all(); ?>
+
+                <? foreach($work_types as $work_type): ?>
+
+                    <option value="<?=$work_type->id;?>"><?=$work_type->name;?></option>
+
+                <? endforeach; ?>
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+				-->
 			</select>
 		</div>
 		<div class="add-works__info">
 			<label>Периодичность</label>
 			<select name="razdel">
 				<option selected disabled hidden>Выберите из списка</option>
+
+                <? $periods = Period::find()->orderBy('priority')->all(); ?>
+
+                <? foreach($periods as $period): ?>
+
+                    <option value="<?=$period->id;?>"><?=$period->name;?></option>
+
+                <? endforeach; ?>
+
+
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -200,6 +234,8 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+
+				-->
 			</select>
 		</div>
 		<div class="add-works__info">
@@ -216,7 +252,8 @@ AppAsset::register($this);
 			</div>
 		</div>
 		<div class="add-works__info-composition">
-			<div class="composition">
+
+			<div class="composition composition-template">
 				<div class="title-block">
 					<label>Состав работы</label>
 					<div class="input-button">
@@ -263,6 +300,9 @@ AppAsset::register($this);
 					</div>
 				</div>
 			</div>
+
+
+
 			<div class="composition hidens">
 				<div class="title-block">
 					<label>Состав работы</label>
@@ -314,6 +354,9 @@ AppAsset::register($this);
 				</div>
 
 			</div>
+
+
+
 		</div>
 		<div class="add-works__info op">
 			<label>Краткое описание <br>

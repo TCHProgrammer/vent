@@ -1786,7 +1786,7 @@ use app\models\Period;
                 }
 
                 if($(this).hasClass('selected')){
-                    result = $('.select-razdel select.select-razdel option').eq(parseInt(index)).val();
+                    result = $('.select-razdel select.select-razdel option').eq(index).val();
                 }
             });
 
@@ -1797,7 +1797,7 @@ use app\models\Period;
 
             var selectedCategoryId = getSelectedCategoryId();
 
-            
+
 
             $('.select-brand select.select-brand option').each(function(index){
 
@@ -1810,12 +1810,36 @@ use app\models\Period;
             });
         }
 
+        function setSelectedCategory(category_id){
+
+            var indexToSelect = 0;
+
+            $('.select-brand select.select-brand option').each(function(index){
+
+                if(indexToSelect){
+                    return;
+                }
+
+                if($(this).attr('category_id') == category_id){
+                    indexToSelect = index;
+                }
+            });
+
+            $('.select-razdel .jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
+
+            $('.select-razdel .jq-selectbox__dropdown ul li').eq(parseInt(indexToSelect) - 1).addClass('selected').addClass('sel');
+
+
+           $('.select-razdel .jq-selectbox__select-text').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(parseInt(indexToSelect) - 1).text());
+        }
+
+
         $('.work .plus').eq(0).click(function(){
 
 
 
 
-            $('.select-brand .jq-selectbox__trigger').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
+            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
 
             //$('.add-works__info select.select-razdel li:gt(1)').remove();
 
@@ -1828,19 +1852,8 @@ use app\models\Period;
             success: function(data){
 
 
-
-                //$.each(data.categories_list, function(index,category){
-
-
-
-                    //$('.add-works__info select.select-razdel').append('<option value="' + category['id'] + '">' + category['name'] + '</option>');
-
-
-
-
-                    //$('.select-razdel .jq-selectbox__dropdown ul').eq(0).append('<li category_id="' + category['id'] + '">' + category['name'] + '</li>');
-                //});
-
+                setSelectedCategory(17);
+                alert(getSelectedCategoryId());
 
             },
             dataType: 'json'
