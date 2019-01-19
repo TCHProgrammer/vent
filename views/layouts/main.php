@@ -12,6 +12,13 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
+use app\models\Categories;
+use app\models\Brands;
+use app\models\WorkerTypes;
+use app\models\WorkTypes;
+use app\models\Period;
+use app\models\ReportForms;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -99,6 +106,13 @@ AppAsset::register($this);
 			<label>Раздел</label>
 			<select name="razdel" class="select-razdel">
 				<option selected disabled hidden>Выберите из списка</option>
+
+                <? $categories = Categories::find()->orderBy('name')->all(); ?>
+
+                <? foreach($categories as $category): ?>
+                    <option value="<?=$category->id;?>"><?=$category->name;?></option>
+                <? endforeach; ?>
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -111,12 +125,22 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+				-->
 			</select>
 		</div>
 		<div class="add-works__info disabled">
 			<label>Бренд</label>
 			<select name="razdel" class="select-brand">
 				<option selected disabled hidden>Выберите из списка</option>
+
+
+                <? $brands = Brands::find()->orderBy('name')->all(); ?>
+
+                <? foreach($brands as $brand): ?>
+                    <option is_add_work_brand="yes" category_id="<?=$brand->category_id?>"  value="<?=$brand->id;?>"><?=$brand->name;?></option>
+                <? endforeach; ?>
+
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -129,6 +153,8 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+
+				-->
 			</select>
 		</div>
 		<div class="add-works__info">
@@ -139,6 +165,15 @@ AppAsset::register($this);
 			<label>Должность сотрудника</label>
 			<select name="razdel">
 				<option selected disabled hidden>Выберите из списка</option>
+
+                <? $worker_types = WorkerTypes::find()->orderBy('priority')->all(); ?>
+
+                <? foreach($worker_types as $worker_type): ?>
+
+				<option value="<?=$worker_type->id;?>"><?=$worker_type->name;?></option>
+
+                <? endforeach; ?>
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -150,22 +185,44 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
-				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+
+				-->
 			</select>
 		</div>
 		<div class="add-works__info">
 			<label>Приоритет</label>
 			<select name="razdel">
 				<option selected disabled hidden>Выберите из списка</option>
+
+                <? $work_types = WorkTypes::find()->orderBy('priority')->all(); ?>
+
+                <? foreach($work_types as $work_type): ?>
+
+                    <option value="<?=$work_type->id;?>"><?=$work_type->name;?></option>
+
+                <? endforeach; ?>
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+				-->
 			</select>
 		</div>
 		<div class="add-works__info">
 			<label>Периодичность</label>
 			<select name="razdel">
 				<option selected disabled hidden>Выберите из списка</option>
+
+                <? $periods = Period::find()->orderBy('priority')->all(); ?>
+
+                <? foreach($periods as $period): ?>
+
+                    <option value="<?=$period->id;?>"><?=$period->name;?></option>
+
+                <? endforeach; ?>
+
+
+                <!--
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
@@ -178,6 +235,8 @@ AppAsset::register($this);
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
 				<option value="Вентиляторы_крышные">Вентиляторы крышные</option>
+
+				-->
 			</select>
 		</div>
 		<div class="add-works__info">
@@ -194,7 +253,7 @@ AppAsset::register($this);
 			</div>
 		</div>
 		<div class="add-works__info-composition">
-			<div class="composition">
+			<div class="composition composition-template">
 				<div class="title-block">
 					<label>Состав работы</label>
 					<div class="input-button">
@@ -241,6 +300,9 @@ AppAsset::register($this);
 					</div>
 				</div>
 			</div>
+
+
+
 			<div class="composition hidens">
 				<div class="title-block">
 					<label>Состав работы</label>
@@ -292,6 +354,9 @@ AppAsset::register($this);
 				</div>
 
 			</div>
+
+
+
 		</div>
 		<div class="add-works__info op">
 			<label>Краткое описание <br>
@@ -306,10 +371,27 @@ AppAsset::register($this);
 				Форма отчетности <br> исполнителей
 			</label>
 			<div class="checks">
-				<div>
-					<input type="checkbox" id="file" checked>
-					<label for="file">Приложить файл / фото / видео</label>
+
+                <? $report_forms = ReportForms::find()->orderBy('priority')->all(); ?>
+                <? foreach($report_forms as $report_form): ?>
+				<div report_forms_id="<?=$report_form->id;?>">
+
+					<input type="checkbox" id="<?=$report_form->symbole_code;?>" report_forms_id="<?=$report_form->id;?>">
+					<label for="<?=$report_form->symbole_code;?>"><?=$report_form->name;?></label>
 				</div>
+
+                <? if($report_form->symbole_code == 'form'): ?>
+                        <div class="new-form" report_forms_id="<?=$report_form->id;?>">
+                            <div class="inputs">
+                                <input type="text" placeholder="Введите название поля"  report_forms_id="<?=$report_form->id;?>">
+                            </div>
+                            <a href="#" class="add-input">Добавить поле</a>
+                        </div>
+                <? endif; ?>
+
+                <? endforeach; ?>
+
+                <!--
 				<div>
 					<input type="checkbox" id="form">
 					<label for="form">Форма ввода данных</label>
@@ -324,6 +406,7 @@ AppAsset::register($this);
 					<input type="checkbox" id="gal">
 					<label for="gal">Поставить галочку</label>
 				</div>
+				-->
 			</div>
 		</div>
 		<div class="add-brands__button">
@@ -408,7 +491,27 @@ AppAsset::register($this);
 <script src="/libs/baron.js"></script>
 <script src="/libs/jquery.jscrollpane.min.js"></script>
 <script src="/libs/jquery.mousewheel.js"></script>
-<script src="/js/common.js"></script>	
+<script src="/js/common.js"></script>
+
+<!--<script src="libs/jquery/jquery-2.1.3.min.js"></script>-->
+<!--<script src="libs/jcfilter.js"></script>
+<!--<script src="libs/jquery.mCustomScrollbar.js"></script>-->
+<!--<script src="libs/jquery.formstyler.min.js"></script>-->
+<!--<script src="libs/baron.js"></script>-->
+<!--<script src="libs/jquery.jscrollpane.min.js"></script>-->
+<!--<script src="libs/jquery.mousewheel.js"></script>-->
+<script src="libs/sortElements.js"></script>
+<!--<script src="js/common.js"></script>-->
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 
@@ -589,6 +692,11 @@ AppAsset::register($this);
             });
         }
 	});
+
+    $('body').on('click','.sure-closes', function(e){
+        $('.add-brands__input input[name="name"]').attr('readonly',false);
+        $('.add-brands__input input[name="brand_name"]').attr('readonly',false);
+    });
 	
 </script>
 

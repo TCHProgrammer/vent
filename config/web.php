@@ -51,7 +51,6 @@ $config = [
 				'<controller>/<action>' => '<controller>/<action>'
             ],
         ],
-		
         
     ],
     'params' => $params,
