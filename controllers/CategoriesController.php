@@ -189,7 +189,7 @@ class CategoriesController extends Controller
 	public function actionGetAjaxBrandName($id){
 		$brand = Brands::findOne($id);
 		
-		$category = Categories::findOne($brand->category_id);
+		$category = $brand->category;
 		
 		return json_encode(array('brand_name'=>$brand->name,'category_name'=>$category->name,'category_id'=>$category->id));
 	}
