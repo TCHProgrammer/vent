@@ -2045,14 +2045,14 @@ use app\models\Period;
         }
 
 
-        function appendNewComposition(){
-            var strToAdd = '<div class="composition composition-template">' +
+        function appendNewComposition(work_contents_id, work_contents_name, work_contents_description, images){
+            var strToAdd = '<div class="composition composition-template" work_contents_id="' + work_contents_id + '">' +
                 '<div class="title-block">' +
                 '<label>Состав работы</label>' +
                 '<div class="input-button">' +
                 '<div class="input-area">' +
                 '<div class="number">1</div>' +
-                '<input type="text" placeholder="Введите название пункта">' +
+                '<input type="text" placeholder="Введите название пункта" value="' + work_contents_name + '">' +
                 '</div>' +
                 '<div class="buttons-area">' +
                 '<button class="add-descr">' +
@@ -2073,7 +2073,7 @@ use app\models\Period;
                 '<a href="#" class="delete-all">Удалить описание</a>' +
                 '</div>' +
                 '<div class="files">' +
-                '<textarea></textarea>' +
+                '<textarea>' + work_contents_description + '</textarea>' +
                 '</div>' +
                 '</div>' +
                 '<div class="add-photo_block" style="display:flex;">' +
@@ -2156,7 +2156,7 @@ use app\models\Period;
 
                 alert(getReportFormsIds());
 
-                appendNewComposition();
+                appendNewComposition(3,'name','description',[]);
 
             },
             dataType: 'json'
