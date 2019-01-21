@@ -116,7 +116,7 @@ use app\models\Brands;
                             </div>
                         </a>
                         <a href="#" class="brand"><?=$brand->name;?></a>
-                        <span>Количество работ</span>
+                        <span><?=count($brand->works);?></span>
                     </li>
                     <?endforeach;?>
 
