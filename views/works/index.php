@@ -2046,6 +2046,24 @@ use app\models\Period;
 
 
         function appendNewComposition(work_contents_id, work_contents_name, work_contents_description, images){
+
+            if(!work_contents_description || work_contents_description == ''){
+                var description_button_class = '';
+                var description_block_style = '';
+            } else {
+                var description_button_class = 'non-active';
+                var description_block_style = 'style="display:flex;"';
+            }
+
+
+            if(!images || !images.length){
+                var images_button_class = '';
+                var images_block_style = '';
+            } else {
+                var images_button_class = 'non-active';
+                var images_block_style = 'style="display:flex;"';
+            }
+
             var strToAdd = '<div class="composition composition-template" work_contents_id="' + work_contents_id + '">' +
                 '<div class="title-block">' +
                 '<label>Состав работы</label>' +
@@ -2055,11 +2073,11 @@ use app\models\Period;
                 '<input type="text" placeholder="Введите название пункта" value="' + work_contents_name + '">' +
                 '</div>' +
                 '<div class="buttons-area">' +
-                '<button class="add-descr">' +
+                '<button class="add-descr ' + description_button_class + '">' +
                 '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14"><defs><path id="a51ia" d="M598 959h-1v1a1 1 0 0 1-2 0v-1h-1a1 1 0 1 1 0-2h1v-1a1 1 0 0 1 2 0v1h1a1 1 0 1 1 0 2zm-8 0h-3v8h8v-3a1 1 0 1 1 2 0v4a1 1 0 0 1-1.029 1H586a1 1 0 0 1-1-1.04v-9.92-.04a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2zm3 3h-4a1 1 0 1 1 0-2h4a1 1 0 1 1 0 2zm0 3h-4a1 1 0 0 1 0-2h4a1 1 0 1 1 0 2z"/></defs><g><g transform="translate(-585 -955)"><use fill="#6d67f9" xlink:href="#a51ia"/></g></g></svg>' +
                 '<span>Добавить описание</span>' +
                 '</button>' +
-                '<button class="add-photo">' +
+                '<button class="add-photo ' + images_button_class + '">' +
                 '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="14" viewBox="0 0 18 14"><defs><path id="j9cha" d="M810 680v10a1 1 0 0 1-1 1h-2.016v-.002A1 1 0 0 1 807 689h.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5h-3.329l-.585-.586L802.17 679h-2.343l-1.414 1.414-.586.586H794.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h.5a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1v-10a1 1 0 0 1 1-1h4l1.707-1.707a1 1 0 0 1 .707-.293h3.172a1 1 0 0 1 .707.293L805 679h4a1 1 0 0 1 1 1zm-9 4c-1.103 0-2 .897-2 2s.897 2 2 2 2-.897 2-2-.897-2-2-2c0 0 1.103 0 0 0zm0-2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></defs><g><g transform="translate(-792 -677)"><use fill="#6d67f9" xlink:href="#j9cha"/></g></g></svg>' +
                 '<span>Добавить фото</span>' +
                 '</button>' +
@@ -2067,7 +2085,7 @@ use app\models\Period;
                 '</div>' +
                 '</div>' +
                 '<div class="props-block">' +
-                '<div class="add-descr_block" style="display:flex;">' +
+                '<div class="add-descr_block" ' + description_block_style + '>' +
                 '<div class="quantity">' +
                 '<div class="title">Описание для <span>1</span> пункта</div>' +
                 '<a href="#" class="delete-all">Удалить описание</a>' +
@@ -2076,7 +2094,7 @@ use app\models\Period;
                 '<textarea>' + work_contents_description + '</textarea>' +
                 '</div>' +
                 '</div>' +
-                '<div class="add-photo_block" style="display:flex;">' +
+                '<div class="add-photo_block" ' + images_block_style + '>' +
                 '<div class="quantity">' +
                 '<div class="title">Фотографии для <span>1</span> пункта</div>' +
                 '<a href="#" class="delete-all">Удалить все фото</a>' +
