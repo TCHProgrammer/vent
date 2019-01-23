@@ -2100,6 +2100,7 @@ use app\models\Period;
                 '<a href="#" class="delete-all">Удалить все фото</a>' +
                 '</div>' +
                 '<div class="files">' +
+                    getCompositionPhotos(images) +
                 '<div class="file">' +
                 '<label>' +
                 '<input type="file" name="file">' +
@@ -2115,6 +2116,22 @@ use app\models\Period;
             $('.add-works__info-composition').prepend(strToAdd);
 
             renumerateCompositions();
+        }
+
+
+        function getCompositionPhotoHTML(img_file){
+            var strToAdd = '<div class="file"><label style="display: none;"><input type="file" name="file"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="14" viewBox="0 0 18 14"><defs><path id="eqkwa" d="M805 1031v10a1 1 0 0 1-1 1h-2.016v-.002A1 1 0 0 1 802 1040h.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5h-3.329l-.585-.586-1.415-1.414h-2.343l-1.414 1.414-.586.586H789.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h.5a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1v-10a1 1 0 0 1 1-1h4l1.707-1.707a1 1 0 0 1 .707-.293h3.172a1 1 0 0 1 .707.293L800 1030h4a1 1 0 0 1 1 1zm-9 4c-1.103 0-2 .897-2 2s.897 2 2 2 2-.897 2-2-.897-2-2-2c0 0 1.103 0 0 0zm0-2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"></path></defs><g><g transform="translate(-787 -1028)"><use fill="#939499" xlink:href="#eqkwa"></use></g></g></svg><span>Загрузить фото</span></label><div></div><div class="img-block" style="background-image: url(blob:http://' + '<?=$_SERVER['HTTP_HOST'];?>' + '/vent-local.ru/upload/composition_images/' + img_file + ')"><a href="#" class="delete-photo"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9" height="9" viewBox="0 0 9 9"><defs><path id="l6tfa" d="M706.026 1021.044a1 1 0 0 1-1.414 0l-2.121-2.122-2.144 2.144a1 1 0 1 1-1.414-1.414l2.143-2.144-2.12-2.12a1 1 0 1 1 1.413-1.415l2.122 2.121 2.099-2.1a1 1 0 0 1 1.414 1.415l-2.1 2.099 2.122 2.121a1 1 0 0 1 0 1.415z"></path></defs><g><g transform="translate(-698 -1013)"><use fill="#232226" xlink:href="#l6tfa"></use></g></g></svg></a></div></div>';
+            return strToAdd;
+        }
+
+
+        function getCompositionPhotos(images){
+            var strToAdd = '';
+            $.each(images, function(i,val){
+                strToAdd = strToAdd + getCompositionPhotoHTML(val);
+            });
+
+            return strToAdd;
         }
 
 
@@ -2174,7 +2191,7 @@ use app\models\Period;
 
                 alert(getReportFormsIds());
 
-                appendNewComposition(3,'name','description',[]);
+                appendNewComposition(3,'name','description',['abc','def','ghi']);
 
             },
             dataType: 'json'
