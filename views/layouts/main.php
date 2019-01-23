@@ -409,9 +409,36 @@ AppAsset::register($this);
 				-->
 			</div>
 		</div>
-		<div class="add-brands__button">
-			<button><span>Сохранить работу</span></button>
-		</div>
+
+        <form id="save-work-form" method="post" enctype="multipart/form-data" action="/works/update">
+            <div class="work-fields">
+                <input type="hidden" name="brands_id">
+                <input type="hidden" name="name">
+                <input type="hidden" name="worker_types_id">
+                <input type="hidden" name="work_types_id">
+                <input type="hidden" name="period_id">
+                <input type="hidden" name="execution_time">
+            </div>
+
+            <div class="work-contents">
+                <div class="work-contents-already-exits">
+                </div>
+                <div class="work-contents-to-add">
+                </div>
+            </div>
+
+
+            <div class="work-report-forms">
+                
+            </div>
+
+
+
+		    <div class="add-brands__button">
+			    <button><span>Сохранить работу</span></button>
+		    </div>
+
+        </form>
 	</div>
 </div>
 

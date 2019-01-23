@@ -36,6 +36,23 @@ class WorkReportForms extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeDelete()
+    {
+
+        if(parent::beforeDelete()){
+            $report_form_fields = $this->reportformfields;
+
+            foreach($report_form_fields as $item){
+                $item->delete();
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -62,5 +79,13 @@ class WorkReportForms extends \yii\db\ActiveRecord
     public function getWorks()
     {
         return $this->hasOne(Works::className(), ['id' => 'works_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReportFormFields()
+    {
+        return $this->hasMany(WorkReportFormFields::className(), ['work_report_forms_id' => 'id']);
     }
 }
