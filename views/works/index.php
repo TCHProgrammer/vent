@@ -2045,6 +2045,14 @@ use app\models\Period;
         }
 
 
+        function addReportFormsField(report_forms_id, work_report_form_fields_id, field_name){
+
+
+
+            $('.new-form[report_forms_id="' + report_forms_id + '"]>.inputs').append('<input type="text" report_forms_id="' + report_forms_id + '" work_report_form_fields_id="' + work_report_form_fields_id + '" placeholder="Введите название поля" value="' + field_name + '">');
+        }
+
+
         function appendNewComposition(work_contents_id, work_contents_name, work_contents_description, images){
 
             if(!work_contents_description || work_contents_description == ''){
@@ -2193,6 +2201,7 @@ use app\models\Period;
 
                 appendNewComposition(3,'name','description',[{img_file:'abc',work_contents_photo_id:1},{img_file:'def',work_contents_photo_id:2},{img_file:'ghi',work_contents_photo_id:3}]);
 
+                addReportFormsField(2,4,'Тестовое название поля');
             },
             dataType: 'json'
         });

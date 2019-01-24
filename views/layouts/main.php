@@ -382,9 +382,11 @@ AppAsset::register($this);
 
                 <? if($report_form->symbole_code == 'form'): ?>
                         <div class="new-form" report_forms_id="<?=$report_form->id;?>">
+
                             <div class="inputs">
-                                <input type="text" placeholder="Введите название поля"  report_forms_id="<?=$report_form->id;?>">
+                                <!--<input type="text" placeholder="Введите название поля"  report_forms_id="<?=$report_form->id;?>">-->
                             </div>
+
                             <a href="#" class="add-input">Добавить поле</a>
                         </div>
                 <? endif; ?>
