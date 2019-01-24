@@ -608,8 +608,39 @@ $(document).ready(function(){
  		}
  	});
 
+
+	function getPresentableNumber(number,max_digits_after_point){
+
+		var result = (parseFloat(number)).toFixed(max_digits_after_point);
+
+
+
+		for(var i=max_digits_after_point;i>=0;i--){
+			if((parseFloat(result)).toFixed(i) == parseFloat(result)){
+				result = (parseFloat(result)).toFixed(i);
+			}
+		}
+
+		return result;
+
+	}
+
 	$('.time-tabs-nav button').on('click', function(e){
 		e.preventDefault();
+
+		if(!$(this).hasClass('active')){
+
+			if(isNaN(parseFloat($('.time-tabs-pane input').val()))){
+                $('.time-tabs-pane input').val(0);
+			}
+
+			if($(this).attr('data-href') == '#minutes'){
+				$('.time-tabs-pane input').val(getPresentableNumber((parseFloat($('.time-tabs-pane input').val())*60),0));
+			} else if($(this).attr('data-href') == '#hours'){
+                $('.time-tabs-pane input').val(getPresentableNumber((parseFloat($('.time-tabs-pane input').val())/60),3));
+            }
+		}
+
 		$('.time-tabs-nav button').removeClass('active');
 		$(this).addClass('active');
 		return false;
