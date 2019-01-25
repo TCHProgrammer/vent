@@ -2213,15 +2213,14 @@ use app\models\Period;
 
                     work_contents_index++;
 
-                    alert('work_contents_index=' + work_contents_index);
+
 
                     //var work_contents_id = $(this).attr('work_contents_id');
                     var name = $(this).find('input').eq(0).val();
                     var description = $(this).find('.add-descr_block textarea').eq(0).text();
 
 
-                    alert('name='+name);
-                    alert('description='+description);
+
 
                     var image_inputs = [];
 
@@ -2235,32 +2234,40 @@ use app\models\Period;
                         }
                     });
 
-                    var res_str = '<div>';
 
-                    res_str += '<input type="hidden" name="work_contents_to_add_name[' + work_contents_index + ']" value="' + name + '">';
-                    res_str += '<input type="hidden" name="work_contents_to_add_description[' + work_contents_index + ']" value="' + description + '">';
+                    if(!(((!name && !description) ||  (name == '' && description == '')) && !image_inputs.length)) {
 
+                        var res_str = '<div>';
 
-                    res_str += '</div>';
-
-                    $('.work-contents-to-add').append(res_str);
-
-                    $('.work-contents-to-add').append('<div class="work_contents_photos"></div>');
+                        res_str += '<input type="hidden" name="work_contents_to_add_name[' + work_contents_index + ']" value="' + name + '">';
+                        res_str += '<input type="hidden" name="work_contents_to_add_description[' + work_contents_index + ']" value="' + description + '">';
 
 
-                    $('.work_contents_photos').append('<div work_contents_index="' + work_contents_index + '"></div>')
+                        res_str += '</div>';
 
-                    $.each(image_inputs, function (i, val) {
-                        $('.work_contents_photos>div[work_contents_index="' + work_contents_index + '"]').append(val);
-                    });
+                        $('.work-contents-to-add').append(res_str);
 
-                    $('.work_contents_photos>div[work_contents_index="' + work_contents_index + '"]>input').each(function (index1) {
-                        $(this).attr('name', 'work_contents_image[' + work_contents_index + '][]');
-                    });
+                        $('.work-contents-to-add').append('<div class="work_contents_photos"></div>');
+
+
+                        $('.work_contents_photos').append('<div work_contents_index="' + work_contents_index + '"></div>')
+
+                        $.each(image_inputs, function (i, val) {
+                            $('.work_contents_photos>div[work_contents_index="' + work_contents_index + '"]').append(val);
+                        });
+
+                        $('.work_contents_photos>div[work_contents_index="' + work_contents_index + '"]>input').each(function (index1) {
+                            $(this).attr('name', 'work_contents_image[' + work_contents_index + '][]').css('display','none');
+                        });
+
+                    }
 
                 }
 
             });
+
+
+
 
         }
 
