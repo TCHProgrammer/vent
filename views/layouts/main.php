@@ -437,7 +437,7 @@ AppAsset::register($this);
 
 
 		    <div class="add-brands__button">
-			    <button><span>Сохранить работу</span></button>
+			    <button type="submit"><span>Сохранить работу</span></button>
 		    </div>
 
         </form>

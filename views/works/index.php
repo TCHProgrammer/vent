@@ -2143,6 +2143,8 @@ use app\models\Period;
         }
 
 
+
+
         function renumerateCompositions(){
             $('.add-works__info-composition .composition .number').each(function(index){
 
@@ -2154,6 +2156,23 @@ use app\models\Period;
             });
         }
 
+
+        function getWorkTimeInMinutes(){
+
+            var time_number = parseFloat($('.time-tabs .time-tabs-pane input').val());
+
+            if(isNaN(time_number)){
+                return 0;
+            }
+
+            if($('.time-tabs .time-tabs-nav button[data-href="#minutes"]').hasClass('active')){
+                return (parseFloat(time_number)).toFixed(0);
+            } else {
+                return (parseFloat(time_number * 60)).toFixed(0);
+            }
+
+
+        }
 
         function addToFormWorkContentsAlreadyExists(){
 
@@ -2272,6 +2291,73 @@ use app\models\Period;
         }
 
 
+        function addToFormReportFormsWithFields(){
+            var checked_report_forms = getReportFormsIds();
+
+            var strToAdd = '<div class="checked_report_forms">';
+
+            $.each(checked_report_forms, function(i,val){
+                strToAdd += '<input type="hidden" name="checked_report_forms[]" value="' + val + '">';
+            });
+
+            strToAdd += '</div>';
+
+            strToAdd += '<div class="report_form_fields">';
+
+            $('.add-works__info .new-form .inputs>input').each(function(){
+                var report_forms_id = $(this).parent().parent().attr('report_forms_id');
+                var name = $(this).val();
+                var found = false;
+
+                $.each(checked_report_forms, function(i,val){
+                    if(val == report_forms_id){
+                        found = true;
+                    }
+                });
+
+
+                if(found){
+                    strToAdd += '<input type="hidden" name="report_form_fields[' + report_forms_id + '][]" value="' + name + '">';
+                }
+
+
+            });
+
+            strToAdd += '</div>';
+
+            $('#save-work-form .work-report-forms').append(strToAdd);
+        }
+
+
+        function fillFormToSend(){
+            $('#save-work-form .work-fields input[name="brands_id"]').val(getSelectedBrandId());
+            $('#save-work-form .work-fields input[name="name"]').val($('.add-works__info').eq(3).find('input').val());
+            $('#save-work-form .work-fields input[name="worker_types_id"]').val(getSelectedWorkerTypeId());
+            $('#save-work-form .work-fields input[name="work_types_id"]').val(getSelectedWorkTypeId());
+            $('#save-work-form .work-fields input[name="period_id"]').val(getSelectedPeriodId());
+            $('#save-work-form .work-fields input[name="execution_time"]').val(getWorkTimeInMinutes());
+
+
+            addToFormWorkContentsAlreadyExists();
+            addToFormWorkContentsToAdd();
+            addToFormReportFormsWithFields();
+
+        }
+
+
+        function formToSendValidate(){
+            var result = true;
+
+            $('#save-work-form .work-fields input').each(function(){
+                if(!$(this.val()) || $(this).val() == ''){
+                    result = false;
+                }
+            });
+
+            return result;
+        }
+
+
         $('.work .plus').eq(0).click(function(){
 
 
@@ -2324,7 +2410,9 @@ use app\models\Period;
 
                 setTimeout(function(){
                     addToFormWorkContentsToAdd();
-                },10000)
+                    addToFormReportFormsWithFields();
+                    alert(getWorkTimeInMinutes());
+                },15000)
 
             },
             dataType: 'json'
