@@ -2330,8 +2330,11 @@ use app\models\Period;
 
 
         function fillFormToSend(){
+
+
+
             $('#save-work-form .work-fields input[name="brands_id"]').val(getSelectedBrandId());
-            $('#save-work-form .work-fields input[name="name"]').val($('.add-works__info').eq(3).find('input').val());
+            $('#save-work-form .work-fields input[name="name"]').val($('.add-works__info').eq(2).find('input').val());
             $('#save-work-form .work-fields input[name="worker_types_id"]').val(getSelectedWorkerTypeId());
             $('#save-work-form .work-fields input[name="work_types_id"]').val(getSelectedWorkTypeId());
             $('#save-work-form .work-fields input[name="period_id"]').val(getSelectedPeriodId());
@@ -2349,7 +2352,11 @@ use app\models\Period;
             var result = true;
 
             $('#save-work-form .work-fields input').each(function(){
-                if(!$(this.val()) || $(this).val() == ''){
+
+                alert($(this).attr('name'));
+                alert($(this).val());
+
+                if(!$(this).val() || $(this).val() == ''){
                     result = false;
                 }
             });
@@ -2357,6 +2364,18 @@ use app\models\Period;
             return result;
         }
 
+
+        $(document)
+            .on('click', '#save-work-form button[type="submit"]', function(e) {
+
+                fillFormToSend();
+
+                var isValid = formToSendValidate();
+                if(!isValid) {
+                    e.preventDefault(); //prevent the default action
+                    alert('Заполнены не все поля!!!');
+                }
+            });
 
         $('.work .plus').eq(0).click(function(){
 
@@ -2408,11 +2427,11 @@ use app\models\Period;
 
                 addToFormWorkContentsAlreadyExists();
 
-                setTimeout(function(){
+               // setTimeout(function(){
                     addToFormWorkContentsToAdd();
                     addToFormReportFormsWithFields();
                     alert(getWorkTimeInMinutes());
-                },15000)
+                //},15000)
 
             },
             dataType: 'json'
