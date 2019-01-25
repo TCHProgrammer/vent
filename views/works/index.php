@@ -2236,9 +2236,9 @@ use app\models\Period;
 
                     //var work_contents_id = $(this).attr('work_contents_id');
                     var name = $(this).find('input').eq(0).val();
-                    var description = $(this).find('.add-descr_block textarea').eq(0).text();
+                    var description = $(this).find('.add-descr_block textarea').eq(0).val();
 
-
+                    alert($(this).find('.add-descr_block textarea').eq(0).val());
 
 
                     var image_inputs = [];
