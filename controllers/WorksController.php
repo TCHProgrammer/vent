@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 
+use Yii;
 use app\models\Categories;
 use app\models\Brands;
 use app\models\Works;
@@ -79,6 +80,15 @@ class WorksController extends \yii\web\Controller
 
         return json_encode($result);
 
+    }
+
+
+    public function actionUpdate(){
+        $result = array();
+        $result['POST'] = Yii::$app->request->post();
+        $result['FILES'] = $_FILES;
+
+        return json_encode($result);
     }
 
 

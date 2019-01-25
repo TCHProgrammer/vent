@@ -434,7 +434,7 @@ AppAsset::register($this);
                 
             </div>
 
-
+            <input type="hidden" name="<?=Yii::$app->getRequest()->csrfParam;?>" value="<?=Yii::$app->getRequest()->getCsrfToken();?>">
 
 		    <div class="add-brands__button">
 			    <button type="submit"><span>Сохранить работу</span></button>

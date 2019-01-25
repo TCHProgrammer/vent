@@ -2387,6 +2387,9 @@ use app\models\Period;
 
             //$('ul.mCS_destroyed li:gt(1)').remove();
 
+
+
+
             $.ajax({
                 type: "POST",
                 url: "<?=Yii::$app->urlManager->createUrl('works/getworkinfo')?>",
