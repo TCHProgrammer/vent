@@ -2047,10 +2047,10 @@ use app\models\Period;
 
         function addReportFormsField(report_forms_id, work_report_form_fields_id, field_name){
 
-
-
             $('.new-form[report_forms_id="' + report_forms_id + '"]>.inputs').append('<input type="text" report_forms_id="' + report_forms_id + '" work_report_form_fields_id="' + work_report_form_fields_id + '" placeholder="Введите название поля" value="' + field_name + '">');
         }
+
+
 
 
         function appendNewComposition(work_contents_id, work_contents_name, work_contents_description, images){
@@ -2155,6 +2155,116 @@ use app\models\Period;
         }
 
 
+        function addToFormWorkContentsAlreadyExists(){
+
+            $('.work-contents-already-exits').empty();
+
+            $('.add-works__info-composition>.composition').each(function(){
+
+                if(!$(this).attr('work_contents_id')){
+                    return;
+                }
+
+                var work_contents_id = $(this).attr('work_contents_id');
+                var name = $(this).find('input').eq(0).val();
+                var description = $(this).find('.add-descr_block textarea').eq(0).text();
+
+                var image_ids = [];
+
+                var self = this;
+
+                $(self).find('.add-photo_block .files .file').each(function(){
+                    if($(this).attr('work_contents_photo_id')){
+                        image_ids.push($(this).attr('work_contents_photo_id'));
+                    }
+                });
+
+                var res_str = '<div>';
+
+                res_str += '<input type="hidden" name="work_contents_already_exists_name[' + work_contents_id + ']" value="' + name + '">';
+                res_str += '<input type="hidden" name="work_contents_already_exists_description[' + work_contents_id + ']" value="' + description + '">';
+
+                $.each(image_ids, function(i,val){
+                    res_str += '<input type="hidden" name="work_contents_photo_id[' + work_contents_id + '][]" value="' + val + '">';
+                });
+
+                res_str += '</div>';
+
+                $('.work-contents-already-exits').append(res_str);
+
+            });
+
+        }
+
+        function addToFormWorkContentsToAdd(){
+
+            $('.work-contents-to-add').empty();
+
+            var work_contents_index = -1;
+
+
+
+            $('.add-works__info-composition>.composition').each(function(index){
+
+
+
+                if(!$(this).attr('work_contents_id')) {
+
+
+                    work_contents_index++;
+
+                    alert('work_contents_index=' + work_contents_index);
+
+                    //var work_contents_id = $(this).attr('work_contents_id');
+                    var name = $(this).find('input').eq(0).val();
+                    var description = $(this).find('.add-descr_block textarea').eq(0).text();
+
+
+                    alert('name='+name);
+                    alert('description='+description);
+
+                    var image_inputs = [];
+
+                    var self = $(this);
+
+                    self.find('.add-photo_block .files .file').each(function () {
+
+
+                        if (!$(this).attr('work_contents_photo_id') && $(this).find('input').eq(0)[0].files.length) {
+                            image_inputs.push($(this).find('input').eq(0).clone());
+                        }
+                    });
+
+                    var res_str = '<div>';
+
+                    res_str += '<input type="hidden" name="work_contents_to_add_name[' + work_contents_index + ']" value="' + name + '">';
+                    res_str += '<input type="hidden" name="work_contents_to_add_description[' + work_contents_index + ']" value="' + description + '">';
+
+
+                    res_str += '</div>';
+
+                    $('.work-contents-to-add').append(res_str);
+
+                    $('.work-contents-to-add').append('<div class="work_contents_photos"></div>');
+
+
+                    $('.work_contents_photos').append('<div work_contents_index="' + work_contents_index + '"></div>')
+
+                    $.each(image_inputs, function (i, val) {
+                        $('.work_contents_photos>div[work_contents_index="' + work_contents_index + '"]').append(val);
+                    });
+
+                    $('.work_contents_photos>div[work_contents_index="' + work_contents_index + '"]>input').each(function (index1) {
+                        $(this).attr('name', 'work_contents_image[' + work_contents_index + '][]');
+                    });
+
+                }
+
+            });
+
+        }
+
+
         $('.work .plus').eq(0).click(function(){
 
 
@@ -2202,6 +2312,13 @@ use app\models\Period;
                 appendNewComposition(3,'name','description',[{img_file:'abc',work_contents_photo_id:1},{img_file:'def',work_contents_photo_id:2},{img_file:'ghi',work_contents_photo_id:3}]);
 
                 addReportFormsField(2,4,'Тестовое название поля');
+
+                addToFormWorkContentsAlreadyExists();
+
+                setTimeout(function(){
+                    addToFormWorkContentsToAdd();
+                },10000)
+
             },
             dataType: 'json'
         });
