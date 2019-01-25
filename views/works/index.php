@@ -2353,8 +2353,7 @@ use app\models\Period;
 
             $('#save-work-form .work-fields input').each(function(){
 
-                alert($(this).attr('name'));
-                alert($(this).val());
+
 
                 if(!$(this).val() || $(this).val() == ''){
                     result = false;
@@ -2395,42 +2394,42 @@ use app\models\Period;
             success: function(data){
 
 
-                setSelectedCategory(17);
+                //setSelectedCategory(17);
 
-                $('.add-works__info').eq(1).removeClass('disabled').addClass('active');
+                //$('.add-works__info').eq(1).removeClass('disabled').addClass('active');
 
                 //alert(getSelectedCategoryId());
 
-                setSelectedBrand(12);
+                //setSelectedBrand(12);
 
                 //alert(getSelectedBrandId());
 
-                setSelectedWorkerType(1);
+                //setSelectedWorkerType(1);
 
                 //alert(getSelectedWorkerTypeId());
 
-                setSelectedWorkType(1);
+                //setSelectedWorkType(1);
 
                 //alert(getSelectedWorkTypeId());
 
-                setSelectedPeriod(1);
+                //setSelectedPeriod(1);
 
                 //alert(getSelectedPeriodId());
 
-                setReportFormsChecked(2);
+                //setReportFormsChecked(2);
 
-                alert(getReportFormsIds());
+                //alert(getReportFormsIds());
 
-                appendNewComposition(3,'name','description',[{img_file:'abc',work_contents_photo_id:1},{img_file:'def',work_contents_photo_id:2},{img_file:'ghi',work_contents_photo_id:3}]);
+                //appendNewComposition(3,'name','description',[{img_file:'abc',work_contents_photo_id:1},{img_file:'def',work_contents_photo_id:2},{img_file:'ghi',work_contents_photo_id:3}]);
 
-                addReportFormsField(2,4,'Тестовое название поля');
+                //addReportFormsField(2,4,'Тестовое название поля');
 
-                addToFormWorkContentsAlreadyExists();
+                //addToFormWorkContentsAlreadyExists();
 
                // setTimeout(function(){
-                    addToFormWorkContentsToAdd();
-                    addToFormReportFormsWithFields();
-                    alert(getWorkTimeInMinutes());
+                    //addToFormWorkContentsToAdd();
+                    //addToFormReportFormsWithFields();
+                    //alert(getWorkTimeInMinutes());
                 //},15000)
 
             },
