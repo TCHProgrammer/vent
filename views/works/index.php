@@ -200,7 +200,7 @@ use app\models\Period;
 
                                         </div>
                                     </div>
-                                    <span><?=$works_data->name;?></span>
+                                    <span class="work-name" works_id="<?=$works_data->id;?>"><?=$works_data->name;?></span>
                                 </td>
                                 <? $work_period = Period::findOne($works_data->period_id); ?>
                                 <td class="checks"><?if($work_period->symbole_code == 'dayly'):?><img src="img/checks.png" alt=""><? endif; ?></td>
@@ -863,6 +863,66 @@ use app\models\Period;
                     alert('Заполнены не все поля!!!');
                 }
             });
+
+
+        $('.work-name').click(function(){
+            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
+            addIdToFormToSend($(this).attr('works_id'));
+
+            var self = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: "<?=Yii::$app->urlManager->createUrl('works/getworkinfo').'?id=';?>"+self.attr('works_id'),
+                data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
+                success: function(data){
+
+                    console.info(data);
+
+                /*
+                setSelectedCategory(17);
+
+                $('.add-works__info').eq(1).removeClass('disabled').addClass('active');
+
+                //alert(getSelectedCategoryId());
+
+                setSelectedBrand(12);
+
+                //alert(getSelectedBrandId());
+
+                setSelectedWorkerType(1);
+
+                //alert(getSelectedWorkerTypeId());
+
+                setSelectedWorkType(1);
+
+                //alert(getSelectedWorkTypeId());
+
+                setSelectedPeriod(1);
+
+                //alert(getSelectedPeriodId());
+
+                setReportFormsChecked(2);
+
+                //alert(getReportFormsIds());
+
+                appendNewComposition(3,'name','description',[{img_file:'abc',work_contents_photo_id:1},{img_file:'def',work_contents_photo_id:2},{img_file:'ghi',work_contents_photo_id:3}]);
+
+                addReportFormsField(2,4,'Тестовое название поля');
+
+                //addToFormWorkContentsAlreadyExists();
+
+                // setTimeout(function(){
+                //addToFormWorkContentsToAdd();
+                //addToFormReportFormsWithFields();
+                //alert(getWorkTimeInMinutes());
+                //},15000)
+                */
+                },
+                dataType: 'json'
+                });
+
+        });
 
         $('.work .plus').eq(0).click(function(){
 

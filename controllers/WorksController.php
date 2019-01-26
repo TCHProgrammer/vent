@@ -31,30 +31,30 @@ class WorksController extends \yii\web\Controller
 
         $result = array();
 
-        $categories = Categories::find()->orderBy('name')->asArray()->all();
+        //$categories = Categories::find()->orderBy('name')->asArray()->all();
 
-        $brands = Brands::find()->orderBy('name')->asArray()->all();
+        //$brands = Brands::find()->orderBy('name')->asArray()->all();
 
-        $work_types = WorkTypes::find()->orderBy('name')->asArray()->all();
+        //$work_types = WorkTypes::find()->orderBy('name')->asArray()->all();
 
-        $worker_types = WorkerTypes::find()->orderBy('name')->asArray()->all();
+        //$worker_types = WorkerTypes::find()->orderBy('name')->asArray()->all();
 
-        $periods = Period::find()->orderBy('priority')->asArray()->all();
+        //$periods = Period::find()->orderBy('priority')->asArray()->all();
 
-        $report_forms = ReportForms::find()->orderBy('priority')->asArray()->all();
+        //$report_forms = ReportForms::find()->orderBy('priority')->asArray()->all();
 
 
-        $result['categories_list'] = $categories;
+        //$result['categories_list'] = $categories;
 
-        $result['brands_list'] = $brands;
+        //$result['brands_list'] = $brands;
 
-        $result['work_types_list'] = $work_types;
+        //$result['work_types_list'] = $work_types;
 
-        $result['worker_types_list'] = $worker_types;
+        //$result['worker_types_list'] = $worker_types;
 
-        $result['periods_list'] = $periods;
+        //$result['periods_list'] = $periods;
 
-        $result['report_forms_list'] = $report_forms;
+        //$result['report_forms_list'] = $report_forms;
 
 
         if($id){
@@ -74,6 +74,29 @@ class WorksController extends \yii\web\Controller
                 $work_contents = WorkContents::find()->where(array('works_id'=>$model->id))->orderBy('name')->asArray()->all();
 
                 $result['work_contents'] = $work_contents;
+
+                $work_report_forms = WorkReportForms::find()->where(array('works_id'=>$model->id))->asArray()->all();
+
+                $result['work_report_forms'] = $work_report_forms;
+
+                $work_report_form_fields = array();
+                foreach($work_report_forms as $work_report_form){
+                    $wrff = WorkReportFormFields::find()->where(array('work_report_forms_id'=>$work_report_form['id']))->asArray()->all();
+                    $work_report_form_fields[$work_report_form['id']] = $wrff;
+                }
+
+                $result['work_report_form_fields'] = $work_report_form_fields;
+
+
+                $work_contents_photo = array();
+
+
+                foreach($work_contents as $work_content){
+                    $wcp = WorkContentsPhoto::find()->where(array('work_contents_id'=>$work_content['id']))->asArray()->all();
+                    $work_contents_photo[$work_content['id']] = $wcp;
+                }
+
+                $result['work_contents_photo'] = $work_contents_photo;
 
 
             } else {
@@ -190,8 +213,9 @@ class WorksController extends \yii\web\Controller
         if($brands_id){
             return $this->redirect('/works?brands_id='.$brands_id);
         } else {
-            return $this->redirect(['index']);
+            return $this->redirect(['/works']);
         }
+
     }
 
 
