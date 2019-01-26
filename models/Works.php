@@ -86,13 +86,12 @@ class Works extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['brands_id', 'worker_types_id', 'work_types_id', 'period_id', 'report_forms_id'], 'required'],
-            [['brands_id', 'worker_types_id', 'work_types_id', 'period_id', 'execution_time', 'report_forms_id'], 'integer'],
+            [['brands_id', 'worker_types_id', 'work_types_id', 'period_id'], 'required'],
+            [['brands_id', 'worker_types_id', 'work_types_id', 'period_id', 'execution_time'], 'integer'],
             [['name'], 'string', 'max' => 512],
             [['total_composition_description'], 'string'],
             [['brands_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brands::className(), 'targetAttribute' => ['brands_id' => 'id']],
             [['period_id'], 'exist', 'skipOnError' => true, 'targetClass' => Period::className(), 'targetAttribute' => ['period_id' => 'id']],
-            [['report_forms_id'], 'exist', 'skipOnError' => true, 'targetClass' => ReportForms::className(), 'targetAttribute' => ['report_forms_id' => 'id']],
             [['worker_types_id'], 'exist', 'skipOnError' => true, 'targetClass' => WorkerTypes::className(), 'targetAttribute' => ['worker_types_id' => 'id']],
         ];
     }
@@ -112,7 +111,7 @@ class Works extends \yii\db\ActiveRecord
             'work_types_id' => 'Work Types ID',
             'period_id' => 'Period ID',
             'execution_time' => 'Execution Time',
-            'report_forms_id' => 'Report Forms ID',
+
         ];
     }
 
@@ -140,13 +139,7 @@ class Works extends \yii\db\ActiveRecord
         return $this->hasOne(Period::className(), ['id' => 'period_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getReportForms()
-    {
-        return $this->hasOne(ReportForms::className(), ['id' => 'report_forms_id']);
-    }
+
 
     /**
      * @return \yii\db\ActiveQuery

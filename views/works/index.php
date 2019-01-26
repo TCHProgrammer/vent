@@ -791,7 +791,7 @@ use app\models\Period;
 
             strToAdd += '</div>';
 
-            $('#save-work-form .work-report-forms').append(strToAdd);
+            $('#save-work-form .work-report-forms').empty().append(strToAdd);
         }
 
 
@@ -820,7 +820,9 @@ use app\models\Period;
 
             $('#save-work-form .work-fields input').each(function(){
 
-
+                if($(this).attr('name') == 'total_composition_description'){
+                    return;
+                }
 
                 if(!$(this).val() || $(this).val() == ''){
                     result = false;
@@ -870,7 +872,7 @@ use app\models\Period;
             $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
 
 
-            addIdToFormToSend(4);
+            //addIdToFormToSend(4);
 
             //$('.add-works__info select.select-razdel li:gt(1)').remove();
 

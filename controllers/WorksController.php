@@ -10,12 +10,18 @@ use app\models\Works;
 use app\models\WorkTypes;
 use app\models\WorkerTypes;
 use app\models\WorkContents;
+use app\models\WorkContentsPhoto;
 use app\models\ReportForms;
+use app\models\WorkReportForms;
+use app\models\WorkReportFormFields;
 use app\models\Period;
 
 
 class WorksController extends \yii\web\Controller
 {
+
+
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -82,18 +88,110 @@ class WorksController extends \yii\web\Controller
 
     }
 
+    private function newWorkDataUpdate($id){
+        foreach(Yii::$app->request->post()['work_contents_to_add_name'] as $k=>$wk_name){
+            $wk = new WorkContents();
+            $wk->name = $wk_name;
+            $wk->description = Yii::$app->request->post()['work_contents_to_add_description'][$k];
+            $wk->works_id = $id;
 
-    public function actionUpdate($id=null){
+            if($wk->save()){
+                $work_contents_id = $wk->id;
 
-        if(!$id){
+                if(isset($_FILES['work_contents_image']['tmp_name'][$k])) {
+                    $tmp_files = $_FILES['work_contents_image']['tmp_name'][$k];
+                } else {
+                    $tmp_files = array();
+                }
+
+                if(isset($_FILES['work_contents_image']['name'][$k])) {
+                    $file_names = $_FILES['work_contents_image']['name'][$k];
+                } else {
+                    $file_names = array();
+                }
+
+                $file_extensions = array();
+
+                foreach($file_names as $file_name){
+                    $exp = explode('.',$file_name);
+
+                    $file_extensions[] = array_pop($exp);
+                }
+
+                $file_names_to_replace = array();
+
+
+                foreach($file_extensions as $file_extension){
+                    $file_names_to_replace[] = md5(time().rand().rand()).'.'.$file_extension;
+                }
+
+                foreach($tmp_files as $ktf=>$tmp_file){
+                    rename($tmp_file,$_SERVER['DOCUMENT_ROOT'].'/'.'upload/composition_images/'.$file_names_to_replace[$ktf]);
+                    $work_contents_photo = new WorkContentsPhoto();
+                    $work_contents_photo->work_contents_id = $work_contents_id;
+                    $work_contents_photo->file_name = $file_names_to_replace[$ktf];
+
+                    $work_contents_photo->save();
+                }
+
+
+
+
+            }
+
+            foreach(Yii::$app->request->post()['checked_report_forms'] as $crf){
+                $wrf = new WorkReportForms();
+                $wrf->report_forms_id = $crf;
+                $wrf->works_id = $id;
+                if($wrf->save()){
+                    $work_report_forms_id = $wrf->id;
+                    if(isset(Yii::$app->request->post()['report_form_fields'][$crf])){
+                        foreach(Yii::$app->request->post()['report_form_fields'][$crf] as $work_report_form_fields_name){
+                            $work_report_form_field = new WorkReportFormFields();
+                            $work_report_form_field->work_report_forms_id = $work_report_forms_id;
+                            $work_report_form_field->name = $work_report_form_fields_name;
+                            $work_report_form_field->save();
+                        }
+                    }
+                }
+            }
+
 
         }
+    }
 
+    /**
+     * @param null $id
+     * @param null $brand_id
+     * @return string
+     */
+    public function actionUpdate($id=null, $brands_id=null){
+
+        if(!$id){
+            $model = new Works();
+            $fields = $model->attributes();
+            foreach($fields as $field){
+                $model[$field] = Yii::$app->request->post()[$field];
+            }
+
+            if($model->save()){
+                $id = $model->id;
+                $this->newWorkDataUpdate($id);
+            }
+        }
+
+        /*
         $result = array();
         $result['POST'] = Yii::$app->request->post();
         $result['FILES'] = $_FILES;
 
         return json_encode($result);
+        */
+        if($brands_id){
+            return $this->redirect('/works?brands_id='.$brands_id);
+        } else {
+            return $this->redirect(['index']);
+        }
     }
 
 

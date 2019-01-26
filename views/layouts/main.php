@@ -432,7 +432,6 @@ AppAsset::register($this);
 
 
             <div class="work-report-forms">
-                
             </div>
 
             <input type="hidden" name="<?=Yii::$app->getRequest()->csrfParam;?>" value="<?=Yii::$app->getRequest()->getCsrfToken();?>">
