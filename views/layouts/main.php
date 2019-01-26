@@ -412,7 +412,7 @@ AppAsset::register($this);
 			</div>
 		</div>
 
-        <form id="save-work-form" method="post" enctype="multipart/form-data" action="/works/update">
+        <form id="save-work-form" method="post" enctype="multipart/form-data" action="/works/update<?if(isset($_GET['brands_id']) && is_numeric($_GET['brands_id'])){echo '?brands_id='.$_GET['brands_id'];}?>">
             <div class="work-fields">
                 <input type="hidden" name="brands_id">
                 <input type="hidden" name="name">
@@ -420,6 +420,7 @@ AppAsset::register($this);
                 <input type="hidden" name="work_types_id">
                 <input type="hidden" name="period_id">
                 <input type="hidden" name="execution_time">
+                <input type="hidden" name="total_composition_description">
             </div>
 
             <div class="work-contents">

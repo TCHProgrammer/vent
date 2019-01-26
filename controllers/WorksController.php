@@ -83,7 +83,12 @@ class WorksController extends \yii\web\Controller
     }
 
 
-    public function actionUpdate(){
+    public function actionUpdate($id=null){
+
+        if(!$id){
+
+        }
+
         $result = array();
         $result['POST'] = Yii::$app->request->post();
         $result['FILES'] = $_FILES;
