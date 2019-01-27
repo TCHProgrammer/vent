@@ -71,6 +71,11 @@ class WorksController extends \yii\web\Controller
                     $result[$field] = $model[$field];
                 }
 
+                $brand = Brands::findOne($model->brands_id);
+
+                $result['categories_id'] = $brand->category_id;
+
+
                 $work_contents = WorkContents::find()->where(array('works_id'=>$model->id))->orderBy('name')->asArray()->all();
 
                 $result['work_contents'] = $work_contents;

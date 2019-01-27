@@ -404,6 +404,11 @@ use app\models\Period;
 
             $('.add-works__title .brand').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display','inline');
             $('.add-works__title .check').css('display','inline');
+
+
+
+
+            $('.add-works__info').eq(1).removeClass('disabled');
         }
 
         function setSelectedWorkerType(worker_types_id){
@@ -878,6 +883,66 @@ use app\models\Period;
                 success: function(data){
 
                     console.info(data);
+
+                    setSelectedCategory(data.categories_id);
+
+                    setSelectedBrand(data.brands_id);
+
+                    setSelectedWorkerType(data.worker_types_id);
+
+                    setSelectedWorkType(data.work_types_id);
+
+                    setSelectedPeriod(data.period_id);
+
+                    $('.add-works__info').eq(2).find('input').val(data.name);
+
+                    $('.time-tabs-pane input').val(data.execution_time);
+
+                    $('.time-tabs-nav button[data-href="minutes"]').addClass('active');
+
+                    $('.time-tabs-nav button[data-href="hours"]').removeClass('active');
+
+
+                    $('.add-works__info.op textarea').val(data.total_composition_description);
+
+                    $.each(data.work_contents, function(i, val){
+                        var work_contents_id = val.id;
+
+
+
+                        var photos = [];
+                        var photo_items = data.work_contents_photo[work_contents_id];
+
+
+
+                        if(photo_items){
+                            $.each(photo_items, function(i1,val1){
+                               photos.push({img_file:val1.file_name, work_contents_photo_id:val1.id});
+                            });
+                        }
+
+
+
+                        appendNewComposition(work_contents_id, val.name, val.description, photos);
+                    });
+
+
+                    $.each(data.work_report_forms, function(i,val){
+                        setReportFormsChecked(val.report_forms_id);
+
+                        var work_report_forms_id = val.id;
+
+                        $.each(data.work_report_form_fields[work_report_forms_id], function(i1,val1){
+
+
+                                addReportFormsField(val.report_forms_id,val1.id,val1.name);
+
+
+                        });
+
+
+                    });
+
 
                 /*
                 setSelectedCategory(17);
