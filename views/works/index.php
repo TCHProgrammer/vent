@@ -799,6 +799,34 @@ use app\models\Period;
             $('#save-work-form .work-report-forms').empty().append(strToAdd);
         }
 
+        function emptyWorkBlock(){
+            setSelectedCategory(0);
+            setSelectedBrand(0);
+            setSelectedWorkerType(0);
+            setSelectedWorkType(0);
+            setSelectedPeriod(0);
+
+            $('.add-works__info').eq(2).find('input').val('');
+
+            $('.time-tabs-pane input').val('');
+
+            $('.time-tabs-nav button[data-href="minutes"]').addClass('active');
+
+            $('.time-tabs-nav button[data-href="hours"]').removeClass('active');
+
+
+            $('.add-works__info.op textarea').val('');
+
+            while($('.add-works__info-composition>div').length > 2) {
+                $('.add-works__info-composition>div').eq(0).remove();
+            }
+            renumerateCompositions();
+
+            $('.add-works__info.inp input').attr('checked',false);
+
+            $('.add-works__info.inp .new-form .inputs input').remove();
+        }
+
 
         function fillFormToSend(){
 
@@ -996,7 +1024,7 @@ use app\models\Period;
 
             $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
 
-
+            emptyWorkBlock();
             //addIdToFormToSend(4);
 
             //$('.add-works__info select.select-razdel li:gt(1)').remove();
