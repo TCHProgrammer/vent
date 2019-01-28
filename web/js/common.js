@@ -193,7 +193,7 @@ $(document).ready(function(){
 	});
 
 	// work open-3
-	$('.aside-menu__menu ul li .work .plus').click(function(e){
+	$('.aside-menu__menu ul li .work .plus,.item-content .to-add-work').click(function(e){
 		e.preventDefault();
 		$('.scroller__track').css('opacity','0');
 		setTimeout(function(){

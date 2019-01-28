@@ -152,7 +152,7 @@ use app\models\Period;
         <? foreach($workers_type_data as $works_type_id=>$works_type_data): ?>
         <div class="item-content opened">
             <div class="wrap" data-linked="<?=WorkTypes::findOne($works_type_id)->symbole_code;?>">
-                <a href="#" class="to-add-work">
+                <a href="#" class="to-add-work" categories_id="<?=$category->id;?>"  brands_id="<?=$brands_id;?>" work_types_id="<?=$works_type_id;?>" worker_types_id="<?=$workers_type_id;?>" >
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="2ehra" d="M252.5 315a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H254v3.5a1.5 1.5 0 0 1-3 0V323h-3.5a1.5 1.5 0 0 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-246 -315)"><use fill="#fff" xlink:href="#2ehra"/></g></g></svg>
                 </a>
                 <div class="table-control rotating">
@@ -1038,6 +1038,24 @@ use app\models\Period;
             emptyWorkBlock();
 
 
+        });
+
+        $('.item-content .to-add-work').click(function(){
+
+
+            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
+
+            emptyWorkBlock();
+
+            
+
+            setSelectedCategory($(this).attr('categories_id'));
+
+            setSelectedBrand($(this).attr('brands_id'));
+
+            setSelectedWorkerType($(this).attr('worker_types_id'));
+
+            setSelectedWorkType($(this).attr('work_types_id'));
         });
 
     });
