@@ -295,6 +295,49 @@ class WorksController extends \yii\web\Controller
 
     }
 
+
+    private function setCheckedReportFormsWithFields($id){
+
+        $work = Works::findOne($id);
+
+        $work_report_forms_in_db = $work->workReportForms;
+
+
+        foreach($work_report_forms_in_db as $item_to_delete){
+            $item_to_delete->delete();
+        }
+
+        if(isset(Yii::$app->request->post()['checked_report_forms'])) {
+            $report_forms = array_unique(Yii::$app->request->post()['checked_report_forms']);
+        } else {
+            $report_forms = array();
+        }
+
+
+        foreach($report_forms as $report_form_id){
+            $work_report_form = new WorkReportForms();
+            $work_report_form->works_id = $work->id;
+            $work_report_form->report_forms_id = $report_form_id;
+
+            if($work_report_form->save()) {
+
+                if(isset(Yii::$app->request->post()['report_form_fields'][$report_form_id])) {
+                    foreach(Yii::$app->request->post()['report_form_fields'][$report_form_id] as $form_fields_name){
+                        $work_report_form_field = new WorkReportFormFields();
+                        $work_report_form_field->name = $form_fields_name;
+                        $work_report_form_field->work_report_forms_id = $work_report_form->id;
+                        $work_report_form_field->save();
+                    }
+                }
+
+
+            }
+        }
+
+
+
+    }
+
     private function newWorkDataUpdate($id){
 
         if(isset(Yii::$app->request->post()['work_contents_to_add_name'])) {
@@ -548,6 +591,7 @@ class WorksController extends \yii\web\Controller
             $this->lastWorkContentsAndPhotosAvailable($id);
             $this->lastWorkContentsPhotoToAdd($id);
             $this->newWorkContentsWithPhotosToAdd($id);
+            $this->setCheckedReportFormsWithFields($id);
         }
 
 
