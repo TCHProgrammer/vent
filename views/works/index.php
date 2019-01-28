@@ -190,7 +190,7 @@ use app\models\Period;
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
 
                                             <div class="tooltip">
-                                                <button class="delete">
+                                                <button class="delete" works_id="<?=$works_data->id;?>">
                                                     <div class="icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
                                                     </div>
@@ -1047,7 +1047,7 @@ use app\models\Period;
 
             emptyWorkBlock();
 
-            
+
 
             setSelectedCategory($(this).attr('categories_id'));
 
@@ -1056,6 +1056,22 @@ use app\models\Period;
             setSelectedWorkerType($(this).attr('worker_types_id'));
 
             setSelectedWorkType($(this).attr('work_types_id'));
+        });
+
+
+        $('.tooltip button.delete').click(function(){
+
+            var id = $(this).attr('works_id');
+
+            $.ajax({
+                type: "POST",
+                url: "<?=Yii::$app->urlManager->createUrl('works/delete')?>" + "?id=" + id,
+                data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
+            success: function(data){
+
+            },
+            //dataType: dataType
+            });
         });
 
     });

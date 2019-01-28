@@ -96,7 +96,27 @@ class Works extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeDelete(){
+        if(parent::beforeDelete()){
+            $work_contents = $this->workContents;
 
+            foreach($work_contents as $item){
+                $item->delete();
+            }
+
+            $work_report_forms = $this->workReportForms;
+
+
+            foreach($work_report_forms as $item){
+                $item->delete();
+            }
+
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * {@inheritdoc}

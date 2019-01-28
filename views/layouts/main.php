@@ -460,7 +460,7 @@ AppAsset::register($this);
 				<nav class="aside-menu__menu">
 					<ul>
 						<li>
-							<a href="categories.html" class="active cat">
+							<a href="/categories" class="active cat">
 								<span class="line"></span>
 								<div class="content">
 									<div class="icon">
@@ -474,7 +474,7 @@ AppAsset::register($this);
 							</a>
 						</li>
 						<li>
-							<a href="works.html" class="work">
+							<a href="/works" class="work">
 								<span class="line"></span>
 								<div class="content">
 									<div class="icon">
