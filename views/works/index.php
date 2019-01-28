@@ -597,13 +597,20 @@ use app\models\Period;
 
 
         function renumerateCompositions() {
-            $('.add-works__info-composition .composition .number').each(function (index) {
+            $('.add-works__info-composition .composition').each(function (index) {
 
                 var number = parseInt(index) + parseInt(1);
-                $(this).text(number);
 
-                $(this).parent().find('.add-descr_block .title span').text(number);
-                $(this).parent().find('.add-photo_block .title span').text(number);
+                var number_block = $(this).find('.number');
+
+                number_block.text(number);
+
+                number_block.parent().find('.add-descr_block .title span').text(number);
+                number_block.parent().find('.add-photo_block .title span').text(number);
+
+                $(this).find('.quantity .title span').text(number);
+
+
             });
         }
 
@@ -928,7 +935,7 @@ use app\models\Period;
         },
             success: function (data) {
 
-                console.info(data);
+
 
 
 
@@ -987,6 +994,9 @@ use app\models\Period;
 
 
                 });
+
+
+                renumerateCompositions();
 
 
                 /*
@@ -1080,6 +1090,11 @@ use app\models\Period;
             },
             //dataType: dataType
             });
+        });
+
+        $('.sure-close .to-save a.save').click(function(){
+            var click_element = $('#save-work-form button[type="submit"]').eq(0);
+            click_element.click();
         });
 
     });
