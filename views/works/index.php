@@ -240,7 +240,7 @@ use app\models\Period;
             location.href = $(this).attr('href');
         });
 
-
+        var current_brands_id = <?=$brand->id;?>;
         //alert($('.select-brand .jq-selectbox__trigger').length);
 
         function getSelectedCategoryId() {
@@ -894,6 +894,12 @@ use app\models\Period;
             $('#save-work-form').attr('action', result);
         }
 
+        function removeIdToFormToSend(){
+
+
+            $('#save-work-form').attr('action', '/works/update?brands_id=' + current_brands_id);
+        }
+
 
         $(document)
             .on('click', '#save-work-form button[type="submit"]', function (e) {
@@ -1037,6 +1043,8 @@ use app\models\Period;
 
             emptyWorkBlock();
 
+            removeIdToFormToSend();
+
 
         });
 
@@ -1047,7 +1055,7 @@ use app\models\Period;
 
             emptyWorkBlock();
 
-
+            removeIdToFormToSend();
 
             setSelectedCategory($(this).attr('categories_id'));
 

@@ -364,6 +364,9 @@ class WorksController extends \yii\web\Controller
         if(!$id){
             $model = new Works();
             $fields = $model->attributes();
+
+            unset($fields['id']);
+
             foreach($fields as $field){
                 $model[$field] = Yii::$app->request->post()[$field];
             }
