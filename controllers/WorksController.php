@@ -169,6 +169,11 @@ class WorksController extends \yii\web\Controller
                     $file_names_to_replace[] = md5(time() . rand() . rand()) . '.' . $file_extension;
                 }
 
+
+                //var_dump('lastWorkContentsPhotoToAdd');
+
+                //var_dump($tmp_files);
+
                 foreach ($tmp_files as $ktf => $tmp_file) {
                     rename($tmp_file, $_SERVER['DOCUMENT_ROOT'] . '/' . 'upload/composition_images/' . $file_names_to_replace[$ktf]);
                     $work_contents_photo = new WorkContentsPhoto();
@@ -274,9 +279,14 @@ class WorksController extends \yii\web\Controller
                         $file_names_to_replace[] = md5(time() . rand() . rand()) . '.' . $file_extension;
                     }
 
-                    foreach ($tmp_files as $ktf => $tmp_file) {
+                    //var_dump('newWorkContentsWithPhotosToAdd');
 
-                        rename($tmp_file, $_SERVER['DOCUMENT_ROOT'] . '/' . 'upload/composition_images/' . $file_names_to_replace[$ktf]);
+                    //var_dump($tmp_files);
+
+                    foreach ($tmp_files as $ktf => $tmp_file) {
+                        if(file_exists($tmp_file)) {
+                            rename($tmp_file, $_SERVER['DOCUMENT_ROOT'] . '/' . 'upload/composition_images/' . $file_names_to_replace[$ktf]);
+                        }
                         $work_contents_photo = new WorkContentsPhoto();
                         $work_contents_photo->work_contents_id = $work_contents_id;
                         $work_contents_photo->file_name = $file_names_to_replace[$ktf];
@@ -609,6 +619,7 @@ class WorksController extends \yii\web\Controller
         } else {
             return $this->redirect(['/works']);
         }
+
 
     }
 
