@@ -47,6 +47,21 @@ class WorkContentsPhoto extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeDelete(){
+        if(parent::beforeDelete()){
+
+            $file_path = $_SERVER['DOCUMENT_ROOT'].'/upload/composition_images/'.$this->file_name;
+
+            if(file_exists($file_path)){
+                unlink($file_path);
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
