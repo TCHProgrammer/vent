@@ -175,12 +175,15 @@ class WorksController extends \yii\web\Controller
                 //var_dump($tmp_files);
 
                 foreach ($tmp_files as $ktf => $tmp_file) {
-                    rename($tmp_file, $_SERVER['DOCUMENT_ROOT'] . '/' . 'upload/composition_images/' . $file_names_to_replace[$ktf]);
-                    $work_contents_photo = new WorkContentsPhoto();
-                    $work_contents_photo->work_contents_id = $work_contents_id;
-                    $work_contents_photo->file_name = $file_names_to_replace[$ktf];
+                    if(file_exists($tmp_file)) {
+                        rename($tmp_file, $_SERVER['DOCUMENT_ROOT'] . '/' . 'upload/composition_images/' . $file_names_to_replace[$ktf]);
 
-                    $work_contents_photo->save();
+                        $work_contents_photo = new WorkContentsPhoto();
+                        $work_contents_photo->work_contents_id = $work_contents_id;
+                        $work_contents_photo->file_name = $file_names_to_replace[$ktf];
+
+                        $work_contents_photo->save();
+                    }
                 }
 
 
@@ -286,12 +289,13 @@ class WorksController extends \yii\web\Controller
                     foreach ($tmp_files as $ktf => $tmp_file) {
                         if(file_exists($tmp_file)) {
                             rename($tmp_file, $_SERVER['DOCUMENT_ROOT'] . '/' . 'upload/composition_images/' . $file_names_to_replace[$ktf]);
-                        }
-                        $work_contents_photo = new WorkContentsPhoto();
-                        $work_contents_photo->work_contents_id = $work_contents_id;
-                        $work_contents_photo->file_name = $file_names_to_replace[$ktf];
 
-                        $work_contents_photo->save();
+                            $work_contents_photo = new WorkContentsPhoto();
+                            $work_contents_photo->work_contents_id = $work_contents_id;
+                            $work_contents_photo->file_name = $file_names_to_replace[$ktf];
+
+                            $work_contents_photo->save();
+                        }
                     }
 
 
