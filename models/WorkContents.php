@@ -51,11 +51,37 @@ class WorkContents extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public function beforeDelete()
+    {
+
+        if(parent::beforeDelete()){
+            $work_contents_photo = $this->workContentsPhoto;
+
+            foreach($work_contents_photo as $item){
+                $item->delete();
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getWorks()
     {
         return $this->hasOne(Works::className(), ['id' => 'works_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWorkContentsPhoto()
+    {
+        return $this->hasMany(WorkContentsPhoto::className(), ['work_contents_id' => 'id']);
     }
 }

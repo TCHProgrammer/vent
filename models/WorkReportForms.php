@@ -40,7 +40,7 @@ class WorkReportForms extends \yii\db\ActiveRecord
     {
 
         if(parent::beforeDelete()){
-            $report_form_fields = $this->reportformfields;
+            $report_form_fields = $this->reportFormFields;
 
             foreach($report_form_fields as $item){
                 $item->delete();
@@ -51,6 +51,15 @@ class WorkReportForms extends \yii\db\ActiveRecord
             return false;
         }
 
+    }
+
+
+    public function deleteReportFormFields(){
+        $report_form_fields = $this->reportFormFields;
+
+        foreach($report_form_fields as $item){
+            $item->delete();
+        }
     }
 
     /**

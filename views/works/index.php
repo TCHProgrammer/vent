@@ -235,23 +235,23 @@ use app\models\Period;
 <script type="text/javascript">
 
 
-    $(document).ready(function(){
-        $('.main-content__works-menu_dropdown-right ul').find('li a').click(function(){
+    $(document).ready(function() {
+        $('.main-content__works-menu_dropdown-right ul').find('li a').click(function () {
             location.href = $(this).attr('href');
         });
 
 
         //alert($('.select-brand .jq-selectbox__trigger').length);
 
-        function getSelectedCategoryId(){
+        function getSelectedCategoryId() {
             var result = null;
 
-            $('.select-razdel .jq-selectbox__dropdown ul li').each(function(index){
-                if(result){
+            $('.select-razdel .jq-selectbox__dropdown ul li').each(function (index) {
+                if (result) {
                     return;
                 }
 
-                if($(this).hasClass('selected')){
+                if ($(this).hasClass('selected')) {
                     result = $('.select-razdel select.select-razdel option').eq(index).val();
                 }
             });
@@ -259,15 +259,15 @@ use app\models\Period;
             return result;
         }
 
-        function getSelectedBrandId(){
+        function getSelectedBrandId() {
             var result = null;
 
-            $('.select-brand .jq-selectbox__dropdown ul li').each(function(index){
-                if(result){
+            $('.select-brand .jq-selectbox__dropdown ul li').each(function (index) {
+                if (result) {
                     return;
                 }
 
-                if($(this).hasClass('selected')){
+                if ($(this).hasClass('selected')) {
                     result = $('.select-brand select.select-brand option').eq(index).val();
                 }
             });
@@ -275,15 +275,15 @@ use app\models\Period;
             return result;
         }
 
-        function getSelectedWorkerTypeId(){
+        function getSelectedWorkerTypeId() {
             var result = null;
 
-            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').each(function(index){
-                if(result){
+            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').each(function (index) {
+                if (result) {
                     return;
                 }
 
-                if($(this).hasClass('selected')){
+                if ($(this).hasClass('selected')) {
                     result = $('.add-works__info').eq(3).find('select[name="razdel"] option').eq(index).val();
                 }
             });
@@ -291,15 +291,15 @@ use app\models\Period;
             return result;
         }
 
-        function getSelectedWorkTypeId(){
+        function getSelectedWorkTypeId() {
             var result = null;
 
-            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').each(function(index){
-                if(result){
+            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').each(function (index) {
+                if (result) {
                     return;
                 }
 
-                if($(this).hasClass('selected')){
+                if ($(this).hasClass('selected')) {
                     result = $('.add-works__info').eq(4).find('select[name="razdel"] option').eq(index).val();
                 }
             });
@@ -308,15 +308,15 @@ use app\models\Period;
         }
 
 
-        function getSelectedPeriodId(){
+        function getSelectedPeriodId() {
             var result = null;
 
-            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').each(function(index){
-                if(result){
+            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').each(function (index) {
+                if (result) {
                     return;
                 }
 
-                if($(this).hasClass('selected')){
+                if ($(this).hasClass('selected')) {
                     result = $('.add-works__info').eq(5).find('select[name="razdel"] option').eq(index).val();
                 }
             });
@@ -324,45 +324,44 @@ use app\models\Period;
             return result;
         }
 
-        function getReportFormsIds(){
+        function getReportFormsIds() {
 
             var result = [];
 
-            $('.add-works__info .checks input:checked').each(function(){
+            $('.add-works__info .checks input:checked').each(function () {
                 result.push($(this).attr('report_forms_id'));
             });
 
             return result;
         }
 
-        function onBrandListOpenClick(){
+        function onBrandListOpenClick() {
 
             var selectedCategoryId = getSelectedCategoryId();
 
 
+            $('.select-brand select.select-brand option').each(function (index) {
 
-            $('.select-brand select.select-brand option').each(function(index){
-
-                if($(this).attr('category_id') == selectedCategoryId){
-                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display','block');
+                if ($(this).attr('category_id') == selectedCategoryId) {
+                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display', 'block');
                 } else {
-                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display','none');
+                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display', 'none');
                 }
 
             });
         }
 
-        function setSelectedCategory(category_id){
+        function setSelectedCategory(category_id) {
 
             var indexToSelect = 0;
 
-            $('.select-razdel select.select-razdel option').each(function(index){
+            $('.select-razdel select.select-razdel option').each(function (index) {
 
-                if(indexToSelect){
+                if (indexToSelect) {
                     return;
                 }
 
-                if($(this).val() == category_id){
+                if ($(this).val() == category_id) {
                     indexToSelect = index;
                 }
             });
@@ -372,24 +371,24 @@ use app\models\Period;
             $('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
 
 
-           $('.select-razdel .jq-selectbox__select-text').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+            $('.select-razdel .jq-selectbox__select-text').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
 
-           $('.add-works__title .divide').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display','inline');
+            $('.add-works__title .divide').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display', 'inline');
 
-            $('.add-works__title .check').css('display','inline');
+            $('.add-works__title .check').css('display', 'inline');
         }
 
-        function setSelectedBrand(brand_id){
+        function setSelectedBrand(brand_id) {
 
             var indexToSelect = 0;
 
-            $('.select-brand select.select-brand option').each(function(index){
+            $('.select-brand select.select-brand option').each(function (index) {
 
-                if(indexToSelect){
+                if (indexToSelect) {
                     return;
                 }
 
-                if($(this).val() == brand_id){
+                if ($(this).val() == brand_id) {
                     indexToSelect = index;
                 }
             });
@@ -402,33 +401,28 @@ use app\models\Period;
             $('.select-brand .jq-selectbox__select-text').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
 
 
-            $('.add-works__title .brand').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display','inline');
-            $('.add-works__title .check').css('display','inline');
-
-
+            $('.add-works__title .brand').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display', 'inline');
+            $('.add-works__title .check').css('display', 'inline');
 
 
             $('.add-works__info').eq(1).removeClass('disabled');
         }
 
-        function setSelectedWorkerType(worker_types_id){
+        function setSelectedWorkerType(worker_types_id) {
 
             var indexToSelect = 0;
 
-            $('.add-works__info').eq(3).find('select option').each(function(index){
+            $('.add-works__info').eq(3).find('select option').each(function (index) {
 
 
-
-                if(indexToSelect){
+                if (indexToSelect) {
                     return;
                 }
 
-                if($(this).val() == worker_types_id){
+                if ($(this).val() == worker_types_id) {
                     indexToSelect = index;
                 }
             });
-
-
 
 
             $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
@@ -439,27 +433,23 @@ use app\models\Period;
             $('.add-works__info').eq(3).find('.jq-selectbox__select-text').text($('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
 
 
-
         }
 
-        function setSelectedWorkType(work_types_id){
+        function setSelectedWorkType(work_types_id) {
 
             var indexToSelect = 0;
 
-            $('.add-works__info').eq(4).find('select option').each(function(index){
+            $('.add-works__info').eq(4).find('select option').each(function (index) {
 
 
-
-                if(indexToSelect){
+                if (indexToSelect) {
                     return;
                 }
 
-                if($(this).val() == work_types_id){
+                if ($(this).val() == work_types_id) {
                     indexToSelect = index;
                 }
             });
-
-
 
 
             $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
@@ -470,27 +460,23 @@ use app\models\Period;
             $('.add-works__info').eq(4).find('.jq-selectbox__select-text').text($('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
 
 
-
         }
 
-        function setSelectedPeriod(period_id){
+        function setSelectedPeriod(period_id) {
 
             var indexToSelect = 0;
 
-            $('.add-works__info').eq(5).find('select option').each(function(index){
+            $('.add-works__info').eq(5).find('select option').each(function (index) {
 
 
-
-                if(indexToSelect){
+                if (indexToSelect) {
                     return;
                 }
 
-                if($(this).val() == period_id){
+                if ($(this).val() == period_id) {
                     indexToSelect = index;
                 }
             });
-
-
 
 
             $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
@@ -501,32 +487,28 @@ use app\models\Period;
             $('.add-works__info').eq(5).find('.jq-selectbox__select-text').text($('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
 
 
-
         }
 
-        function setReportFormsChecked(report_forms_id){
+        function setReportFormsChecked(report_forms_id) {
 
+            //alert($('.add-works__info .checks input[report_forms_id="' + report_forms_id + '"]').length);
+            $('.add-works__info .checks input[report_forms_id="' + report_forms_id + '"]').prop('checked', true);
 
-
-            $('.add-works__info .checks input[report_forms_id="' + report_forms_id + '"]').attr('checked',true);
-
-            if($('.add-works__info .checks input[report_forms_id="' + report_forms_id + '"]').attr('id') == 'form'){
-                $('.new-form[report_forms_id="' + report_forms_id + '"]').css('display','block');
+            if ($('.add-works__info .checks input[report_forms_id="' + report_forms_id + '"]').attr('id') == 'form') {
+                $('.new-form[report_forms_id="' + report_forms_id + '"]').css('display', 'block');
             }
         }
 
 
-        function addReportFormsField(report_forms_id, work_report_form_fields_id, field_name){
+        function addReportFormsField(report_forms_id, work_report_form_fields_id, field_name) {
 
             $('.new-form[report_forms_id="' + report_forms_id + '"]>.inputs').append('<input type="text" report_forms_id="' + report_forms_id + '" work_report_form_fields_id="' + work_report_form_fields_id + '" placeholder="Введите название поля" value="' + field_name + '">');
         }
 
 
+        function appendNewComposition(work_contents_id, work_contents_name, work_contents_description, images) {
 
-
-        function appendNewComposition(work_contents_id, work_contents_name, work_contents_description, images){
-
-            if(!work_contents_description || work_contents_description == ''){
+            if (!work_contents_description || work_contents_description == '') {
                 var description_button_class = '';
                 var description_block_style = '';
             } else {
@@ -535,7 +517,7 @@ use app\models\Period;
             }
 
 
-            if(!images || !images.length){
+            if (!images || !images.length) {
                 var images_button_class = '';
                 var images_block_style = '';
             } else {
@@ -579,7 +561,7 @@ use app\models\Period;
                 '<a href="#" class="delete-all">Удалить все фото</a>' +
                 '</div>' +
                 '<div class="files">' +
-                    getCompositionPhotos(images) +
+                getCompositionPhotos(images) +
                 '<div class="file">' +
                 '<label>' +
                 '<input type="file" name="file">' +
@@ -598,15 +580,15 @@ use app\models\Period;
         }
 
 
-        function getCompositionPhotoHTML(img_file, work_contents_photo_id){
+        function getCompositionPhotoHTML(img_file, work_contents_photo_id) {
             var strToAdd = '<div class="file" work_contents_photo_id="' + work_contents_photo_id + '"><label style="display: none;"><input type="file" name="file"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="14" viewBox="0 0 18 14"><defs><path id="eqkwa" d="M805 1031v10a1 1 0 0 1-1 1h-2.016v-.002A1 1 0 0 1 802 1040h.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5h-3.329l-.585-.586-1.415-1.414h-2.343l-1.414 1.414-.586.586H789.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h.5a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1v-10a1 1 0 0 1 1-1h4l1.707-1.707a1 1 0 0 1 .707-.293h3.172a1 1 0 0 1 .707.293L800 1030h4a1 1 0 0 1 1 1zm-9 4c-1.103 0-2 .897-2 2s.897 2 2 2 2-.897 2-2-.897-2-2-2c0 0 1.103 0 0 0zm0-2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"></path></defs><g><g transform="translate(-787 -1028)"><use fill="#939499" xlink:href="#eqkwa"></use></g></g></svg><span>Загрузить фото</span></label><div></div><div class="img-block" style="background-image: url(http://' + '<?=$_SERVER['HTTP_HOST'];?>' + '/upload/composition_images/' + img_file + ')"><a href="#" class="delete-photo"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9" height="9" viewBox="0 0 9 9"><defs><path id="l6tfa" d="M706.026 1021.044a1 1 0 0 1-1.414 0l-2.121-2.122-2.144 2.144a1 1 0 1 1-1.414-1.414l2.143-2.144-2.12-2.12a1 1 0 1 1 1.413-1.415l2.122 2.121 2.099-2.1a1 1 0 0 1 1.414 1.415l-2.1 2.099 2.122 2.121a1 1 0 0 1 0 1.415z"></path></defs><g><g transform="translate(-698 -1013)"><use fill="#232226" xlink:href="#l6tfa"></use></g></g></svg></a></div></div>';
             return strToAdd;
         }
 
 
-        function getCompositionPhotos(images){
+        function getCompositionPhotos(images) {
             var strToAdd = '';
-            $.each(images, function(i,val){
+            $.each(images, function (i, val) {
                 strToAdd = strToAdd + getCompositionPhotoHTML(val.img_file, val.work_contents_photo_id);
             });
 
@@ -614,12 +596,10 @@ use app\models\Period;
         }
 
 
+        function renumerateCompositions() {
+            $('.add-works__info-composition .composition .number').each(function (index) {
 
-
-        function renumerateCompositions(){
-            $('.add-works__info-composition .composition .number').each(function(index){
-
-                var number = parseInt(index)+parseInt(1);
+                var number = parseInt(index) + parseInt(1);
                 $(this).text(number);
 
                 $(this).parent().find('.add-descr_block .title span').text(number);
@@ -628,15 +608,15 @@ use app\models\Period;
         }
 
 
-        function getWorkTimeInMinutes(){
+        function getWorkTimeInMinutes() {
 
             var time_number = parseFloat($('.time-tabs .time-tabs-pane input').val());
 
-            if(isNaN(time_number)){
+            if (isNaN(time_number)) {
                 return 0;
             }
 
-            if($('.time-tabs .time-tabs-nav button[data-href="#minutes"]').hasClass('active')){
+            if ($('.time-tabs .time-tabs-nav button[data-href="#minutes"]').hasClass('active')) {
                 return (parseFloat(time_number)).toFixed(0);
             } else {
                 return (parseFloat(time_number * 60)).toFixed(0);
@@ -645,13 +625,15 @@ use app\models\Period;
 
         }
 
-        function addToFormWorkContentsAlreadyExists(){
+        function addToFormWorkContentsAlreadyExists() {
 
             $('.work-contents-already-exits').empty();
 
-            $('.add-works__info-composition>.composition').each(function(){
+            $('.work-contents-already-exits').append('<div class="work_contents_photos"></div>');
 
-                if(!$(this).attr('work_contents_id')){
+            $('.add-works__info-composition>.composition').each(function () {
+
+                if (!$(this).attr('work_contents_id')) {
                     return;
                 }
 
@@ -659,12 +641,28 @@ use app\models\Period;
                 var name = $(this).find('input').eq(0).val();
                 var description = $(this).find('.add-descr_block textarea').eq(0).val();
 
+
+                var image_inputs = [];
+
+                var self = $(this);
+
+                self.find('.add-photo_block .files .file').each(function () {
+
+
+                    if (!$(this).attr('work_contents_photo_id') && $(this).find('input').eq(0)[0].files.length) {
+                        image_inputs.push($(this).find('input').eq(0).clone());
+                    }
+                });
+
+
+
+
                 var image_ids = [];
 
                 var self = this;
 
-                $(self).find('.add-photo_block .files .file').each(function(){
-                    if($(this).attr('work_contents_photo_id')){
+                $(self).find('.add-photo_block .files .file').each(function () {
+                    if ($(this).attr('work_contents_photo_id')) {
                         image_ids.push($(this).attr('work_contents_photo_id'));
                     }
                 });
@@ -674,42 +672,58 @@ use app\models\Period;
                 res_str += '<input type="hidden" name="work_contents_already_exists_name[' + work_contents_id + ']" value="' + name + '">';
                 res_str += '<input type="hidden" name="work_contents_already_exists_description[' + work_contents_id + ']" value="' + description + '">';
 
-                $.each(image_ids, function(i,val){
+                $.each(image_ids, function (i, val) {
                     res_str += '<input type="hidden" name="work_contents_photo_id[' + work_contents_id + '][]" value="' + val + '">';
                 });
 
                 res_str += '</div>';
 
+
+
+
+
+
                 $('.work-contents-already-exits').append(res_str);
+
+
+
+
+
+                $('.work-contents-already-exits .work_contents_photos').append('<div work_contents_id="' + work_contents_id + '"></div>');
+
+                $.each(image_inputs, function (i, val) {
+
+
+                    $('.work-contents-already-exits .work_contents_photos>div[work_contents_id="' + work_contents_id + '"]').append(val);
+                });
+
+                $('.work-contents-already-exits .work_contents_photos>div[work_contents_id="' + work_contents_id + '"]>input').each(function (index1) {
+                    $(this).attr('name', 'last_work_contents_image_to_add[' + work_contents_id + '][]').css('display', 'none');
+                });
 
             });
 
         }
 
-        function addToFormWorkContentsToAdd(){
+        function addToFormWorkContentsToAdd() {
 
             $('.work-contents-to-add').empty();
 
             var work_contents_index = -1;
 
 
-
-            $('.add-works__info-composition>.composition').each(function(index){
-
+            $('.add-works__info-composition>.composition').each(function (index) {
 
 
-                if(!$(this).attr('work_contents_id')) {
+                if (!$(this).attr('work_contents_id')) {
 
 
                     work_contents_index++;
 
 
-
                     //var work_contents_id = $(this).attr('work_contents_id');
                     var name = $(this).find('input').eq(0).val();
                     var description = $(this).find('.add-descr_block textarea').eq(0).val();
-
-
 
 
                     var image_inputs = [];
@@ -725,7 +739,7 @@ use app\models\Period;
                     });
 
 
-                    if(!(((!name && !description) ||  (name == '' && description == '')) && !image_inputs.length)) {
+                    if (!(((!name && !description) || (name == '' && description == '')) && !image_inputs.length)) {
 
                         var res_str = '<div>';
 
@@ -740,14 +754,14 @@ use app\models\Period;
                         $('.work-contents-to-add').append('<div class="work_contents_photos"></div>');
 
 
-                        $('.work_contents_photos').append('<div work_contents_index="' + work_contents_index + '"></div>')
+                        $('.work-contents-to-add .work_contents_photos').append('<div work_contents_index="' + work_contents_index + '"></div>')
 
                         $.each(image_inputs, function (i, val) {
-                            $('.work_contents_photos>div[work_contents_index="' + work_contents_index + '"]').append(val);
+                            $('.work-contents-to-add .work_contents_photos>div[work_contents_index="' + work_contents_index + '"]').append(val);
                         });
 
-                        $('.work_contents_photos>div[work_contents_index="' + work_contents_index + '"]>input').each(function (index1) {
-                            $(this).attr('name', 'work_contents_image[' + work_contents_index + '][]').css('display','none');
+                        $('.work-contents-to-add .work_contents_photos>div[work_contents_index="' + work_contents_index + '"]>input').each(function (index1) {
+                            $(this).attr('name', 'new_work_contents_image_to_add[' + work_contents_index + '][]').css('display', 'none');
                         });
 
                     }
@@ -757,17 +771,15 @@ use app\models\Period;
             });
 
 
-
-
         }
 
 
-        function addToFormReportFormsWithFields(){
+        function addToFormReportFormsWithFields() {
             var checked_report_forms = getReportFormsIds();
 
             var strToAdd = '<div class="checked_report_forms">';
 
-            $.each(checked_report_forms, function(i,val){
+            $.each(checked_report_forms, function (i, val) {
                 strToAdd += '<input type="hidden" name="checked_report_forms[]" value="' + val + '">';
             });
 
@@ -775,19 +787,19 @@ use app\models\Period;
 
             strToAdd += '<div class="report_form_fields">';
 
-            $('.add-works__info .new-form .inputs>input').each(function(){
+            $('.add-works__info .new-form .inputs>input').each(function () {
                 var report_forms_id = $(this).parent().parent().attr('report_forms_id');
                 var name = $(this).val();
                 var found = false;
 
-                $.each(checked_report_forms, function(i,val){
-                    if(val == report_forms_id){
+                $.each(checked_report_forms, function (i, val) {
+                    if (val == report_forms_id) {
                         found = true;
                     }
                 });
 
 
-                if(found){
+                if (found) {
                     strToAdd += '<input type="hidden" name="report_form_fields[' + report_forms_id + '][]" value="' + name + '">';
                 }
 
@@ -799,7 +811,7 @@ use app\models\Period;
             $('#save-work-form .work-report-forms').empty().append(strToAdd);
         }
 
-        function emptyWorkBlock(){
+        function emptyWorkBlock() {
             setSelectedCategory(0);
             setSelectedBrand(0);
             setSelectedWorkerType(0);
@@ -817,19 +829,18 @@ use app\models\Period;
 
             $('.add-works__info.op textarea').val('');
 
-            while($('.add-works__info-composition>div').length > 2) {
+            while ($('.add-works__info-composition>div').length > 2) {
                 $('.add-works__info-composition>div').eq(0).remove();
             }
             renumerateCompositions();
 
-            $('.add-works__info.inp input').attr('checked',false);
+            $('.add-works__info.inp input').prop('checked', false);
 
             $('.add-works__info.inp .new-form .inputs input').remove();
         }
 
 
-        function fillFormToSend(){
-
+        function fillFormToSend() {
 
 
             $('#save-work-form .work-fields input[name="brands_id"]').val(getSelectedBrandId());
@@ -848,16 +859,16 @@ use app\models\Period;
         }
 
 
-        function formToSendValidate(){
+        function formToSendValidate() {
             var result = true;
 
-            $('#save-work-form .work-fields input').each(function(){
+            $('#save-work-form .work-fields input').each(function () {
 
-                if($(this).attr('name') == 'total_composition_description'){
+                if ($(this).attr('name') == 'total_composition_description') {
                     return;
                 }
 
-                if(!$(this).val() || $(this).val() == ''){
+                if (!$(this).val() || $(this).val() == '') {
                     result = false;
                 }
             });
@@ -865,12 +876,12 @@ use app\models\Period;
             return result;
         }
 
-        function addIdToFormToSend(id){
+        function addIdToFormToSend(id) {
             var formAction = $('#save-work-form').attr('action');
             var exp1 = formAction.split('?');
-            if(exp1.length == 2 && exp1[1].length){
+            if (exp1.length == 2 && exp1[1].length) {
 
-                if(exp1[1].indexOf('?id=')<0 && exp1[1].indexOf('&id=')<0){
+                if (exp1[1].indexOf('?id=') < 0 && exp1[1].indexOf('&id=') < 0) {
                     var result = formAction + '&id=' + id;
                 } else {
                     var result = formAction;
@@ -880,96 +891,96 @@ use app\models\Period;
             }
 
 
-
-            $('#save-work-form').attr('action',result);
+            $('#save-work-form').attr('action', result);
         }
 
 
         $(document)
-            .on('click', '#save-work-form button[type="submit"]', function(e) {
+            .on('click', '#save-work-form button[type="submit"]', function (e) {
 
                 fillFormToSend();
 
                 var isValid = formToSendValidate();
-                if(!isValid) {
+                if (!isValid) {
                     e.preventDefault(); //prevent the default action
                     alert('Заполнены не все поля!!!');
                 }
             });
 
 
-        $('.work-name').click(function(){
-            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
+        $('.work-name').click(function () {
+            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
             addIdToFormToSend($(this).attr('works_id'));
-
+            emptyWorkBlock();
             var self = $(this);
 
             $.ajax({
                 type: "POST",
-                url: "<?=Yii::$app->urlManager->createUrl('works/getworkinfo').'?id=';?>"+self.attr('works_id'),
-                data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
-                success: function(data){
+                url: "<?=Yii::$app->urlManager->createUrl('works/getworkinfo') . '?id=';?>" + self.attr('works_id'),
+                data: {<?=Yii::$app->getRequest()->csrfParam;?>:
+            '<?=Yii::$app->getRequest()->getCsrfToken();?>'
+        },
+            success: function (data) {
 
-                    console.info(data);
-
-                    setSelectedCategory(data.categories_id);
-
-                    setSelectedBrand(data.brands_id);
-
-                    setSelectedWorkerType(data.worker_types_id);
-
-                    setSelectedWorkType(data.work_types_id);
-
-                    setSelectedPeriod(data.period_id);
-
-                    $('.add-works__info').eq(2).find('input').val(data.name);
-
-                    $('.time-tabs-pane input').val(data.execution_time);
-
-                    $('.time-tabs-nav button[data-href="minutes"]').addClass('active');
-
-                    $('.time-tabs-nav button[data-href="hours"]').removeClass('active');
-
-
-                    $('.add-works__info.op textarea').val(data.total_composition_description);
-
-                    $.each(data.work_contents, function(i, val){
-                        var work_contents_id = val.id;
+                console.info(data);
 
 
 
-                        var photos = [];
-                        var photo_items = data.work_contents_photo[work_contents_id];
+                setSelectedCategory(data.categories_id);
+
+                setSelectedBrand(data.brands_id);
+
+                setSelectedWorkerType(data.worker_types_id);
+
+                setSelectedWorkType(data.work_types_id);
+
+                setSelectedPeriod(data.period_id);
+
+                $('.add-works__info').eq(2).find('input').val(data.name);
+
+                $('.time-tabs-pane input').val(data.execution_time);
+
+                $('.time-tabs-nav button[data-href="minutes"]').addClass('active');
+
+                $('.time-tabs-nav button[data-href="hours"]').removeClass('active');
 
 
+                $('.add-works__info.op textarea').val(data.total_composition_description);
 
-                        if(photo_items){
-                            $.each(photo_items, function(i1,val1){
-                               photos.push({img_file:val1.file_name, work_contents_photo_id:val1.id});
-                            });
-                        }
+                $.each(data.work_contents, function (i, val) {
+                    var work_contents_id = val.id;
 
 
-
-                        appendNewComposition(work_contents_id, val.name, val.description, photos);
-                    });
-
-
-                    $.each(data.work_report_forms, function(i,val){
-                        setReportFormsChecked(val.report_forms_id);
-
-                        var work_report_forms_id = val.id;
-
-                        $.each(data.work_report_form_fields[work_report_forms_id], function(i1,val1){
+                    var photos = [];
+                    var photo_items = data.work_contents_photo[work_contents_id];
 
 
-                                addReportFormsField(val.report_forms_id,val1.id,val1.name);
-
-
+                    if (photo_items) {
+                        $.each(photo_items, function (i1, val1) {
+                            photos.push({img_file: val1.file_name, work_contents_photo_id: val1.id});
                         });
+                    }
+
+
+                    appendNewComposition(work_contents_id, val.name, val.description, photos);
+                });
+
+
+                $.each(data.work_report_forms, function (i, val) {
+                    setReportFormsChecked(val.report_forms_id);
+
+                    var work_report_forms_id = val.id;
+
+                    $.each(data.work_report_form_fields[work_report_forms_id], function (i1, val1) {
+
+
+                        addReportFormsField(val.report_forms_id, val1.id, val1.name);
 
 
                     });
+
+
+                });
 
 
                 /*
@@ -1011,78 +1022,24 @@ use app\models\Period;
                 //alert(getWorkTimeInMinutes());
                 //},15000)
                 */
-                },
-                dataType: 'json'
-                });
+            }
+        ,
+            dataType: 'json'
+        })
+            ;
 
         });
 
-        $('.work .plus').eq(0).click(function(){
+        $('.work .plus').eq(0).click(function () {
 
 
-
-
-            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click',onBrandListOpenClick).click(onBrandListOpenClick);
+            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
 
             emptyWorkBlock();
-            //addIdToFormToSend(4);
-
-            //$('.add-works__info select.select-razdel li:gt(1)').remove();
-
-            //$('ul.mCS_destroyed li:gt(1)').remove();
 
 
-
-
-            //$.ajax({
-                //type: "POST",
-                //url: "<?//=Yii::$app->urlManager->createUrl('works/getworkinfo')?>",
-                ///data: {<?//=Yii::$app->getRequest()->csrfParam;?>:'<?//=Yii::$app->getRequest()->getCsrfToken();?>'},
-            //success: function(data){
-
-
-                //setSelectedCategory(17);
-
-                //$('.add-works__info').eq(1).removeClass('disabled').addClass('active');
-
-                //alert(getSelectedCategoryId());
-
-                //setSelectedBrand(12);
-
-                //alert(getSelectedBrandId());
-
-                //setSelectedWorkerType(1);
-
-                //alert(getSelectedWorkerTypeId());
-
-                //setSelectedWorkType(1);
-
-                //alert(getSelectedWorkTypeId());
-
-                //setSelectedPeriod(1);
-
-                //alert(getSelectedPeriodId());
-
-                //setReportFormsChecked(2);
-
-                //alert(getReportFormsIds());
-
-                //appendNewComposition(3,'name','description',[{img_file:'abc',work_contents_photo_id:1},{img_file:'def',work_contents_photo_id:2},{img_file:'ghi',work_contents_photo_id:3}]);
-
-                //addReportFormsField(2,4,'Тестовое название поля');
-
-                //addToFormWorkContentsAlreadyExists();
-
-               // setTimeout(function(){
-                    //addToFormWorkContentsToAdd();
-                    //addToFormReportFormsWithFields();
-                    //alert(getWorkTimeInMinutes());
-                //},15000)
-
-            //},
-            //dataType: 'json'
-        //});
         });
+
     });
 
 

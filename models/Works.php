@@ -150,4 +150,10 @@ class Works extends \yii\db\ActiveRecord
     }
 
 
+    public function getWorkReportForms()
+    {
+        return $this->hasMany(WorkReportForms::className(), ['works_id' => 'id']);
+    }
+
+
 }
