@@ -115,7 +115,7 @@ use app\models\Brands;
                                 </button>
                             </div>
                         </a>
-                        <a href="#" class="brand"><?=$brand->name;?></a>
+                        <a href="/works?brands_id=<?=$brand->id;?>" class="brand"><?=$brand->name;?></a>
                         <span onclick="location.href = '/works?brands_id=<?=$brand->id;?>';"><?=count($brand->works);?></span>
                     </li>
                     <?endforeach;?>
