@@ -178,12 +178,28 @@ use app\models\Period;
                             <? endforeach; ?>
 
                             </thead>
+                            <?
 
+                                $word_numbers_1 = array('one','two','three','four','five');
+                                $word_numbers_index = 0;
+
+                            ?>
                             <? foreach($works_type_data as $works_data): ?>
 
+                            <?
+                                $curr_work_period = $works_data->period->symbole_code;
 
+                                switch($curr_work_period){
+                                    case 'week': $word_numbers_index = 0;break;
+                                    case 'month': $word_numbers_index = 1;break;
+                                    case 'kvar': $word_numbers_index = 2;break;
+                                    case 'polu': $word_numbers_index = 3;break;
+                                    case 'year': $word_numbers_index = 4;break;
+                                    default: $word_numbers_index = 0;
+                                }
+                                ?>
 
-                            <tr data-filter-one="true">
+                            <tr data-filter-<?=$word_numbers_1[$word_numbers_index];?>="true">
                                 <td class="named">
                                     <div class="button">
                                         <div class="open-tooltip">
@@ -203,12 +219,14 @@ use app\models\Period;
                                     <span class="work-name" works_id="<?=$works_data->id;?>"><?=$works_data->name;?></span>
                                 </td>
                                 <? $work_period = Period::findOne($works_data->period_id); ?>
-                                <td class="checks"><?if($work_period->symbole_code == 'dayly'):?><img src="img/checks.png" alt=""><? endif; ?></td>
-                                <td class="checks"><?if($work_period->symbole_code == 'monthly'):?><img src="img/checks.png" alt=""><? endif; ?></td>
-                                <td class="checks"><?if($work_period->symbole_code == 'squarely'):?><img src="img/checks.png" alt=""><? endif; ?></td>
-                                <td class="checks"><?if($work_period->symbole_code == 'halfyear'):?><img src="img/checks.png" alt=""><? endif; ?></td>
-                                <td class="checks"><?if($work_period->symbole_code == 'timeinyear'):?><img src="img/checks.png" alt=""><? endif; ?></td>
+                                <td class="checks"><?if($work_period->symbole_code == 'week'):?><img src="img/checks.png" alt=""><? endif; ?></td>
+                                <td class="checks"><?if($work_period->symbole_code == 'month'):?><img src="img/checks.png" alt=""><? endif; ?></td>
+                                <td class="checks"><?if($work_period->symbole_code == 'kvar'):?><img src="img/checks.png" alt=""><? endif; ?></td>
+                                <td class="checks"><?if($work_period->symbole_code == 'polu'):?><img src="img/checks.png" alt=""><? endif; ?></td>
+                                <td class="checks"><?if($work_period->symbole_code == 'year'):?><img src="img/checks.png" alt=""><? endif; ?></td>
                             </tr>
+
+
 
                             <? endforeach; ?>
 
