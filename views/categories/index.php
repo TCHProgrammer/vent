@@ -92,7 +92,7 @@ use app\models\Brands;
                     <?$brands = Brands::find()->where(array('category_id'=>$category->id))->orderBy('name')->all();?>
                     <?foreach($brands as $brand_index=>$brand):?>
                     <li>
-                        <a href="#" class="tooltiped">
+                        <a href="/works?brands_id=<?=$brand->id;?>" class="tooltiped">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"></path></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"></use></g></g></svg>
                             <div class="tooltip">
                                 <button class="copy" category_id="<?=$category->id;?>" brand_id="<?=$brand->id;?>" onclick="setElementBrandNameOnCopy(this);">
