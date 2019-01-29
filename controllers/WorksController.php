@@ -24,6 +24,22 @@ class WorksController extends \yii\web\Controller
 
     public function actionIndex()
     {
+
+        if(!isset($_GET['brands_id'])){
+            $brands = Brands::find()->orderBy('id')->limit(1,1)->all();
+            if(count($brands)){
+                $brands_id = $brands[0]->id;
+
+                if($brands_id){
+                    return $this->redirect('/works?brands_id='.$brands_id);
+                } else {
+                    return $this->redirect(['/works']);
+                }
+            }
+        }
+
+
+
         return $this->render('index');
     }
 
