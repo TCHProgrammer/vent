@@ -426,7 +426,10 @@ class WorksController extends \yii\web\Controller
 
     public function actionDelete($id){
         $model = Works::findOne($id);
-        $model->delete();
+
+        if($model) {
+            $model->delete();
+        }
     }
 
 
