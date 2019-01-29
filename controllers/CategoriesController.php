@@ -254,6 +254,73 @@ class CategoriesController extends Controller
                                             }
                                         }
 
+
+                                        $last_work_contents = $work_item->workContents;
+
+                                        foreach($last_work_contents as $work_content_item){
+                                            $copied_work_content = new WorkContents();
+                                            $last_work_content_attributes = $work_content_item->attributes();
+                                            unset($last_work_content_attributes['id']);
+
+                                            foreach($last_work_content_attributes as $attribute_field){
+
+                                                if($attribute_field == 'id'){
+                                                    continue;
+                                                }
+
+                                                $copied_work_content[$attribute_field] = $work_content_item[$attribute_field];
+                                            }
+
+                                            $copied_work_content->works_id = $copied_work->id;
+
+                                            if($copied_work_content->save()){
+                                                $last_work_contents_photo = $work_content_item->workContentsPhoto;
+
+                                                foreach($last_work_contents_photo as $work_contents_photo_item){
+
+                                                    if($attribute_field == 'id'){
+                                                        continue;
+                                                    }
+
+
+                                                    $copied_work_contents_photo = new WorkContentsPhoto();
+
+                                                    $last_work_contents_photo_attributes = $work_contents_photo_item->attributes();
+
+                                                    unset($last_work_contents_photo_attributes['id']);
+
+                                                    foreach($last_work_contents_photo_attributes as $attribute_field){
+
+                                                        if($attribute_field == 'id'){
+                                                            continue;
+                                                        }
+
+                                                        $copied_work_contents_photo[$attribute_field] =  $work_contents_photo_item[$attribute_field];
+                                                    }
+
+                                                    $copied_work_contents_photo->work_contents_id = $copied_work_content->id;
+
+
+                                                    $last_image_file = $copied_work_contents_photo->file_name;
+
+
+                                                    $exploded = explode('.',$last_image_file);
+
+                                                    $last_file_ext = array_pop($exploded);
+
+
+
+                                                    $new_image_file = md5(time().rand().rand()).'.'.$last_file_ext;
+
+                                                    copy($_SERVER['DOCUMENT_ROOT'].'/'.'upload/composition_images/'.$last_image_file,$_SERVER['DOCUMENT_ROOT'].'/'.'upload/composition_images/'.$new_image_file);
+
+                                                    $copied_work_contents_photo->file_name = $new_image_file;
+
+                                                    $copied_work_contents_photo->save();
+                                                }
+                                            }
+                                        }
+
                                     }
 
 
