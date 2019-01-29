@@ -76,6 +76,12 @@ AppAsset::register($this);
 	//});
 	
 </script>
+
+
+
+
+
+
 <div class="sure-closes">
 	<a href="#" class="close">
 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" viewBox="0 0 35 35"><defs><path id="s6cja" d="M252.5 44c9.665 0 17.5 7.835 17.5 17.5S262.165 79 252.5 79 235 71.165 235 61.5 242.835 44 252.5 44zm2.475 12.904l-2.475 2.474-2.475-2.474a1.5 1.5 0 0 0-2.121 2.121l2.475 2.475-2.475 2.475a1.5 1.5 0 0 0 2.121 2.121l2.475-2.475 2.475 2.475a1.5 1.5 0 0 0 2.121-2.121l-2.475-2.475 2.475-2.475a1.5 1.5 0 0 0-2.121-2.121z"/></defs><g><g transform="translate(-235 -44)"><use fill="#fff" xlink:href="#s6cja"/></g></g></svg>
@@ -772,10 +778,10 @@ AppAsset::register($this);
         }
 	});
 
-    $('body').on('click','.sure-closes', function(e){
-        $('.add-brands__input input[name="name"]').attr('readonly',false);
-        $('.add-brands__input input[name="brand_name"]').attr('readonly',false);
-    });
+    //$('body').on('click','.sure-closes', function(e){
+        //$('.add-brands__input input[name="name"]').attr('readonly',false);
+        //$('.add-brands__input input[name="brand_name"]').attr('readonly',false);
+    //});
 	
 </script>
 
