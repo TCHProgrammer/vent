@@ -42,6 +42,10 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
+
+
+
+
 <?php $this->beginBody() ?>
 
 <div class="overlay"></div>
@@ -463,7 +467,36 @@ AppAsset::register($this);
 				<nav class="aside-menu__menu">
 					<ul>
 						<li>
-							<a href="/categories" class="active cat">
+
+                            <?
+
+                            $cat_index = strpos($_SERVER['REQUEST_URI'],'/categories');
+
+
+
+
+
+                            if($cat_index !== FALSE){
+                                $cat_active = 'active';
+                            } else {
+                                $cat_active = '';
+                            }
+
+
+
+                            $works_index = strpos($_SERVER['REQUEST_URI'],'/works');
+
+                            if($works_index !== FALSE){
+                                $work_active = 'active';
+                            } else {
+                                $work_active = '';
+                            }
+
+
+
+                            ?>
+                            
+							<a href="/categories" class="<?=$cat_active;?> cat">
 								<span class="line"></span>
 								<div class="content">
 									<div class="icon">
@@ -477,7 +510,7 @@ AppAsset::register($this);
 							</a>
 						</li>
 						<li>
-							<a href="/works" class="work">
+							<a href="/works" class="<?=$work_active;?> work">
 								<span class="line"></span>
 								<div class="content">
 									<div class="icon">

@@ -21,7 +21,7 @@ use app\models\Brands;
                         <?foreach($categories as $category):?>
                             <?$brands = Brands::find()->where(array('category_id'=>$category->id))->orderBy('name')->all();?>
                             <?foreach($brands as $brand):?>
-                                   <li><a href="#" class="jcorgFilterTextChild"><?=$category->name?> | <?=$brand->name?></a></li>
+                                   <li><a href="/works?brands_id=<?=$brand->id;?>" class="jcorgFilterTextChild"><?=$category->name?> | <?=$brand->name?></a></li>
                             <?endforeach;?>
                         <?endforeach;?>
 
@@ -116,7 +116,7 @@ use app\models\Brands;
                             </div>
                         </a>
                         <a href="#" class="brand"><?=$brand->name;?></a>
-                        <span><?=count($brand->works);?></span>
+                        <span onclick="location.href = '/works?brands_id=<?=$brand->id;?>';"><?=count($brand->works);?></span>
                     </li>
                     <?endforeach;?>
 
