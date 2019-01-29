@@ -1103,20 +1103,23 @@ use app\models\Period;
         });
 
 
-        $('.tooltip button.delete').click(function(){
+        $(document)
+            .on('click', '.tooltip button.delete', function(){
 
-            var id = $(this).attr('works_id');
+                var id = $(this).attr('works_id');
 
-            $.ajax({
-                type: "POST",
-                url: "<?=Yii::$app->urlManager->createUrl('works/delete')?>" + "?id=" + id,
-                data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
-            success: function(data){
+                $.ajax({
+                    type: "POST",
+                    url: "<?=Yii::$app->urlManager->createUrl('works/delete')?>" + "?id=" + id,
+                    data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
+                success: function(data){
 
-            },
-            //dataType: dataType
+                },
+                //dataType: dataType
             });
-        });
+            });
+
+
 
         $('.sure-close .to-save a.save').click(function(){
             var click_element = $('#save-work-form button[type="submit"]').eq(0);

@@ -577,9 +577,21 @@ $(document).ready(function(){
     	}
     });
 
-    $('.named .button .tooltip .delete').click(function(e){
-    	e.preventDefault();
-    	$(this).parents('.button').parents('.named').parents('tr').remove();
+    $(document).on('click', '.named .button .tooltip .delete', function(e){
+        e.preventDefault();
+        $(this).parents('.button').parents('.named').parents('tr').remove();
+        /*let selector = $(this).parents('.button').parents('.named').parents('tr');
+        function sort(selector) {
+            selector.parents('table').find('tbody').find('tr').sortElements(function(a, b){
+                return $(a).find('.named').find('span').text() > $(b).find('.named').find('span').text() ? 1 : -1;
+            });
+        }
+        sort(selector);*/
+	});
+
+    //$('.named .button .tooltip .delete').click(function(e){
+    	//e.preventDefault();
+    	//$(this).parents('.button').parents('.named').parents('tr').remove();
     	/*let selector = $(this).parents('.button').parents('.named').parents('tr');
 		function sort(selector) {
 			selector.parents('table').find('tbody').find('tr').sortElements(function(a, b){
@@ -587,7 +599,7 @@ $(document).ready(function(){
 			});
 		}
 		sort(selector);*/
-    });
+    //});
 
     $('body').on('click', 'ul.opened li a', function(e){
     	e.preventDefault();
