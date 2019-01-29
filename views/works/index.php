@@ -939,7 +939,7 @@ use app\models\Period;
             });
 
 
-        $('.work-name').click(function () {
+        function work_name_click_action(){
             $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
             addIdToFormToSend($(this).attr('works_id'));
             emptyWorkBlock();
@@ -1061,8 +1061,16 @@ use app\models\Period;
             dataType: 'json'
         })
             ;
+        }
 
-        });
+
+        $(document)
+            .on('click', '.work-name', work_name_click_action);
+
+
+        //$('.work-name').unbind('click',work_name_click_action).click(work_name_click_action);
+
+
 
         $('.work .plus').eq(0).click(function () {
 
