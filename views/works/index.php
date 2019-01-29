@@ -168,7 +168,7 @@ use app\models\Period;
 
 
                         <div class="prim">В данной категории нет работ</div>
-                        <a href="#" class="add-work">
+                        <a href="#" class="add-work" categories_id="<?=$category->id;?>"  brands_id="<?=$brands_id;?>" work_types_id="<?=$works_type_id;?>" worker_types_id="<?=$workers_type_id;?>">
                             <div class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="y90sa" d="M428.5 501a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H430v3.5a1.5 1.5 0 1 1-3 0V509h-3.5a1.5 1.5 0 1 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-422 -501)"><use fill="#6d67f9" xlink:href="#y90sa"/></g></g></svg>
                             </div>
@@ -1083,7 +1083,19 @@ use app\models\Period;
             setSelectedWorkType($(this).attr('work_types_id'));
         });
 
+        $(document).on('click','.add-work', function(){
+            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
+            emptyWorkBlock();
+            removeIdToFormToSend();
 
+            setSelectedCategory($(this).attr('categories_id'));
+
+            setSelectedBrand($(this).attr('brands_id'));
+
+            setSelectedWorkerType($(this).attr('worker_types_id'));
+
+            setSelectedWorkType($(this).attr('work_types_id'));
+        });
         $(document)
             .on('click', '.tooltip button.delete', function(){
 
