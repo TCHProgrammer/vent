@@ -3,6 +3,13 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\WorkReportFormFields;
+use app\models\WorkReportForms;
+use app\models\Works;
+use app\models\WorkTypes;
+use app\models\WorkerTypes;
+use app\models\WorkContents;
+use app\models\WorkContentsPhoto;
 use app\models\Categories;
 use app\models\Brands;
 use app\models\CategoriesSearch;
@@ -168,6 +175,94 @@ class CategoriesController extends Controller
                         $brand_model->category_id = $model->id;
 
                         $brand_saved = $brand_model->save();
+                    if($brand_saved) {
+                        if (isset(Yii::$app->request->post()["last_brand_id"]) && Yii::$app->request->post()["last_brand_id"] && trim(Yii::$app->request->post()["last_brand_id"]) != '') {
+
+                            $last_brand = Brands::findOne(Yii::$app->request->post()["last_brand_id"]);
+
+                            if ($last_brand) {
+                                $last_brand_works = $last_brand->works;
+
+                                foreach ($last_brand_works as $work_item) {
+
+                                    $copied_work = new Works();
+
+                                    $last_work_attributes = $work_item->attributes();
+
+                                    unset($last_work_attributes['id']);
+
+                                    foreach($last_work_attributes as $attribute_field){
+                                        if($attribute_field == 'id'){
+                                            continue;
+                                        }
+                                        $copied_work[$attribute_field] = $work_item[$attribute_field];
+                                    }
+
+
+                                    $copied_work->brands_id = $brand_model->id;
+
+
+                                    if($copied_work->save()){
+
+                                        $last_work_report_forms = $work_item->workReportForms;
+
+                                        foreach($last_work_report_forms as $work_report_form_item){
+                                            $copied_work_report_form = new WorkReportForms();
+                                            $last_work_report_forms_attributes = $work_report_form_item->attributes();
+                                            unset($last_work_report_forms_attributes['id']);
+
+                                            foreach($last_work_report_forms_attributes as $attribute_field){
+
+                                                if($attribute_field == 'id'){
+                                                    continue;
+                                                }
+
+                                                $copied_work_report_form[$attribute_field] = $work_report_form_item[$attribute_field];
+                                            }
+
+                                            $copied_work_report_form->works_id = $copied_work->id;
+
+                                            if($copied_work_report_form->save()){
+                                                $last_work_report_form_fields = $work_report_form_item->reportFormFields;
+
+                                                foreach($last_work_report_form_fields as $work_report_form_field_item){
+
+                                                    if($attribute_field == 'id'){
+                                                        continue;
+                                                    }
+
+
+                                                    $copied_work_report_form_field = new WorkReportFormFields();
+
+                                                    $last_work_report_form_fields_attributes = $work_report_form_field_item->attributes();
+
+                                                    unset($last_work_report_form_fields_attributes['id']);
+
+                                                    foreach($last_work_report_form_fields_attributes as $attribute_field){
+
+                                                        if($attribute_field == 'id'){
+                                                            continue;
+                                                        }
+
+                                                        $copied_work_report_form_field[$attribute_field] =  $work_report_form_field_item[$attribute_field];
+                                                    }
+
+                                                    $copied_work_report_form_field->work_report_forms_id = $copied_work_report_form->id;
+
+                                                    $copied_work_report_form_field->save();
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+
+
+                                }
+                            }
+
+                        }
+                    }
 
 
                 } else {
