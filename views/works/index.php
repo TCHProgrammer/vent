@@ -163,6 +163,20 @@ use app\models\Period;
                 </div>
                 <div class="table table-opened">
                     <div class="wrapper">
+
+                        <? if(count($works_type_data) == 0): ?>
+
+
+                        <div class="prim">В данной категории нет работ</div>
+                        <a href="#" class="add-work">
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="y90sa" d="M428.5 501a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H430v3.5a1.5 1.5 0 1 1-3 0V509h-3.5a1.5 1.5 0 1 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-422 -501)"><use fill="#6d67f9" xlink:href="#y90sa"/></g></g></svg>
+                            </div>
+                            <span>Добавить работу</span>
+                        </a>
+
+                        <? else: ?>
+
                         <table>
                             <thead>
                             <td class="name active">Наименование работы</td>
@@ -184,6 +198,9 @@ use app\models\Period;
                                 $word_numbers_index = 0;
 
                             ?>
+
+
+
                             <? foreach($works_type_data as $works_data): ?>
 
                             <?
@@ -232,6 +249,8 @@ use app\models\Period;
 
 
                         </table>
+
+                        <? endif; ?>
                     </div>
                 </div>
             </div>
