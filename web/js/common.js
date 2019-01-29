@@ -339,7 +339,7 @@ $(document).ready(function(){
 		$('.add-brands').addClass('open-add');
 		$('.add-brands').find('#input1').val(category);
 		$('.add-brands').find('#input2').val(brand);
-		$('.sure-closes').fadeIn();
+		$('.sure-close').fadeIn();
 	});
 
     $('body').on('click', '.item-content ul li .tooltiped .copy', function(e){
@@ -353,7 +353,7 @@ $(document).ready(function(){
         $('.add-brands').addClass('open-add');
         $('.add-brands').find('#input1').val(category);
         $('.add-brands').find('#input2').val(brand);
-        $('.sure-closes').fadeIn();
+        $('.sure-close').fadeIn();
     });
 
 	//$('.scroller__bar').removeClass('asd');
