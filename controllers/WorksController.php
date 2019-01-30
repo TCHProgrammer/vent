@@ -25,6 +25,10 @@ class WorksController extends \yii\web\Controller
     public function actionIndex()
     {
 
+        if(Yii::$app->user->isGuest){
+            return $this->redirect(['/site/login']);
+        }
+
         if(!isset($_GET['brands_id'])){
             $brands = Brands::find()->orderBy('id')->limit(1,1)->all();
             if(count($brands)){

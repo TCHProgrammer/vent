@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
+<div class="site-signup" style="margin-left:40%;">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>Please fill out the following fields to signup:</p>
     <div class="row">
