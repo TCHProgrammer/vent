@@ -199,7 +199,7 @@ class SiteController extends Controller
             ]);
       }
 
-
+    /*
     public function actionAddAdmin() {
         $model = User::find()->where(['username' => 'admin'])->one();
         if (empty($model)) {
@@ -213,5 +213,6 @@ class SiteController extends Controller
             }
         }
     }
-    
+    */
+
 }
