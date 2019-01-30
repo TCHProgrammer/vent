@@ -148,7 +148,7 @@ class WorksController extends \yii\web\Controller
         $work = Works::findOne($id);
         $work_contents = $work->workContents;
 
-        foreach($work_contents as $work_content){
+        //foreach($work_contents as $work_content){
             foreach ($work_contents as $wk) {
 
 
@@ -207,7 +207,7 @@ class WorksController extends \yii\web\Controller
 
 
             }
-        }
+        //}
 
 
     }
@@ -388,6 +388,11 @@ class WorksController extends \yii\web\Controller
             unset($fields['id']);
 
             foreach($fields as $field){
+
+                if($field == 'id'){
+                    continue;
+                }
+
                 $model[$field] = Yii::$app->request->post()[$field];
             }
 
@@ -400,6 +405,11 @@ class WorksController extends \yii\web\Controller
             $model = Works::findOne($id);
             $fields = $model->attributes();
             foreach($fields as $field){
+
+                if($field == 'id'){
+                    continue;
+                }
+
                 $model[$field] = Yii::$app->request->post()[$field];
             }
 

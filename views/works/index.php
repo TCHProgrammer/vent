@@ -753,6 +753,8 @@ use app\models\Period;
 
             $('.work-contents-to-add').empty();
 
+            $('.work-contents-to-add').append('<div class="work_contents_photos"></div>');
+
             var work_contents_index = -1;
 
 
@@ -795,7 +797,7 @@ use app\models\Period;
 
                         $('.work-contents-to-add').append(res_str);
 
-                        $('.work-contents-to-add').append('<div class="work_contents_photos"></div>');
+
 
 
                         $('.work-contents-to-add .work_contents_photos').append('<div work_contents_index="' + work_contents_index + '"></div>')
