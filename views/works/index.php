@@ -1037,7 +1037,7 @@ use app\models\Period;
 
                 renumerateCompositions();
 
-
+                $('.jq-selectbox__select').addClass('change-select');
 
             }
         ,
@@ -1088,6 +1088,8 @@ use app\models\Period;
             setSelectedWorkerType($(this).attr('worker_types_id'));
 
             setSelectedWorkType($(this).attr('work_types_id'));
+
+            $('.jq-selectbox__select').addClass('change-select');
         });
 
         $(document).on('click','.add-work', function(){

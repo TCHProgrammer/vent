@@ -30,7 +30,7 @@ use app\models\Brands;
             </div>
         </div>
     </div>
-
+<!--
     <script type="text/javascript">
 
         $('.main-content__search-block_search input').eq(0).bind('keyup',function(){
@@ -49,17 +49,18 @@ use app\models\Brands;
 
 
                if(searched.indexOf(pressed.toUpperCase()) == -1){
-                   $(this).parent().css('display','none');
+                   $(this).parent().css('display','none').removeClass('cat-and-brand-checked');
                } else {
-                   $(this).parent().css('display','block');
+                   $(this).parent().css('display','block').addClass('cat-and-brand-checked');
                }
             });
-        })
+        });
 
         //setInterval(function(){
             //console.log($('.main-content__search-block_search input').eq(0).val());
         //},1000);
     </script>
+    -->
 </div>
 <div class="main-content__display-category">
     <div class="main-content__display-category_title">Отображение категорий</div>
