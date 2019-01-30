@@ -27,6 +27,8 @@ Thumbs.db
 
 /web/upload
 
+/vent
+
 # composer itself is not needed
 composer.phar
 
