@@ -468,7 +468,7 @@ AppAsset::register($this);
 					</div>
 				</div>
 				<div class="aside-menu__welcome">
-					Добрый день, <span>Иван Васильевич</span>
+					Добрый день, <span><?=Yii::$app->user->identity->username;?></span>
 				</div>
 				<nav class="aside-menu__menu">
 					<ul>
