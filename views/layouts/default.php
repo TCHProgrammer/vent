@@ -43,7 +43,9 @@
 
 <div class="hidden"></div>
 
-<script src="/js/common.js"></script>
+
+
+<!--<script src="/js/common.js"></script>-->
 
 
 </body></html>
