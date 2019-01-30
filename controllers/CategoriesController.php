@@ -45,7 +45,7 @@ class CategoriesController extends Controller
     {
 
         if(Yii::$app->user->isGuest){
-            return $this->redirect(['/site/login']);
+            return $this->redirect(['/login']);
         }
 
         $searchModel = new CategoriesSearch();

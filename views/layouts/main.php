@@ -468,7 +468,7 @@ AppAsset::register($this);
 					</div>
 				</div>
 				<div class="aside-menu__welcome">
-					Добрый день, <span><?=Yii::$app->user->identity->username;?></span>
+					Добрый день, <span><?=Yii::$app->user->identity->full_name;?></span>
 				</div>
 				<nav class="aside-menu__menu">
 					<ul>
@@ -498,7 +498,16 @@ AppAsset::register($this);
                                 $work_active = '';
                             }
 
-
+                            if(isset($_GET['brands_id']) && is_numeric((int)$_GET['brands_id'])){
+                                $brand_main_layout = Brands::findOne((int)$_GET['brands_id']);
+                                if($brand_main_layout){
+                                    $work_plus_attrs_string = 'categories_id="'.$brand_main_layout->category_id.'"" brands_id="'.$brand_main_layout->id.'""';
+                                } else {
+                                    $work_plus_attrs_string = '';
+                                }
+                            } else {
+                                $work_plus_attrs_string = '';
+                            }
 
                             ?>
                             
@@ -509,7 +518,7 @@ AppAsset::register($this);
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21" height="15" viewBox="0 0 21 15"><defs><path id="acmda" d="M31.5 238.999a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm0 6a1.5 1.5 0 1 1-.001 3 1.5 1.5 0 0 1 0-3zm0 6a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5.5-12h13a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H37a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0 6h13a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H37a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0 6h13a1 1 0 0 1 1 1v1A1 1 0 0 1 50 254H37a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z"/></defs><g><g transform="translate(-30 -239)"><use fill="#fff" xlink:href="#acmda"/></g></g></svg>
 									</div>
 									<span>Категории</span>
-									<div class="plus" onclick="clearInputCategoryAndBrand();">
+									<div class="plus" onclick="$('.add-brands .add-brands__title').text('Добавление категории');  clearInputCategoryAndBrand();">
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="2ehra" d="M252.5 315a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H254v3.5a1.5 1.5 0 0 1-3 0V323h-3.5a1.5 1.5 0 0 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-246 -315)"><use fill="#fff" xlink:href="#2ehra"/></g></g></svg>
 									</div>
 								</div>
@@ -523,7 +532,7 @@ AppAsset::register($this);
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19" height="25" viewBox="0 0 19 25"><defs><path id="lzbda" d="M46.256 325.67L46.25 333a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1l.006-8.893.668-.445a6.413 6.413 0 0 0 2.872-5.342 6.44 6.44 0 0 0-2.1-4.736v3.926a2.463 2.463 0 0 1-2.46 2.46h-3.48a2.463 2.463 0 0 1-2.46-2.46v-3.926a6.44 6.44 0 0 0-2.1 4.736 6.413 6.413 0 0 0 2.872 5.342l.668.445.014 8.893a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1l-.014-7.33a9.399 9.399 0 0 1-3.54-7.35c0-3.635 2.137-6.984 5.443-8.534l.075-.035.078-.027c.27-.092.518-.137.757-.137.996 0 1.747.775 1.747 1.803v5.58h2.4v-5.58c0-1.028.751-1.803 1.747-1.803.24 0 .487.045.757.137l.079.027.074.035c3.307 1.55 5.443 4.9 5.443 8.534a9.399 9.399 0 0 1-3.54 7.35z"/></defs><g><g transform="translate(-31 -309)"><use fill="#fff" xlink:href="#lzbda"/></g></g></svg>
 									</div>
 									<span>Работы</span>
-									<div class="plus">
+									<div class="plus" <?=$work_plus_attrs_string;?>>
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="2ehra" d="M252.5 315a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H254v3.5a1.5 1.5 0 0 1-3 0V323h-3.5a1.5 1.5 0 0 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-246 -315)"><use fill="#fff" xlink:href="#2ehra"/></g></g></svg>
 									</div>
 								</div>

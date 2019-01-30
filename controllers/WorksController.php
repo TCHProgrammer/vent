@@ -26,7 +26,7 @@ class WorksController extends \yii\web\Controller
     {
 
         if(Yii::$app->user->isGuest){
-            return $this->redirect(['/site/login']);
+            return $this->redirect(['/login']);
         }
 
         if(!isset($_GET['brands_id'])){

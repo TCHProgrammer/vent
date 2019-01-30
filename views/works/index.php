@@ -1062,6 +1062,11 @@ use app\models\Period;
 
             emptyWorkBlock();
 
+            if($(this).attr('brands_id') && $(this).attr('categories_id')){
+                setSelectedCategory($(this).attr('categories_id'));
+                setSelectedBrand($(this).attr('brands_id'));
+            }
+
             removeIdToFormToSend();
 
 

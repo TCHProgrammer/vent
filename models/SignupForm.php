@@ -13,6 +13,7 @@ class SignupForm extends Model
 
     public $username;
     public $email;
+    public $full_name;
     public $password;
 
     /**
@@ -30,8 +31,18 @@ class SignupForm extends Model
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.'],
+            ['full_name', 'string', 'max' => 255],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Login',
+            'full_name' => 'User name',
         ];
     }
 
@@ -50,6 +61,7 @@ class SignupForm extends Model
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->full_name = $this->full_name;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         return $user->save() ? $user : null;
