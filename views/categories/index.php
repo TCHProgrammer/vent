@@ -140,6 +140,11 @@ use app\models\Brands;
 
     <script type="text/javascript">
         $('.sure-close a.save').click(function(){
+
+            if('.add-works.category-works').hasClass('open-add'){
+                return true;
+            }
+
             $('#save-category').click();
         });
     </script>
