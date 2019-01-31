@@ -91,11 +91,29 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
+        } else {
+            if(isset(Yii::$app->request->post()['LoginForm']['username']) && User::findByUsername(Yii::$app->request->post()['LoginForm']['username'])){
+               $login_is_right = true;
+               $password_is_right = false;
+            } else {
+                $login_is_right = false;
+                $password_is_right = false;
+            }
+        }
+
+
+        if(!isset(Yii::$app->request->post()['LoginForm']['username']) && !isset(Yii::$app->request->post()['LoginForm']['password'])){
+            $is_new_login = true;
+        } else {
+            $is_new_login = false;
         }
 
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
+            'is_new_login'=>$is_new_login,
+            'login_is_right'=>$login_is_right,
+            'password_is_right'=>$password_is_right,
         ]);
     }
 
