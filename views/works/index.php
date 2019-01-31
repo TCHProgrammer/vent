@@ -272,7 +272,7 @@ use app\models\Period;
 <script type="text/javascript">
 
 
-    $(document).ready(function() {
+    //$(document).ready(function() {
         $('.main-content__works-menu_dropdown-right ul').find('li a').click(function () {
             location.href = $(this).attr('href');
         });
@@ -280,277 +280,6 @@ use app\models\Period;
         var current_brands_id = <?=$brand->id;?>;
         //alert($('.select-brand .jq-selectbox__trigger').length);
 
-        function getSelectedCategoryId() {
-            var result = null;
-
-            $('.select-razdel .jq-selectbox__dropdown ul li').each(function (index) {
-                if (result) {
-                    return;
-                }
-
-                if ($(this).hasClass('selected')) {
-                    result = $('.select-razdel select.select-razdel option').eq(index).val();
-                }
-            });
-
-            return result;
-        }
-
-        function getSelectedBrandId() {
-            var result = null;
-
-            $('.select-brand .jq-selectbox__dropdown ul li').each(function (index) {
-                if (result) {
-                    return;
-                }
-
-                if ($(this).hasClass('selected')) {
-                    result = $('.select-brand select.select-brand option').eq(index).val();
-                }
-            });
-
-            return result;
-        }
-
-        function getSelectedWorkerTypeId() {
-            var result = null;
-
-            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').each(function (index) {
-                if (result) {
-                    return;
-                }
-
-                if ($(this).hasClass('selected')) {
-                    result = $('.add-works__info').eq(3).find('select[name="razdel"] option').eq(index).val();
-                }
-            });
-
-            return result;
-        }
-
-        function getSelectedWorkTypeId() {
-            var result = null;
-
-            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').each(function (index) {
-                if (result) {
-                    return;
-                }
-
-                if ($(this).hasClass('selected')) {
-                    result = $('.add-works__info').eq(4).find('select[name="razdel"] option').eq(index).val();
-                }
-            });
-
-            return result;
-        }
-
-
-        function getSelectedPeriodId() {
-            var result = null;
-
-            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').each(function (index) {
-                if (result) {
-                    return;
-                }
-
-                if ($(this).hasClass('selected')) {
-                    result = $('.add-works__info').eq(5).find('select[name="razdel"] option').eq(index).val();
-                }
-            });
-
-            return result;
-        }
-
-        function getReportFormsIds() {
-
-            var result = [];
-
-            $('.add-works__info .checks input:checked').each(function () {
-                result.push($(this).attr('report_forms_id'));
-            });
-
-            return result;
-        }
-
-        function onBrandListOpenClick() {
-
-            var selectedCategoryId = getSelectedCategoryId();
-
-
-            $('.select-brand select.select-brand option').each(function (index) {
-
-                if ($(this).attr('category_id') == selectedCategoryId) {
-                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display', 'block');
-                } else {
-                    $('.select-brand .jq-selectbox__dropdown ul li').eq(index).css('display', 'none');
-                }
-
-            });
-        }
-
-        function setSelectedCategory(category_id) {
-
-            var indexToSelect = 0;
-
-            $('.select-razdel select.select-razdel option').each(function (index) {
-
-                if (indexToSelect) {
-                    return;
-                }
-
-                if ($(this).val() == category_id) {
-                    indexToSelect = index;
-                }
-            });
-
-            $('.select-razdel .jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
-
-            $('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
-
-
-            $('.select-razdel .jq-selectbox__select-text').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
-
-            $('.add-works__title .divide').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display', 'inline');
-
-            $('.add-works__title .check').css('display', 'inline');
-            if (category_id) {
-                $('.add-works__info').eq(0).find('.jq-selectbox__select').addClass('change-select');
-            } else {
-                $('.add-works__info').eq(0).find('.jq-selectbox__select').removeClass('change-select');
-            }
-        }
-
-        function setSelectedBrand(brand_id) {
-
-            var indexToSelect = 0;
-
-            $('.select-brand select.select-brand option').each(function (index) {
-
-                if (indexToSelect) {
-                    return;
-                }
-
-                if ($(this).val() == brand_id) {
-                    indexToSelect = index;
-                }
-            });
-
-            $('.select-brand .jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
-
-            $('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
-
-
-            $('.select-brand .jq-selectbox__select-text').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text());
-
-
-            $('.add-works__title .brand').text($('.select-brand .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display', 'inline');
-            $('.add-works__title .check').css('display', 'inline');
-
-
-            $('.add-works__info').eq(1).removeClass('disabled');
-            if (brand_id) {
-                $('.add-works__info').eq(1).find('.jq-selectbox__select').addClass('change-select');
-            } else{
-                $('.add-works__info').eq(1).find('.jq-selectbox__select').removeClass('change-select');
-            }
-        }
-
-        function setSelectedWorkerType(worker_types_id) {
-
-            var indexToSelect = 0;
-
-            $('.add-works__info').eq(3).find('select option').each(function (index) {
-
-
-                if (indexToSelect) {
-                    return;
-                }
-
-                if ($(this).val() == worker_types_id) {
-                    indexToSelect = index;
-                }
-            });
-
-
-            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
-
-            $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
-
-
-            $('.add-works__info').eq(3).find('.jq-selectbox__select-text').text($('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
-
-            if (worker_types_id) {
-                $('.add-works__info').eq(3).find('.jq-selectbox__select').addClass('change-select');
-            } else {
-                $('.add-works__info').eq(3).find('.jq-selectbox__select').removeClass('change-select');
-            }
-        }
-
-        function setSelectedWorkType(work_types_id) {
-
-            var indexToSelect = 0;
-
-            $('.add-works__info').eq(4).find('select option').each(function (index) {
-
-
-                if (indexToSelect) {
-                    return;
-                }
-
-                if ($(this).val() == work_types_id) {
-                    indexToSelect = index;
-                }
-            });
-
-
-            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
-
-            $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
-
-
-            $('.add-works__info').eq(4).find('.jq-selectbox__select-text').text($('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
-
-
-            if (work_types_id) {
-                $('.add-works__info').eq(4).find('.jq-selectbox__select').addClass('change-select');
-            } else {
-                $('.add-works__info').eq(4).find('.jq-selectbox__select').removeClass('change-select');
-            }
-        }
-
-        function setSelectedPeriod(period_id) {
-
-            var indexToSelect = 0;
-
-            $('.add-works__info').eq(5).find('select option').each(function (index) {
-
-
-                if (indexToSelect) {
-                    return;
-                }
-
-                if ($(this).val() == period_id) {
-                    indexToSelect = index;
-                }
-            });
-
-
-            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').removeClass('selected').removeClass('sel');
-
-            $('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).addClass('selected').addClass('sel');
-
-
-            $('.add-works__info').eq(5).find('.jq-selectbox__select-text').text($('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
-
-
-            if (period_id) {
-                $('.add-works__info').eq(5).find('.jq-selectbox__select').addClass('change-select');
-            } else {
-                $('.add-works__info').eq(5).find('.jq-selectbox__select').removeClass('change-select');
-            }
-
-
-        }
 
         function setReportFormsChecked(report_forms_id) {
 
@@ -659,294 +388,12 @@ use app\models\Period;
         }
 
 
-        function renumerateCompositions() {
-            $('.add-works__info-composition .composition').each(function (index) {
 
-                var number = parseInt(index) + parseInt(1);
 
-                var number_block = $(this).find('.number');
 
-                number_block.text(number);
 
-                number_block.parent().find('.add-descr_block .title span').text(number);
-                number_block.parent().find('.add-photo_block .title span').text(number);
 
-                $(this).find('.quantity .title span').text(number);
 
-
-            });
-        }
-
-
-        function getWorkTimeInMinutes() {
-
-            var time_number = parseFloat($('.time-tabs .time-tabs-pane input').val());
-
-            if (isNaN(time_number)) {
-                return 0;
-            }
-
-            if ($('.time-tabs .time-tabs-nav button[data-href="#minutes"]').hasClass('active')) {
-                return (parseFloat(time_number)).toFixed(0);
-            } else {
-                return (parseFloat(time_number * 60)).toFixed(0);
-            }
-
-
-        }
-
-        function addToFormWorkContentsAlreadyExists() {
-
-            $('.work-contents-already-exits').empty();
-
-            $('.work-contents-already-exits').append('<div class="work_contents_photos"></div>');
-
-            $('.add-works__info-composition>.composition').each(function () {
-
-                if (!$(this).attr('work_contents_id')) {
-                    return;
-                }
-
-                var work_contents_id = $(this).attr('work_contents_id');
-                var name = $(this).find('input').eq(0).val();
-                var description = $(this).find('.add-descr_block textarea').eq(0).val();
-
-
-                var image_inputs = [];
-
-                var self = $(this);
-
-                self.find('.add-photo_block .files .file').each(function () {
-
-
-                    if (!$(this).attr('work_contents_photo_id') && $(this).find('input').eq(0)[0].files.length) {
-                        image_inputs.push($(this).find('input').eq(0).clone());
-                    }
-                });
-
-
-
-
-                var image_ids = [];
-
-                var self = this;
-
-                $(self).find('.add-photo_block .files .file').each(function () {
-                    if ($(this).attr('work_contents_photo_id')) {
-                        image_ids.push($(this).attr('work_contents_photo_id'));
-                    }
-                });
-
-                var res_str = '<div>';
-
-                res_str += '<input type="hidden" name="work_contents_already_exists_name[' + work_contents_id + ']" value="' + name + '">';
-                res_str += '<input type="hidden" name="work_contents_already_exists_description[' + work_contents_id + ']" value="' + description + '">';
-
-                $.each(image_ids, function (i, val) {
-                    res_str += '<input type="hidden" name="work_contents_photo_id[' + work_contents_id + '][]" value="' + val + '">';
-                });
-
-                res_str += '</div>';
-
-
-
-
-
-
-                $('.work-contents-already-exits').append(res_str);
-
-
-
-
-
-                $('.work-contents-already-exits .work_contents_photos').append('<div work_contents_id="' + work_contents_id + '"></div>');
-
-                $.each(image_inputs, function (i, val) {
-
-
-                    $('.work-contents-already-exits .work_contents_photos>div[work_contents_id="' + work_contents_id + '"]').append(val);
-                });
-
-                $('.work-contents-already-exits .work_contents_photos>div[work_contents_id="' + work_contents_id + '"]>input').each(function (index1) {
-                    $(this).attr('name', 'last_work_contents_image_to_add[' + work_contents_id + '][]').css('display', 'none');
-                });
-
-            });
-
-        }
-
-        function addToFormWorkContentsToAdd() {
-
-            $('.work-contents-to-add').empty();
-
-            $('.work-contents-to-add').append('<div class="work_contents_photos"></div>');
-
-            var work_contents_index = -1;
-
-
-            $('.add-works__info-composition>.composition').each(function (index) {
-
-
-                if (!$(this).attr('work_contents_id')) {
-
-
-                    work_contents_index++;
-
-
-                    //var work_contents_id = $(this).attr('work_contents_id');
-                    var name = $(this).find('input').eq(0).val();
-                    var description = $(this).find('.add-descr_block textarea').eq(0).val();
-
-
-                    var image_inputs = [];
-
-                    var self = $(this);
-
-                    self.find('.add-photo_block .files .file').each(function () {
-
-
-                        if (!$(this).attr('work_contents_photo_id') && $(this).find('input').eq(0)[0].files.length) {
-                            image_inputs.push($(this).find('input').eq(0).clone());
-                        }
-                    });
-
-
-                    if (!(((!name && !description) || (name == '' && description == '')) && !image_inputs.length)) {
-
-                        var res_str = '<div>';
-
-                        res_str += '<input type="hidden" name="work_contents_to_add_name[' + work_contents_index + ']" value="' + name + '">';
-                        res_str += '<input type="hidden" name="work_contents_to_add_description[' + work_contents_index + ']" value="' + description + '">';
-
-
-                        res_str += '</div>';
-
-                        $('.work-contents-to-add').append(res_str);
-
-
-
-
-                        $('.work-contents-to-add .work_contents_photos').append('<div work_contents_index="' + work_contents_index + '"></div>')
-
-                        $.each(image_inputs, function (i, val) {
-                            $('.work-contents-to-add .work_contents_photos>div[work_contents_index="' + work_contents_index + '"]').append(val);
-                        });
-
-                        $('.work-contents-to-add .work_contents_photos>div[work_contents_index="' + work_contents_index + '"]>input').each(function (index1) {
-                            $(this).attr('name', 'new_work_contents_image_to_add[' + work_contents_index + '][]').css('display', 'none');
-                        });
-
-                    }
-
-                }
-
-            });
-
-
-        }
-
-
-        function addToFormReportFormsWithFields() {
-            var checked_report_forms = getReportFormsIds();
-
-            var strToAdd = '<div class="checked_report_forms">';
-
-            $.each(checked_report_forms, function (i, val) {
-                strToAdd += '<input type="hidden" name="checked_report_forms[]" value="' + val + '">';
-            });
-
-            strToAdd += '</div>';
-
-            strToAdd += '<div class="report_form_fields">';
-
-            $('.add-works__info .new-form .inputs>input').each(function () {
-                var report_forms_id = $(this).parent().parent().attr('report_forms_id');
-                var name = $(this).val();
-                var found = false;
-
-                $.each(checked_report_forms, function (i, val) {
-                    if (val == report_forms_id) {
-                        found = true;
-                    }
-                });
-
-
-                if (found) {
-                    strToAdd += '<input type="hidden" name="report_form_fields[' + report_forms_id + '][]" value="' + name + '">';
-                }
-
-
-            });
-
-            strToAdd += '</div>';
-
-            $('#save-work-form .work-report-forms').empty().append(strToAdd);
-        }
-
-        function emptyWorkBlock() {
-            setSelectedCategory(0);
-            setSelectedBrand(0);
-            setSelectedWorkerType(0);
-            setSelectedWorkType(0);
-            setSelectedPeriod(0);
-
-            $('.add-works__info').eq(2).find('input').val('');
-
-            $('.time-tabs-pane input').val('');
-
-            $('.time-tabs-nav button[data-href="minutes"]').addClass('active');
-
-            $('.time-tabs-nav button[data-href="hours"]').removeClass('active');
-
-
-            $('.add-works__info.op textarea').val('');
-
-            while ($('.add-works__info-composition>div').length > 2) {
-                $('.add-works__info-composition>div').eq(0).remove();
-            }
-            renumerateCompositions();
-
-            $('.add-works__info.inp input').prop('checked', false);
-
-            $('.add-works__info.inp .new-form .inputs input').remove();
-        }
-
-
-        function fillFormToSend() {
-
-
-            $('#save-work-form .work-fields input[name="brands_id"]').val(getSelectedBrandId());
-            $('#save-work-form .work-fields input[name="name"]').val($('.add-works__info').eq(2).find('input').val());
-            $('#save-work-form .work-fields input[name="worker_types_id"]').val(getSelectedWorkerTypeId());
-            $('#save-work-form .work-fields input[name="work_types_id"]').val(getSelectedWorkTypeId());
-            $('#save-work-form .work-fields input[name="period_id"]').val(getSelectedPeriodId());
-            $('#save-work-form .work-fields input[name="execution_time"]').val(getWorkTimeInMinutes());
-            $('#save-work-form .work-fields input[name="total_composition_description"]').val($('.add-works__info').eq(7).find('textarea').val());
-
-
-            addToFormWorkContentsAlreadyExists();
-            addToFormWorkContentsToAdd();
-            addToFormReportFormsWithFields();
-
-        }
-
-
-        function formToSendValidate() {
-            var result = true;
-
-            $('#save-work-form .work-fields input').each(function () {
-
-                if ($(this).attr('name') == 'total_composition_description') {
-                    return;
-                }
-
-                if (!$(this).val() || $(this).val() == '') {
-                    result = false;
-                }
-            });
-
-            return result;
-        }
 
         function addIdToFormToSend(id) {
             var formAction = $('#save-work-form').attr('action');
@@ -966,30 +413,26 @@ use app\models\Period;
             $('#save-work-form').attr('action', result);
         }
 
-        function removeIdToFormToSend(){
 
 
-            $('#save-work-form').attr('action', '/works/update?brands_id=' + current_brands_id);
-        }
 
 
-        $(document)
-            .on('click', '#save-work-form button[type="submit"]', function (e) {
-
-                fillFormToSend();
-
-                var isValid = formToSendValidate();
-                if (!isValid) {
-                    e.preventDefault(); //prevent the default action
-                    alert('Заполнены не все поля!!!');
-                }
-            });
 
 
         function work_name_click_action(){
             $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
             addIdToFormToSend($(this).attr('works_id'));
             emptyWorkBlock();
+
+
+            function copySubmitEventEditedWork(){
+                var click_element = $('#save-work-form button[type="submit"]').eq(0);
+                click_element.click();
+            }
+
+            $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
+
+
             var self = $(this);
 
             $.ajax({
@@ -1081,22 +524,22 @@ use app\models\Period;
 
 
 
-        $('.work .plus').eq(0).click(function () {
+        //$('.work .plus').eq(0).click(function () {
 
 
-            $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
+           // $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
 
-            emptyWorkBlock();
+           // emptyWorkBlock();
 
-            if($(this).attr('brands_id') && $(this).attr('categories_id')){
-                setSelectedCategory($(this).attr('categories_id'));
-                setSelectedBrand($(this).attr('brands_id'));
-            }
+            //if($(this).attr('brands_id') && $(this).attr('categories_id')){
+               // setSelectedCategory($(this).attr('categories_id'));
+               // setSelectedBrand($(this).attr('brands_id'));
+            //}
 
-            removeIdToFormToSend();
+            //removeIdToFormToSend();
 
 
-        });
+        //});
 
         $('.item-content .to-add-work').click(function(){
 
@@ -1115,6 +558,13 @@ use app\models\Period;
 
             setSelectedWorkType($(this).attr('work_types_id'));
 
+            function copySubmitEventEditedWork(){
+                var click_element = $('#save-work-form button[type="submit"]').eq(0);
+                click_element.click();
+            }
+
+            $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
+
 
         });
 
@@ -1130,6 +580,14 @@ use app\models\Period;
             setSelectedWorkerType($(this).attr('worker_types_id'));
 
             setSelectedWorkType($(this).attr('work_types_id'));
+
+
+            function copySubmitEventEditedWork(){
+                var click_element = $('#save-work-form button[type="submit"]').eq(0);
+                click_element.click();
+            }
+
+            $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
 
 
         });
@@ -1151,12 +609,10 @@ use app\models\Period;
 
 
 
-        $('.sure-close .to-save a.save').click(function(){
-            var click_element = $('#save-work-form button[type="submit"]').eq(0);
-            click_element.click();
-        });
 
-    });
+
+
+   // });
 
 
 </script>

@@ -946,4 +946,30 @@ $(document).ready(function(){
         $('.to-save').fadeOut();
     });
 
+
+    $('.work .plus').eq(0).click(function () {
+
+
+        function copySubmitEventEditedWork(){
+            var click_element = $('#save-work-form button[type="submit"]').eq(0);
+            click_element.click();
+        }
+
+        $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
+
+
+        $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
+
+        emptyWorkBlock();
+
+        if($(this).attr('brands_id') && $(this).attr('categories_id')){
+            setSelectedCategory($(this).attr('categories_id'));
+            setSelectedBrand($(this).attr('brands_id'));
+        }
+
+        removeIdToFormToSend();
+
+
+    });
+
 });
