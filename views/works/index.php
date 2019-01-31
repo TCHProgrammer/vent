@@ -413,6 +413,11 @@ use app\models\Period;
             $('.add-works__title .divide').text($('.select-razdel .jq-selectbox__dropdown ul li').eq(indexToSelect).text()).css('display', 'inline');
 
             $('.add-works__title .check').css('display', 'inline');
+            if (category_id) {
+                $('.add-works__info').eq(0).find('.jq-selectbox__select').addClass('change-select');
+            } else {
+                $('.add-works__info').eq(0).find('.jq-selectbox__select').removeClass('change-select');
+            }
         }
 
         function setSelectedBrand(brand_id) {
@@ -443,6 +448,11 @@ use app\models\Period;
 
 
             $('.add-works__info').eq(1).removeClass('disabled');
+            if (brand_id) {
+                $('.add-works__info').eq(1).find('.jq-selectbox__select').addClass('change-select');
+            } else{
+                $('.add-works__info').eq(1).find('.jq-selectbox__select').removeClass('change-select');
+            }
         }
 
         function setSelectedWorkerType(worker_types_id) {
@@ -469,7 +479,11 @@ use app\models\Period;
 
             $('.add-works__info').eq(3).find('.jq-selectbox__select-text').text($('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
 
-
+            if (worker_types_id) {
+                $('.add-works__info').eq(3).find('.jq-selectbox__select').addClass('change-select');
+            } else {
+                $('.add-works__info').eq(3).find('.jq-selectbox__select').removeClass('change-select');
+            }
         }
 
         function setSelectedWorkType(work_types_id) {
@@ -497,6 +511,11 @@ use app\models\Period;
             $('.add-works__info').eq(4).find('.jq-selectbox__select-text').text($('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
 
 
+            if (work_types_id) {
+                $('.add-works__info').eq(4).find('.jq-selectbox__select').addClass('change-select');
+            } else {
+                $('.add-works__info').eq(4).find('.jq-selectbox__select').removeClass('change-select');
+            }
         }
 
         function setSelectedPeriod(period_id) {
@@ -522,6 +541,13 @@ use app\models\Period;
 
 
             $('.add-works__info').eq(5).find('.jq-selectbox__select-text').text($('.add-works__info').eq(5).find('.jq-selectbox__dropdown ul li').eq(indexToSelect).text());
+
+
+            if (period_id) {
+                $('.add-works__info').eq(5).find('.jq-selectbox__select').addClass('change-select');
+            } else {
+                $('.add-works__info').eq(5).find('.jq-selectbox__select').removeClass('change-select');
+            }
 
 
         }
@@ -1037,7 +1063,7 @@ use app\models\Period;
 
                 renumerateCompositions();
 
-                $('.jq-selectbox__select').addClass('change-select');
+
 
             }
         ,
@@ -1089,7 +1115,7 @@ use app\models\Period;
 
             setSelectedWorkType($(this).attr('work_types_id'));
 
-            $('.jq-selectbox__select').addClass('change-select');
+
         });
 
         $(document).on('click','.add-work', function(){
@@ -1104,6 +1130,8 @@ use app\models\Period;
             setSelectedWorkerType($(this).attr('worker_types_id'));
 
             setSelectedWorkType($(this).attr('work_types_id'));
+
+
         });
         $(document)
             .on('click', '.tooltip button.delete', function(){
