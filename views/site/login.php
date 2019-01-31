@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="main-content main-page">
     <div class="main-content__welcome-block">
         <div class="main-content__welcome-block_title">Добро пожаловать</div>
-        <form class="main-content__welcome-block_form" id="login-form" action="/site/login" method="post">
+        <form class="main-content__welcome-block_form" id="login-form" action="/login" method="post">
             <input type="hidden" name="<?=Yii::$app->getRequest()->csrfParam;?>" value="<?=Yii::$app->getRequest()->getCsrfToken();?>">
 
             <input type="text" placeholder="Логин" id="loginform-username" name="LoginForm[username]" <?if(!$login_is_right && !$is_new_login):?> class="error" <? endif; ?>>
