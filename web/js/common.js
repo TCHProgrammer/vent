@@ -56,7 +56,7 @@ $(document).ready(function(){
    	 	hideNegatives: false,
 	});
 
-	$('.search-results').mCustomScrollbar({mouseWheelPixels: 300, scrollInertia: 100});
+	$('.search-results').mCustomScrollbar({mouseWheelPixels: 200, scrollInertia: 100});
 	$('[data-scroll]').mCustomScrollbar({mouseWheelPixels: 200, scrollInertia: 100});
 
 	$('[data-scrolls]').mCustomScrollbar({mouseWheelPixels: 125, scrollInertia: 150});
