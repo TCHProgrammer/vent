@@ -789,9 +789,7 @@ AppAsset::register($this);
         }
 	});
 
-    $('.sure-close a.save').click(function(){
-        $('#save-category').click();
-    });
+
 
     //$('body').on('click','.sure-closes', function(e){
         //$('.add-brands__input input[name="name"]').attr('readonly',false);

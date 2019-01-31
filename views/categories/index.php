@@ -138,7 +138,11 @@ use app\models\Brands;
     <?endforeach;?>
 
 
-
+    <script type="text/javascript">
+        $('.sure-close a.save').click(function(){
+            $('#save-category').click();
+        });
+    </script>
 
 
 		<!--</div>-->
