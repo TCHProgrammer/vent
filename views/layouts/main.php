@@ -509,6 +509,8 @@ AppAsset::register($this);
                                 $work_plus_attrs_string = '';
                             }
 
+
+
                             ?>
                             
 							<a href="/categories" class="<?=$cat_active;?> cat">
@@ -532,7 +534,7 @@ AppAsset::register($this);
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19" height="25" viewBox="0 0 19 25"><defs><path id="lzbda" d="M46.256 325.67L46.25 333a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1l.006-8.893.668-.445a6.413 6.413 0 0 0 2.872-5.342 6.44 6.44 0 0 0-2.1-4.736v3.926a2.463 2.463 0 0 1-2.46 2.46h-3.48a2.463 2.463 0 0 1-2.46-2.46v-3.926a6.44 6.44 0 0 0-2.1 4.736 6.413 6.413 0 0 0 2.872 5.342l.668.445.014 8.893a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1l-.014-7.33a9.399 9.399 0 0 1-3.54-7.35c0-3.635 2.137-6.984 5.443-8.534l.075-.035.078-.027c.27-.092.518-.137.757-.137.996 0 1.747.775 1.747 1.803v5.58h2.4v-5.58c0-1.028.751-1.803 1.747-1.803.24 0 .487.045.757.137l.079.027.074.035c3.307 1.55 5.443 4.9 5.443 8.534a9.399 9.399 0 0 1-3.54 7.35z"/></defs><g><g transform="translate(-31 -309)"><use fill="#fff" xlink:href="#lzbda"/></g></g></svg>
 									</div>
 									<span>Работы</span>
-									<div class="plus" <?=$work_plus_attrs_string;?>>
+									<div class="plus" <?=$work_plus_attrs_string;?> onclick="<?if($work_plus_attrs_string == ''):?>setWorkTitleOnAddWork();<? else: ?>setWorkTitleOnAddWorkToBrand();<?endif; ?>">
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="2ehra" d="M252.5 315a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H254v3.5a1.5 1.5 0 0 1-3 0V323h-3.5a1.5 1.5 0 0 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-246 -315)"><use fill="#fff" xlink:href="#2ehra"/></g></g></svg>
 									</div>
 								</div>
@@ -1361,6 +1363,43 @@ AppAsset::register($this);
 
 
         $('#save-work-form').attr('action', '/works/update?brands_id=' + current_brands_id);
+    }
+
+    function setWorkTitleOnAddWorkToBrand(){
+
+        var removed = $('.add-works__title').children().remove();
+
+        $('.add-works__title').text('Добавление работы в раздел  ');
+
+        $('.add-works__title').append(removed);
+    }
+
+    function setWorkTitleOnAddWork(){
+
+
+        var removed = $('.add-works__title').children().remove();
+
+
+        $('.add-works__title').text('Добавление работы в раздел ');
+
+
+        $('.add-works__title').append(removed);
+
+
+        setTimeout(function(){
+            $('.add-works__title .divide, .add-works__title .brand').text('');
+        },100)
+
+
+    }
+
+    function setWorkTitleOnEditWork(){
+
+        var removed = $('.add-works__title').children().remove();
+
+        $('.add-works__title').text('Редактирование работы в разделе   ');
+
+        $('.add-works__title').append(removed);
     }
 
     $(document)
