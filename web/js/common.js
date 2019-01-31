@@ -289,6 +289,8 @@ $(document).ready(function(){
 		$('.sure-close').fadeOut();
 		$('.to-save').fadeOut();
 
+
+
 	});
 
 	$('body').on('click','.to-save .not-save', function(e){
@@ -950,10 +952,7 @@ $(document).ready(function(){
     $('.work .plus').eq(0).click(function () {
 
 
-        function copySubmitEventEditedWork(){
-            var click_element = $('#save-work-form button[type="submit"]').eq(0);
-            click_element.click();
-        }
+
 
         $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
 

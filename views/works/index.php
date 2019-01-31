@@ -425,10 +425,7 @@ use app\models\Period;
             emptyWorkBlock();
 
 
-            function copySubmitEventEditedWork(){
-                var click_element = $('#save-work-form button[type="submit"]').eq(0);
-                click_element.click();
-            }
+
 
             $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
 
@@ -558,10 +555,7 @@ use app\models\Period;
 
             setSelectedWorkType($(this).attr('work_types_id'));
 
-            function copySubmitEventEditedWork(){
-                var click_element = $('#save-work-form button[type="submit"]').eq(0);
-                click_element.click();
-            }
+
 
             $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
 
@@ -582,10 +576,7 @@ use app\models\Period;
             setSelectedWorkType($(this).attr('work_types_id'));
 
 
-            function copySubmitEventEditedWork(){
-                var click_element = $('#save-work-form button[type="submit"]').eq(0);
-                click_element.click();
-            }
+
 
             $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
 

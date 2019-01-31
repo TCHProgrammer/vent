@@ -520,7 +520,7 @@ AppAsset::register($this);
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21" height="15" viewBox="0 0 21 15"><defs><path id="acmda" d="M31.5 238.999a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm0 6a1.5 1.5 0 1 1-.001 3 1.5 1.5 0 0 1 0-3zm0 6a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5.5-12h13a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H37a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0 6h13a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H37a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0 6h13a1 1 0 0 1 1 1v1A1 1 0 0 1 50 254H37a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z"/></defs><g><g transform="translate(-30 -239)"><use fill="#fff" xlink:href="#acmda"/></g></g></svg>
 									</div>
 									<span>Категории</span>
-									<div class="plus" onclick="$('.add-brands .add-brands__title').text('Добавление категории');  clearInputCategoryAndBrand();">
+									<div class="plus" onclick="$('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork);$('.add-brands .add-brands__title').text('Добавление категории');  clearInputCategoryAndBrand();">
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="2ehra" d="M252.5 315a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H254v3.5a1.5 1.5 0 0 1-3 0V323h-3.5a1.5 1.5 0 0 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-246 -315)"><use fill="#fff" xlink:href="#2ehra"/></g></g></svg>
 									</div>
 								</div>
@@ -1400,6 +1400,12 @@ AppAsset::register($this);
         $('.add-works__title').text('Редактирование работы в разделе   ');
 
         $('.add-works__title').append(removed);
+    }
+
+
+    function copySubmitEventEditedWork(){
+        var click_element = $('#save-work-form button[type="submit"]').eq(0);
+        click_element.click();
     }
 
     $(document)
