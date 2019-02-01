@@ -294,7 +294,12 @@ use app\models\Period;
 
         function addReportFormsField(report_forms_id, work_report_form_fields_id, field_name) {
 
-            $('.new-form[report_forms_id="' + report_forms_id + '"]>.inputs').append('<input type="text" report_forms_id="' + report_forms_id + '" work_report_form_fields_id="' + work_report_form_fields_id + '" placeholder="Введите название поля" value="' + field_name + '">');
+            $('.new-form[report_forms_id="' + report_forms_id + '"]>.inputs').append('<div class="input">' +
+                '<a href="#" class="delete-input">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9" height="9" viewBox="0 0 9 9"><defs><path id="l6tfa" d="M706.026 1021.044a1 1 0 0 1-1.414 0l-2.121-2.122-2.144 2.144a1 1 0 1 1-1.414-1.414l2.143-2.144-2.12-2.12a1 1 0 1 1 1.413-1.415l2.122 2.121 2.099-2.1a1 1 0 0 1 1.414 1.415l-2.1 2.099 2.122 2.121a1 1 0 0 1 0 1.415z"/></defs><g><g transform="translate(-698 -1013)"><use fill="#232226" xlink:href="#l6tfa"/></g></g></svg>' +
+                '</a>' +
+                '<input type="text" report_forms_id="' + report_forms_id + '" work_report_form_fields_id="' + work_report_form_fields_id + '" placeholder="Введите название поля" value="' + field_name + '">' +
+                '</div>');//'<input type="text" report_forms_id="' + report_forms_id + '" work_report_form_fields_id="' + work_report_form_fields_id + '" placeholder="Введите название поля" value="' + field_name + '">');
         }
 
 
@@ -372,6 +377,8 @@ use app\models\Period;
             $('.add-works__info-composition').prepend(strToAdd);
 
             renumerateCompositions();
+
+
         }
 
 
@@ -484,6 +491,19 @@ use app\models\Period;
 
 
                     appendNewComposition(work_contents_id, val.name, val.description, photos);
+                });
+
+                var composition_count = $('.add-works__info-composition .composition').length;
+
+                $('.add-works__info-composition .composition').each(function(index){
+
+                    if(index == composition_count - 1){
+                        return;
+                    }
+
+                    if($(this).find('.input-area input').eq(0).val() == ''){
+                        $(this).remove();
+                    }
                 });
 
 

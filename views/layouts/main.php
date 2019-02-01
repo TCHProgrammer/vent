@@ -886,6 +886,8 @@ AppAsset::register($this);
             result.push($(this).attr('report_forms_id'));
         });
 
+
+
         return result;
     }
 
@@ -1268,8 +1270,8 @@ AppAsset::register($this);
 
         strToAdd += '<div class="report_form_fields">';
 
-        $('.add-works__info .new-form .inputs>input').each(function () {
-            var report_forms_id = $(this).parent().parent().attr('report_forms_id');
+        $('.add-works__info .new-form .inputs>div>input').each(function () {
+            var report_forms_id = $(this).parent().parent().parent().attr('report_forms_id');
             var name = $(this).val();
             var found = false;
 

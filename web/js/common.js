@@ -904,11 +904,16 @@ $(document).ready(function(){
 	});
 
 	$('body').on('click','.new-form .add-input', function(e){
-		e.preventDefault();
-		let input = `
-			<input type="text" placeholder="Введите название поля">
+        e.preventDefault();
+        let input = `
+			<div class="input">
+				<a href="#" class="delete-input">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9" height="9" viewBox="0 0 9 9"><defs><path id="l6tfa" d="M706.026 1021.044a1 1 0 0 1-1.414 0l-2.121-2.122-2.144 2.144a1 1 0 1 1-1.414-1.414l2.143-2.144-2.12-2.12a1 1 0 1 1 1.413-1.415l2.122 2.121 2.099-2.1a1 1 0 0 1 1.414 1.415l-2.1 2.099 2.122 2.121a1 1 0 0 1 0 1.415z"/></defs><g><g transform="translate(-698 -1013)"><use fill="#232226" xlink:href="#l6tfa"/></g></g></svg>
+				</a>
+				<input type="text" placeholder="Введите название поля">
+			</div>
 		`;
-		$('.new-form').find('.inputs').append(input);
+        $('.new-form').find('.inputs').append(input);
 	});
 
 	$('.add-works.category-works').find('.add-works__title').find('.divide').hide();
@@ -988,6 +993,12 @@ $(document).ready(function(){
         if($('.add-brands').hasClass('open-add')){
             $('#save-category').click();
 		}
+    });
+
+
+    $('body').on('click','.new-form .delete-input', function(e){
+        e.preventDefault();
+        $(this).parents('.input').remove();
     });
 
 });
