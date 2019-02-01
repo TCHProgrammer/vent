@@ -1313,8 +1313,20 @@ AppAsset::register($this);
         $('.add-works__info.op textarea').val('');
 
         while ($('.add-works__info-composition>div').length > 2) {
+
             $('.add-works__info-composition>div').eq(0).remove();
+
+            $('.add-works__info-composition>div').eq(0).find('input').eq(0).val('');
+
+            $('.add-works__info-composition>div').eq(0).find('textarea').eq(0).val('');
+
+            $('.add-works__info-composition>div').eq(0).find('.file').remove();
+
+
         }
+
+        $('.add-works__info-composition>div').eq(0).find('.delete-composition').remove();
+
         renumerateCompositions();
 
         $('.add-works__info.inp input').prop('checked', false);
