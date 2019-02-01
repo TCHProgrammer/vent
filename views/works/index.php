@@ -427,7 +427,7 @@ use app\models\Period;
 
 
 
-            $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
+
 
 
             var self = $(this);
@@ -557,7 +557,7 @@ use app\models\Period;
 
 
 
-            $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
+
 
 
         });
@@ -578,7 +578,7 @@ use app\models\Period;
 
 
 
-            $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
+
 
 
         });

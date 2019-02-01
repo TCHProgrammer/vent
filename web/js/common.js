@@ -954,7 +954,7 @@ $(document).ready(function(){
 
 
 
-        $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
+
 
 
         $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
@@ -969,6 +969,20 @@ $(document).ready(function(){
         removeIdToFormToSend();
 
 
+    });
+
+    $('.sure-close a.save').click(function(){
+
+
+
+        if($('.add-works.category-works').hasClass('open-add'))
+        {
+            $('#save-work-form button[type="submit"]').click();
+        }
+
+        if($('.add-brands').hasClass('open-add')){
+            $('#save-category').click();
+		}
     });
 
 });
