@@ -96,13 +96,13 @@ use app\models\Brands;
                         <a href="/works?brands_id=<?=$brand->id;?>" class="tooltiped">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"></path></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"></use></g></g></svg>
                             <div class="tooltip">
-                                <button class="copy" category_id="<?=$category->id;?>" brand_id="<?=$brand->id;?>" onclick="$('.add-brands .add-brands__title').text('Копирование категории'); setElementBrandNameOnCopy(this);">
+                                <button class="copy" category_id="<?=$category->id;?>" brand_id="<?=$brand->id;?>" onclick="$('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork); $('.add-brands .add-brands__title').text('Копирование категории'); setElementBrandNameOnCopy(this);">
                                     <div class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14"><defs><path id="1jfaa" d="M441 351v8a1 1 0 0 1-1 1h-3v3a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h3v-3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm-6 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5zm4-4a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0-.5.5v1.5h3a1 1 0 0 1 1 1v3h1.5a.5.5 0 0 0 .5-.5z"></path></defs><g><g transform="translate(-427 -350)"><use fill="#232226" xlink:href="#1jfaa"></use></g></g></svg>
                                     </div>
                                     <div class="text">Копировать</div>
                                 </button>
-                                <button class="change" category_id="<?=$category->id;?>" brand_id="<?=$brand->id;?>" onclick="$('.add-brands .add-brands__title').text('Редактирование бренда');setElementBrandName(this);">
+                                <button class="change" category_id="<?=$category->id;?>" brand_id="<?=$brand->id;?>" onclick="$('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork); $('.add-brands .add-brands__title').text('Редактирование бренда');setElementBrandName(this);">
                                     <div class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14"><defs><path id="q4iwa" d="M440.737 384.61l-2.04 2.045-.001.002a4624.42 4624.42 0 0 1-7.343 7.342H428a.98.98 0 0 1-.481-.129 1 1 0 0 1-.326-.285 1.024 1.024 0 0 1-.064-.104.983.983 0 0 1-.108-.28A1 1 0 0 1 427 393v-2.884l.005-.465c2.444-2.45 4.892-4.897 7.343-7.342.002-.002.006-.003.008-.006l2.04-2.033a.938.938 0 0 1 .694-.286c.255.004.514.107.715.308l2.91 2.91c.402.402.412 1.032.022 1.408zm-5.654-.148zm-6.083 5.94V392h1.605c1.981-2.025 3.96-4.05 5.938-6.078l-1.46-1.46c-2.03 1.978-4.058 3.959-6.083 5.94zm8.142-7.995l-.651.634 1.474 1.474.634-.65-1.457-1.458z"></path></defs><g><g transform="translate(-427 -380)"><use fill="#939499" xlink:href="#q4iwa"></use></g></g></svg>
                                     </div>
@@ -122,7 +122,7 @@ use app\models\Brands;
                     <?endforeach;?>
 
                 </ul>
-                <a href="#" class="add-brand" category_id="<?=$category->id;?>" onclick="$('.add-brands .add-brands__title').text('Добавление бренда');addCategoryBrand(this);">
+                <a href="#" class="add-brand" category_id="<?=$category->id;?>" onclick="$('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork); $('.add-brands .add-brands__title').text('Добавление бренда');addCategoryBrand(this);">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="13" viewBox="0 0 13 13"><defs><path id="y90sa" d="M428.5 501a1.5 1.5 0 0 1 1.5 1.5v3.5h3.5a1.5 1.5 0 0 1 0 3H430v3.5a1.5 1.5 0 1 1-3 0V509h-3.5a1.5 1.5 0 1 1 0-3h3.5v-3.5a1.5 1.5 0 0 1 1.5-1.5z"/></defs><g><g transform="translate(-422 -501)"><use fill="#6d67f9" xlink:href="#y90sa"/></g></g></svg>
                     </div>
@@ -138,7 +138,16 @@ use app\models\Brands;
     <?endforeach;?>
 
 
+    <script type="text/javascript">
+        $('.sure-close a.save').click(function(){
 
+            if('.add-works.category-works').hasClass('open-add'){
+                return true;
+            }
+
+            $('#save-category').click();
+        });
+    </script>
 
 
 		<!--</div>-->

@@ -56,7 +56,7 @@ $(document).ready(function(){
    	 	hideNegatives: false,
 	});
 
-	$('.search-results').mCustomScrollbar({mouseWheelPixels: 300, scrollInertia: 100});
+	$('.search-results').mCustomScrollbar({mouseWheelPixels: 200, scrollInertia: 100});
 	$('[data-scroll]').mCustomScrollbar({mouseWheelPixels: 200, scrollInertia: 100});
 
 	$('[data-scrolls]').mCustomScrollbar({mouseWheelPixels: 125, scrollInertia: 150});
@@ -288,6 +288,8 @@ $(document).ready(function(){
         $('.add-brands').removeClass('open-add');
 		$('.sure-close').fadeOut();
 		$('.to-save').fadeOut();
+
+
 
 	});
 
@@ -944,6 +946,29 @@ $(document).ready(function(){
         $('.add-brands').removeClass('open-add');
         $('.sure-close').fadeOut();
         $('.to-save').fadeOut();
+    });
+
+
+    $('.work .plus').eq(0).click(function () {
+
+
+
+
+        $('.sure-close .to-save a.save').unbind('click',copySubmitEventEditedWork).click(copySubmitEventEditedWork);
+
+
+        $('.select-brand .jq-selectbox__trigger, .select-brand .jq-selectbox__select').unbind('click', onBrandListOpenClick).click(onBrandListOpenClick);
+
+        emptyWorkBlock();
+
+        if($(this).attr('brands_id') && $(this).attr('categories_id')){
+            setSelectedCategory($(this).attr('categories_id'));
+            setSelectedBrand($(this).attr('brands_id'));
+        }
+
+        removeIdToFormToSend();
+
+
     });
 
 });
