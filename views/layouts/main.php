@@ -1320,16 +1320,26 @@ AppAsset::register($this);
 
             $('.add-works__info-composition>div').eq(0).find('textarea').eq(0).val('');
 
-            $('.add-works__info-composition>div').eq(0).find('.file').remove();
+
+            var files_count = $('.add-works__info-composition>div').eq(0).find('.file').length;
+
+            $('.add-works__info-composition>div').eq(0).find('.file').each(function(index){
+
+                if(index == files_count - 1){
+                   return;
+                }
+
+                $(this).remove();
+            });
 
 
         }
 
         $('.add-works__info-composition>div').eq(0).find('.delete-composition').remove();
 
-        //$('.add-works__info-composition>div').find('.add-descr_block').css('display',null);
+        //$('.add-works__info-composition>div').find('.add-descr_block').css('display','');
 
-        //$('.add-works__info-composition>div').find('.add-photo_block').css('display',null);
+        //$('.add-works__info-composition>div').find('.add-photo_block').css('display','');
 
         renumerateCompositions();
 
