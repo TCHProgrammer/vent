@@ -1327,9 +1327,9 @@ AppAsset::register($this);
 
         $('.add-works__info-composition>div').eq(0).find('.delete-composition').remove();
 
-        $('.add-works__info-composition>div').find('.add-descr_block').css('display',null);
+        //$('.add-works__info-composition>div').find('.add-descr_block').css('display',null);
 
-        $('.add-works__info-composition>div').find('.add-photo_block').css('display',null);
+        //$('.add-works__info-composition>div').find('.add-photo_block').css('display',null);
 
         renumerateCompositions();
 
