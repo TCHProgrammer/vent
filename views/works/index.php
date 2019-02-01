@@ -317,13 +317,16 @@ use app\models\Period;
                 var images_block_style = 'style="display:flex;"';
             }
 
-            var strToAdd = '<div class="composition composition-template" work_contents_id="' + work_contents_id + '">' +
+            var strToAdd = '<div class="composition" work_contents_id="' + work_contents_id + '">' +
                 '<div class="title-block">' +
                 '<label>Состав работы</label>' +
                 '<div class="input-button">' +
                 '<div class="input-area">' +
                 '<div class="number">1</div>' +
                 '<input type="text" placeholder="Введите название пункта" value="' + work_contents_name + '">' +
+                '<a href="#" class="delete-composition">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9" height="9" viewBox="0 0 9 9"><defs><path id="l6tfa" d="M706.026 1021.044a1 1 0 0 1-1.414 0l-2.121-2.122-2.144 2.144a1 1 0 1 1-1.414-1.414l2.143-2.144-2.12-2.12a1 1 0 1 1 1.413-1.415l2.122 2.121 2.099-2.1a1 1 0 0 1 1.414 1.415l-2.1 2.099 2.122 2.121a1 1 0 0 1 0 1.415z"></path></defs><g><g transform="translate(-698 -1013)"><use fill="#232226" xlink:href="#l6tfa"></use></g></g></svg>' +
+                '</a>'
                 '</div>' +
                 '<div class="buttons-area">' +
                 '<button class="add-descr ' + description_button_class + '">' +

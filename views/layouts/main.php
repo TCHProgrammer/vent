@@ -266,7 +266,7 @@ AppAsset::register($this);
 			</div>
 		</div>
 		<div class="add-works__info-composition">
-			<div class="composition composition-template">
+			<div class="composition">
 				<div class="title-block">
 					<label>Состав работы</label>
 					<div class="input-button">

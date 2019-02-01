@@ -287,6 +287,7 @@ $(document).ready(function(){
 		$('.add-works').removeClass('open-add');
         $('.add-brands').removeClass('open-add');
 		$('.sure-close').fadeOut();
+        $('.sure-closes').fadeOut();
 		$('.to-save').fadeOut();
 
 
@@ -304,6 +305,7 @@ $(document).ready(function(){
 		$('.add-works').removeClass('open-add');
         $('.add-brands').removeClass('open-add');
 		$('.sure-close').fadeOut();
+        $('.sure-closes').fadeOut();
 		$('.to-save').fadeOut();
 
 	});
@@ -348,6 +350,7 @@ $(document).ready(function(){
 		},300);
 		$('.add-works').removeClass('open-add');
 		$('.sure-close').fadeOut();
+        $('.sure-closes').fadeOut();
 	});
 
 	$('body').on('click', '.item-content ul li .tooltiped .delete', function(e){
@@ -670,6 +673,7 @@ $(document).ready(function(){
 			});
 			$('.select-razdel').find('.jq-selectbox__dropdown ul li').click(function(){
 				$('.select-brand').parents('.add-works__info').removeClass('disabled');
+                setSelectedBrand(0);
 			});
  		},
  		onSelectClosed: function() {
@@ -945,6 +949,7 @@ $(document).ready(function(){
         $('.add-works').removeClass('open-add');
         $('.add-brands').removeClass('open-add');
         $('.sure-close').fadeOut();
+        $('.sure-closes').fadeOut();
         $('.to-save').fadeOut();
     });
 
