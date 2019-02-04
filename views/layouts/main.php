@@ -463,7 +463,7 @@ AppAsset::register($this);
 			<div class="inner-block">
 				<div class="aside-menu__top">
 					<div class="aside-menu__title">
-						<h1 class="aside-menu__title-h1">VENT_CRM</h1>
+						<h1 class="aside-menu__title-h1" onclick="location.href = '/categories';">VENT_CRM</h1>
 						<div class="aside-menu__title-version">v 0.1a</div>
 					</div>
 				</div>
