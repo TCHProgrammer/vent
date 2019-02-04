@@ -604,6 +604,9 @@ AppAsset::register($this);
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
         $('.last-brand__input input[name="last_brand_id"]').val('');
+
+        $('.add-brands__input input[name="name"]').attr('readonly',false);
+        $('.add-brands__input input[name="brand_name"]').attr('readonly',false);
     }
 
     function getAjaxCategoryName(category_id){
