@@ -1337,9 +1337,15 @@ AppAsset::register($this);
 
         $('.add-works__info-composition>div').eq(0).find('.delete-composition').remove();
 
-        //$('.add-works__info-composition>div').find('.add-descr_block').css('display','');
 
-        //$('.add-works__info-composition>div').find('.add-photo_block').css('display','');
+
+        $('.add-works__info-composition>div').find('.add-descr_block').css('display','');
+
+        $(this).find('.add-descr').removeClass('non-active');
+
+        $('.add-works__info-composition>div').find('.add-photo_block').css('display','');
+
+        $(this).find('.add-photo').removeClass('non-active');
 
         renumerateCompositions();
 
