@@ -1449,6 +1449,208 @@ AppAsset::register($this);
         click_element.click();
     }
 
+
+    var WorksEditControl = function(){
+
+        var fieldsRemembered = {
+            category_id:0,
+            brands_id:0,
+            name:'',
+            worker_types_id:0,
+            work_types_id:0,
+            period_id:0,
+            execution_time:0,
+            total_composition_description:'',
+
+            compositions_already_exists:[
+               //{work_contents_id:work_contents_id, name:'name', description:'description', work_contents_photo_ids:[1,2,3], selected_photos_exists:true}
+            ],
+
+
+            new_compositions_exists: false,
+
+            report_forms: {
+                //work_report_forms_id:['field1_name','field2_name']
+            }
+
+        };
+
+        var fieldsAfterEditing = {
+            category_id:0,
+            brands_id:0,
+            name:'',
+            worker_types_id:0,
+            work_types_id:0,
+            period_id:0,
+            execution_time:0,
+            total_composition_description:'',
+
+            compositions_already_exists:[
+                //{work_contents_id:work_contents_id, name:'name', description:'description', work_contents_photo_ids:[1,2,3], new_photos_exists:true}
+            ],
+
+            new_compositions_exists: false,
+
+            report_forms: {
+                //work_report_forms_id:['field1_name','field2_name']
+            }
+        };
+
+
+        var self = this;
+
+
+        var getWorkEditFormScan = function(){
+            var result = {
+                category_id : getSelectedCategoryId(),
+                brands_id : getSelectedBrandId(),
+                name : $('.add-works__info').eq(2).find('input').val(),
+                work_types_id : getSelectedWorkTypeId(),
+                worker_types_id : getSelectedWorkerTypeId()
+            };
+
+
+            var compositions_already_exists = [
+
+            ];
+
+
+
+
+            $('.add-works__info-composition>.composition').each(function () {
+
+                if (!$(this).attr('work_contents_id')) {
+                    return;
+                }
+
+                var work_contents_id = $(this).attr('work_contents_id');
+                var name = $(this).find('input').eq(0).val();
+                var description = $(this).find('.add-descr_block textarea').eq(0).val();
+
+
+                //var image_inputs = [];
+
+                var new_photos_exists = false;
+
+                //var self = $(this);
+
+                self.find('.add-photo_block .files .file').each(function () {
+
+                    if(new_photos_exists){
+                        return;
+                    }
+
+                    if (!$(this).attr('work_contents_photo_id') && $(this).find('input').eq(0)[0].files.length) {
+                        //image_inputs.push($(this).find('input').eq(0).clone());
+
+                        new_photos_exists = true;
+                    }
+                });
+
+
+
+
+                var image_ids = [];
+
+                //var self = this;
+
+                $(self).find('.add-photo_block .files .file').each(function () {
+                    if ($(this).attr('work_contents_photo_id')) {
+                        image_ids.push($(this).attr('work_contents_photo_id'));
+                    }
+                });
+
+                compositions_already_exists.push({
+                    work_contents_id: work_contents_id,
+                    name : name,
+                    description: description,
+                    work_contents_photo_ids:image_ids,
+                    new_photos_exists:new_photos_exists
+                });
+
+            });
+
+
+            result.compositions_already_exists = compositions_already_exists;
+
+
+            var new_compositions_exists = false;
+
+            $('.add-works__info-composition>.composition').each(function (index) {
+
+
+                if(new_compositions_exists){
+                    return;
+                }
+
+                if (!$(this).attr('work_contents_id')) {
+
+
+                    //work_contents_index++;
+
+
+                    //var work_contents_id = $(this).attr('work_contents_id');
+                    var name = $(this).find('input').eq(0).val();
+
+                    if(name != ''){
+                        new_compositions_exists = true;
+                        return;
+                    }
+
+                    var description = $(this).find('.add-descr_block textarea').eq(0).val();
+
+                    if(description != ''){
+                        new_compositions_exists = true;
+                        return;
+                    }
+
+                    //var image_inputs = [];
+
+                    var new_images_exists = false;
+
+                    var self = $(this);
+
+                    self.find('.add-photo_block .files .file').each(function () {
+
+                        if(new_images_exists){
+                            return;
+                        }
+
+                        if (!$(this).attr('work_contents_photo_id') && $(this).find('input').eq(0)[0].files.length) {
+                            new_images_exists = true;
+                        }
+                    });
+
+
+                    if(new_images_exists){
+                        new_compositions_exists = true;
+                        return;
+                    }
+
+                }
+
+            });
+
+            result.new_compositions_exists = new_compositions_exists;
+
+
+        };
+
+        this.rememberFields = function(){
+            fieldsRemembered = getWorkEditFormScan();
+        };
+
+
+        this.rememberFieldsAfterEditing = function(){
+            fieldsAfterEditing = getWorkEditFormScan();
+        };
+
+
+
+
+
+    };
+
     $(document)
         .on('click', '#save-work-form button[type="submit"]', function (e) {
 
