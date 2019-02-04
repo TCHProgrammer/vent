@@ -801,7 +801,7 @@ AppAsset::register($this);
 
 
     function getSelectedCategoryId() {
-        var result = null;
+        var result = 0;
 
         $('.select-razdel .jq-selectbox__dropdown ul li').each(function (index) {
             if (result) {
@@ -817,7 +817,7 @@ AppAsset::register($this);
     }
 
     function getSelectedBrandId() {
-        var result = null;
+        var result = 0;
 
         $('.select-brand .jq-selectbox__dropdown ul li').each(function (index) {
             if (result) {
@@ -833,7 +833,7 @@ AppAsset::register($this);
     }
 
     function getSelectedWorkerTypeId() {
-        var result = null;
+        var result = 0;
 
         $('.add-works__info').eq(3).find('.jq-selectbox__dropdown ul li').each(function (index) {
             if (result) {
@@ -849,7 +849,7 @@ AppAsset::register($this);
     }
 
     function getSelectedWorkTypeId() {
-        var result = null;
+        var result = 0;
 
         $('.add-works__info').eq(4).find('.jq-selectbox__dropdown ul li').each(function (index) {
             if (result) {
@@ -878,7 +878,7 @@ AppAsset::register($this);
             }
         });
 
-        return result;
+        return 0;
     }
 
     function getReportFormsIds() {
@@ -1506,7 +1506,8 @@ AppAsset::register($this);
                 brands_id : getSelectedBrandId(),
                 name : $('.add-works__info').eq(2).find('input').val(),
                 work_types_id : getSelectedWorkTypeId(),
-                worker_types_id : getSelectedWorkerTypeId()
+                worker_types_id : getSelectedWorkerTypeId(),
+                execution_time: getWorkTimeInMinutes()
             };
 
 
@@ -1534,7 +1535,7 @@ AppAsset::register($this);
 
                 //var self = $(this);
 
-                self.find('.add-photo_block .files .file').each(function () {
+                $(this).find('.add-photo_block .files .file').each(function () {
 
                     if(new_photos_exists){
                         return;
@@ -1554,7 +1555,7 @@ AppAsset::register($this);
 
                 //var self = this;
 
-                $(self).find('.add-photo_block .files .file').each(function () {
+                $(this).find('.add-photo_block .files .file').each(function () {
                     if ($(this).attr('work_contents_photo_id')) {
                         image_ids.push($(this).attr('work_contents_photo_id'));
                     }
@@ -1608,9 +1609,9 @@ AppAsset::register($this);
 
                     var new_images_exists = false;
 
-                    var self = $(this);
+                    //var self = $(this);
 
-                    self.find('.add-photo_block .files .file').each(function () {
+                    $(this).find('.add-photo_block .files .file').each(function () {
 
                         if(new_images_exists){
                             return;
