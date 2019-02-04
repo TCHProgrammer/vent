@@ -1391,6 +1391,12 @@ AppAsset::register($this);
             }
         });
 
+        var checked_report_forms_count = $('#save-work-form .work-report-forms .checked_report_forms input').length;
+
+        if(!checked_report_forms_count){
+            result = false;
+        }
+
         return result;
     }
 
