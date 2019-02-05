@@ -1338,6 +1338,14 @@ AppAsset::register($this);
 
         }
 
+
+
+
+        
+
+
+
+
         $('.add-works__info-composition>div').eq(0).find('.delete-composition').remove();
 
 
