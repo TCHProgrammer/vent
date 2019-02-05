@@ -1842,6 +1842,11 @@ AppAsset::register($this);
 
         };
 
+        this.noChanges = function(){
+            //asjlajflasdkfjlasdkfjalskdjfldsjkf
+            //ksfjlsdkjfldkfjldskfj_to_commit
+        }
+
 
     };
 
