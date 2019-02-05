@@ -1449,7 +1449,7 @@ AppAsset::register($this);
         click_element.click();
     }
 
-
+/*
     var WorksEditControl = function(){
 
         var fieldsRemembered = {
@@ -1577,7 +1577,7 @@ AppAsset::register($this);
 
             var new_compositions_exists = false;
 
-            $('.add-works__info-composition>.composition').each(function (index) {
+            $('.add-works__info-composition>.composition').each(function(index) {
 
 
                 if(new_compositions_exists){
@@ -1611,7 +1611,7 @@ AppAsset::register($this);
 
                     //var self = $(this);
 
-                    $(this).find('.add-photo_block .files .file').each(function () {
+                    $(this).find('.add-photo_block .files .file').each(function() {
 
                         if(new_images_exists){
                             return;
@@ -1635,6 +1635,42 @@ AppAsset::register($this);
             result.new_compositions_exists = new_compositions_exists;
 
 
+            var report_forms = {};
+
+            var checked_report_forms = getReportFormsIds();
+
+
+            $.each(checked_report_forms, function(i,val){
+                report_forms[val] = [];
+            });
+
+
+
+            $('.add-works__info .new-form .inputs>div>input').each(function () {
+                var report_forms_id = $(this).parent().parent().parent().attr('report_forms_id');
+                var name = $(this).val();
+                var found = false;
+
+                $.each(checked_report_forms, function (i, val) {
+                    if (val == report_forms_id) {
+                        found = true;
+                    }
+                });
+
+
+                if (found) {
+
+                    report_forms[report_forms_id].push(name);
+                }
+
+
+            });
+
+
+            result.report_forms = report_forms;
+
+            return result;
+
         };
 
         this.rememberFields = function(){
@@ -1647,17 +1683,175 @@ AppAsset::register($this);
         };
 
 
+        var inArrayKeys = function(value,arr){
+            for(var i in arr){
+                if(i == value){
+                    return true;
+                }
+            }
 
+            return false;
+        };
+
+        var inArray = function(value, arr){
+            for(var i in arr){
+                if(arr[i] == value){
+                    return true;
+                }
+            }
+
+            return false;
+        };
+
+        var arrayKeysAreIdentical = function(arr1,arr2){
+            if(arr1.length != arr2.length){
+                return false;
+            }
+
+            for(var i in arr1){
+                if(!inArrayKeys(i,arr2)){
+                    return false;
+                }
+            }
+
+            for(var i in arr2){
+                if(!inArrayKeys(i,arr1)){
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+        var arraysAreIdentical = function(arr1,arr2){
+            if(arr1.length != arr2.length){
+                return false;
+            }
+
+            for(var i in arr1){
+                if(!inArray(arr1[i],arr2)){
+                    return false;
+                }
+            }
+
+            for(var i in arr2){
+                if(!inArrayKeys(arr2[i],arr1)){
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+        var arrayValuesAreIdentical = function(arr1,arr2){
+            if(arr1.length != arr2.length){
+                return false;
+            }
+
+            for(var i in arr1){
+                if(arr1[i] != arr2[i]){
+                    return false;
+                }
+            }
+
+            for(var i in arr2){
+                if(arr2[i] != arr1[i]){
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+
+        var reportFormsAreIdentical = function(){
+
+           var report_forms_1 = fieldsRemembered.report_forms;
+           var report_forms_2 = fieldsAfterEditing.report_forms;
+
+           if(!arrayKeysAreIdentical(report_forms_1, report_forms_2)){
+               return false;
+           }
+
+           for(var i in report_forms_1) {
+
+               if(!arrayValuesAreIdentical(report_forms_1[i], report_forms_2[i])){
+                   return false;
+               }
+
+           }
+
+           return true;
+        };
+
+
+        var compositionsAreIdentical = function(){
+
+            var compositions1 = fieldsRemembered.compositions_already_exists;
+
+            var compositions2 = fieldsAfterEditing.compositions_already_exists;
+
+
+            if(compositions1.length != compositions2.length){
+                return false;
+            }
+
+            if(fieldsAfterEditing.new_compositions_exists){
+                return false;
+            }
+
+
+
+
+
+            for(var i in compositions1){
+
+                if(compositions2[i].new_photos_exists){
+                    return false;
+                }
+
+
+                if(compositions1[i].work_contents_id != compositions2[i].work_contents_id){
+                    return false;
+                }
+
+                if(compositions1[i].name != compositions2[i].name){
+                    return false;
+                }
+
+                if(compositions1[i].description != compositions2[i].description){
+                    return false;
+                }
+
+                if(!arraysAreIdentical(compositions1[i].work_contents_photo_ids, compositions2[i].work_contents_photo_ids)){
+                    return false;
+                }
+
+
+            }
+
+
+        };
 
 
     };
 
+    */
+
     $(document)
         .on('click', '#save-work-form button[type="submit"]', function (e) {
 
+            //e.preventDefault();
+
             fillFormToSend();
 
+
+
+
             var isValid = formToSendValidate();
+
+            //return false;
+
             if (!isValid) {
                 e.preventDefault(); //prevent the default action
                 alert('Заполнены не все поля!!!');
