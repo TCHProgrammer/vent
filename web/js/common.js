@@ -280,7 +280,17 @@ $(document).ready(function(){
                 $(this).find('.to-save').fadeIn();
 			}
 		} else {
-            $(this).find('.to-save').fadeIn();
+
+            if(window.CategoryEditControlObject && $('.add-brands').hasClass('open-add')){
+
+                CategoryEditControlObject.rememberFieldsAfterEditing();
+
+            	if(!CategoryEditControlObject.noChanges()){
+                    $(this).find('.to-save').fadeIn();
+				}
+			}
+
+            //$(this).find('.to-save').fadeIn();
         }
 	});
 
