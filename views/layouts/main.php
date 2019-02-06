@@ -1804,10 +1804,12 @@ AppAsset::register($this);
 
 
             if(compositions1.length != compositions2.length){
+                //alert('length');
                 return false;
             }
 
             if(fieldsAfterEditing.new_compositions_exists){
+                //alert('new_compositions_exists');
                 return false;
             }
 
@@ -1818,28 +1820,38 @@ AppAsset::register($this);
             for(var i in compositions1){
 
                 if(compositions2[i].new_photos_exists){
+                    //alert('new_photos_exists');
                     return false;
                 }
 
 
                 if(compositions1[i].work_contents_id != compositions2[i].work_contents_id){
+                    //alert('work_contents_id');
                     return false;
                 }
 
                 if(compositions1[i].name != compositions2[i].name){
+                    //alert('name');
                     return false;
                 }
 
                 if(compositions1[i].description != compositions2[i].description){
+                    //alert('description');
                     return false;
                 }
 
-                if(!arraysAreIdentical(compositions1[i].work_contents_photo_ids, compositions2[i].work_contents_photo_ids)){
+                if(!arrayValuesAreIdentical(compositions1[i].work_contents_photo_ids, compositions2[i].work_contents_photo_ids)){
+                    //alert('arrayValuesAreIdentical');
+                    //console.info(compositions1[i].work_contents_photo_ids);
+                    //console.info(compositions2[i].work_contents_photo_ids);
                     return false;
                 }
 
 
             }
+
+
+            return true;
 
 
         };
@@ -1848,47 +1860,59 @@ AppAsset::register($this);
 
 
             if(fieldsRemembered.category_id != fieldsAfterEditing.category_id){
+                //alert('category_id');
                return false;
             }
 
             if(fieldsRemembered.brands_id != fieldsAfterEditing.brands_id){
+                //alert('brands_id');
                 return false;
             }
 
             if(fieldsRemembered.name != fieldsAfterEditing.name){
+                //alert('name');
                 return false;
             }
 
             if(fieldsRemembered.worker_types_id != fieldsAfterEditing.worker_types_id){
+                //alert('worker_types_id');
                 return false;
             }
 
 
             if(fieldsRemembered.work_types_id != fieldsAfterEditing.work_types_id){
+                //alert('work_types_id');
                 return false;
             }
 
             if(fieldsRemembered.period_id != fieldsAfterEditing.period_id){
+                //alert('period_id');
                 return false;
             }
 
             if(fieldsRemembered.execution_time != fieldsAfterEditing.execution_time){
+                //alert('execution_time');
                 return false;
             }
 
             if(fieldsRemembered.total_composition_description != fieldsAfterEditing.total_composition_description){
+                //alert('total_composition_description');
                 return false;
             }
 
 
             if(!compositionsAreIdentical()){
+                //alert('compositionsAreIdentical');
                 return false;
             }
 
 
             if(!reportFormsAreIdentical()){
+                //alert('reportFormsAreIdentical');
                 return false;
             }
+
+            return true;
 
         };
 

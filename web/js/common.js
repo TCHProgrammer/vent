@@ -265,15 +265,18 @@ $(document).ready(function(){
 
 		//alert(window.WorksEditControlObject);
 		//alert($('.add-works').hasClass('open-add'));
+        //WorksEditControlObject.rememberFieldsAfterEditing();
         //alert(WorksEditControlObject.noChanges());
 
 
-        
+
 
 		if(window.WorksEditControlObject && $('.add-works').hasClass('open-add')){
             WorksEditControlObject.rememberFieldsAfterEditing();
 
-			if(WorksEditControlObject.noChanges()){
+
+
+			if(!WorksEditControlObject.noChanges()){
                 $(this).find('.to-save').fadeIn();
 			}
 		} else {
@@ -993,6 +996,9 @@ $(document).ready(function(){
         }
 
         removeIdToFormToSend();
+
+
+        WorksEditControlObject.rememberFields();
 
 
     });
