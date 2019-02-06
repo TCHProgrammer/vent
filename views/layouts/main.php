@@ -776,7 +776,7 @@ AppAsset::register($this);
         },
         success: function (data) {
 
-                
+
 
             //$('.add-brands__input input[name="name"]').attr('readonly',true).attr('category_id',data.category_id).val(data.category_name);
             //$('.add-brands__input input[name="brand_name"]').attr('readonly',false).attr('brand_id',brand_id).val(data.brand_name);
@@ -871,7 +871,7 @@ AppAsset::register($this);
                 return;
             }
 
-            if ($(this).hasClass('selected')) {
+            if ($(this).hasClass('selected') && index>0) {
                 result = $('.select-razdel select.select-razdel option').eq(index).val();
             }
         });
@@ -887,7 +887,7 @@ AppAsset::register($this);
                 return;
             }
 
-            if ($(this).hasClass('selected')) {
+            if ($(this).hasClass('selected') && index>0) {
                 result = $('.select-brand select.select-brand option').eq(index).val();
             }
         });
@@ -903,7 +903,7 @@ AppAsset::register($this);
                 return;
             }
 
-            if ($(this).hasClass('selected')) {
+            if ($(this).hasClass('selected') && index>0) {
                 result = $('.add-works__info').eq(3).find('select[name="razdel"] option').eq(index).val();
             }
         });
@@ -919,7 +919,7 @@ AppAsset::register($this);
                 return;
             }
 
-            if ($(this).hasClass('selected')) {
+            if ($(this).hasClass('selected') && index>0) {
                 result = $('.add-works__info').eq(4).find('select[name="razdel"] option').eq(index).val();
             }
         });
@@ -936,7 +936,7 @@ AppAsset::register($this);
                 return;
             }
 
-            if ($(this).hasClass('selected')) {
+            if ($(this).hasClass('selected') && index>0) {
                 result = $('.add-works__info').eq(5).find('select[name="razdel"] option').eq(index).val();
             }
         });
@@ -1426,6 +1426,9 @@ AppAsset::register($this);
         $('.add-works__info.inp input').prop('checked', false);
 
         $('.add-works__info.inp .new-form .inputs input').remove();
+
+
+        $('.empty-required-field').removeClass('empty-required-field');
     }
 
 
@@ -1469,6 +1472,51 @@ AppAsset::register($this);
         }
 
         return result;
+    }
+
+
+    function getFormToSendEmptyRequiredFields(){
+        var result = [];
+
+        $('#save-work-form .work-fields input').each(function () {
+
+            if ($(this).attr('name') == 'total_composition_description') {
+                return;
+            }
+
+            if (!$(this).val() || $(this).val() == '') {
+                var self = this;
+                result.push($(self).attr('name'));
+            }
+        });
+
+        var checked_report_forms_count = $('#save-work-form .work-report-forms .checked_report_forms input').length;
+
+        if(!checked_report_forms_count){
+            result.push('checked_report_forms');
+        }
+
+        if(!getSelectedCategoryId()){
+            result.push('categories_id');
+        }
+
+        return result;
+    }
+
+    function toBorderEmptyRequiredFields(){
+        var emptyRequiredFields = getFormToSendEmptyRequiredFields();
+
+        $.each(emptyRequiredFields, function(i,val){
+           switch(val){
+               case 'categories_id': $('.add-works__info').eq(0).addClass('empty-required-field');break;
+               case 'brands_id': $('.add-works__info').eq(1).addClass('empty-required-field');break;
+               case 'name': $('.add-works__info').eq(2).addClass('empty-required-field');break;
+               case 'worker_types_id': $('.add-works__info').eq(3).addClass('empty-required-field');break;
+               case 'work_types_id': $('.add-works__info').eq(4).addClass('empty-required-field');break;
+               case 'period_id': $('.add-works__info').eq(5).addClass('empty-required-field');break;
+               case 'checked_report_forms': $('.add-works__info').eq(8).addClass('empty-required-field');break;
+           }
+        });
     }
 
     function removeIdToFormToSend(){
@@ -2028,11 +2076,13 @@ AppAsset::register($this);
     $(document)
         .on('click', '#save-work-form button[type="submit"]', function (e) {
 
+            $('.empty-required-field').removeClass('empty-required-field');
             fillFormToSend();
 
             var isValid = formToSendValidate();
             if (!isValid) {
                 e.preventDefault(); //prevent the default action
+                toBorderEmptyRequiredFields();
                 alert('Заполнены не все поля!!!');
             }
         });

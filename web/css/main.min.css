@@ -118,3 +118,8 @@
             -webkit-transition: all .15s;
             transition: all .15s;
             fill: #232226; }
+			
+.empty-required-field{
+	border: 2px solid;
+	border-color: red;
+}			
