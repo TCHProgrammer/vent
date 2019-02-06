@@ -776,11 +776,33 @@ AppAsset::register($this);
         },
         success: function (data) {
 
+                
+
             //$('.add-brands__input input[name="name"]').attr('readonly',true).attr('category_id',data.category_id).val(data.category_name);
             //$('.add-brands__input input[name="brand_name"]').attr('readonly',false).attr('brand_id',brand_id).val(data.brand_name);
         }//,
         //dataType: 'json'
         });
+    }
+
+    function deleteCategory(element){
+        var category_id = $(element).attr('category_id');
+
+        $.ajax({
+            type: "POST",
+            url: "<?=Yii::$app->urlManager->createUrl('categories/delete')?>" + "?id=" + category_id,
+            data: {<?=Yii::$app->getRequest()->csrfParam;?>:
+        '<?=Yii::$app->getRequest()->getCsrfToken();?>'
+    },
+        success: function (data) {
+
+                location.reload();
+
+            //$('.add-brands__input input[name="name"]').attr('readonly',true).attr('category_id',data.category_id).val(data.category_name);
+            //$('.add-brands__input input[name="brand_name"]').attr('readonly',false).attr('brand_id',brand_id).val(data.brand_name);
+        }//,
+        //dataType: 'json'
+    });
     }
 
 	$('#save-category').unbind('click').click(function(){

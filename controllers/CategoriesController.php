@@ -378,9 +378,11 @@ class CategoriesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $deleted = $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        $status = $deleted?'ok':'error';
+
+        return json_encode(array('status'=>$status));
     }
 
     public function actionDeleteBrand($id)
