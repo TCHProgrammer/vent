@@ -120,6 +120,6 @@
             fill: #232226; }
 			
 .empty-required-field{
-	border: 2px solid;
+	border: 2px solid red;
 	border-color: red;
 }			

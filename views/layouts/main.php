@@ -1429,6 +1429,8 @@ AppAsset::register($this);
 
 
         $('.empty-required-field').removeClass('empty-required-field');
+
+        $('.add-works__info').eq(2).find('input').eq(0).css('border','').css('border-color','');
     }
 
 
@@ -1484,7 +1486,7 @@ AppAsset::register($this);
                 return;
             }
 
-            if (!$(this).val() || $(this).val() == '') {
+            if (!$(this).val() || $(this).val() == '' || $(this).val() == 0) {
                 var self = this;
                 result.push($(self).attr('name'));
             }
@@ -1508,13 +1510,15 @@ AppAsset::register($this);
 
         $.each(emptyRequiredFields, function(i,val){
            switch(val){
-               case 'categories_id': $('.add-works__info').eq(0).addClass('empty-required-field');break;
-               case 'brands_id': $('.add-works__info').eq(1).addClass('empty-required-field');break;
-               case 'name': $('.add-works__info').eq(2).addClass('empty-required-field');break;
-               case 'worker_types_id': $('.add-works__info').eq(3).addClass('empty-required-field');break;
-               case 'work_types_id': $('.add-works__info').eq(4).addClass('empty-required-field');break;
-               case 'period_id': $('.add-works__info').eq(5).addClass('empty-required-field');break;
-               case 'checked_report_forms': $('.add-works__info').eq(8).addClass('empty-required-field');break;
+               case 'categories_id': $('.add-works__info').eq(0).find('div').eq(0).addClass('empty-required-field');break;
+               case 'brands_id': $('.add-works__info').eq(1).find('div').eq(0).addClass('empty-required-field');break;
+               case 'name': $('.add-works__info').eq(2).find('input').eq(0).addClass('empty-required-field').css('border-color','red').css('border','2px solid red');break;
+               case 'worker_types_id': $('.add-works__info').eq(3).find('div').eq(0).addClass('empty-required-field');break;
+               case 'work_types_id': $('.add-works__info').eq(4).find('div').eq(0).addClass('empty-required-field');break;
+               case 'period_id': $('.add-works__info').eq(5).find('div').eq(0).addClass('empty-required-field');break;
+               case 'checked_report_forms': $('.add-works__info').eq(8).find('div').eq(0).addClass('empty-required-field');break;
+               case 'execution_time': $('.time-tabs-pane').eq(0).addClass('empty-required-field');break;
+               default: break;
            }
         });
     }
@@ -2077,6 +2081,9 @@ AppAsset::register($this);
         .on('click', '#save-work-form button[type="submit"]', function (e) {
 
             $('.empty-required-field').removeClass('empty-required-field');
+
+            $('.add-works__info').eq(2).find('input').eq(0).css('border','').css('border-color','');
+
             fillFormToSend();
 
             var isValid = formToSendValidate();
@@ -2089,7 +2096,7 @@ AppAsset::register($this);
 
     $(document).on('click','.change.to-category', function(e){
         e.preventDefault();
-        
+
         setElementCategoryNameToEdit(this);
         $('.aside-menu__menu ul li .cat .plus').click();
 
