@@ -527,7 +527,7 @@ use app\models\Period;
                 renumerateCompositions();
 
 
-
+                WorksEditControlObject.rememberFields();
             }
         ,
             dataType: 'json'
@@ -580,7 +580,7 @@ use app\models\Period;
 
 
 
-
+            WorksEditControlObject.rememberFields();
 
 
         });
@@ -601,7 +601,7 @@ use app\models\Period;
 
 
 
-
+            WorksEditControlObject.rememberFields();
 
 
         });
