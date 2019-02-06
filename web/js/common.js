@@ -268,12 +268,6 @@ $(document).ready(function(){
         //alert(WorksEditControlObject.noChanges());
 
 
-
-
-
-
-
-
         
 
 		if(window.WorksEditControlObject && $('.add-works').hasClass('open-add')){
