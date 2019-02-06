@@ -2087,6 +2087,15 @@ AppAsset::register($this);
             }
         });
 
+    $(document).on('click','.change.to-category', function(e){
+        e.preventDefault();
+        
+        setElementCategoryNameToEdit(this);
+        $('.aside-menu__menu ul li .cat .plus').click();
+
+        $('.add-brands .add-brands__title').text('Редактирование категории');
+    });
+
 
     WorksEditControlObject = new WorksEditControl();
 
