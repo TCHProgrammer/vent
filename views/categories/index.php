@@ -82,10 +82,36 @@ use app\models\Brands;
 
 
         <div class="item-control">
+
+
+
+
+
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="8" viewBox="0 0 13 8"><defs><path id="ldxya" d="M334.59 239.531a1.5 1.5 0 0 1-2.121-2.121l4.961-4.962a1.495 1.495 0 0 1 1.07-.439c.387-.002.775.144 1.07.44l4.961 4.96a1.5 1.5 0 0 1-2.121 2.122l-3.91-3.91z"/></defs><g><g transform="translate(-332 -232)"><use fill="#232226" xlink:href="#ldxya"/></g></g></svg>
             </div>
             <div class="title"><?=$category->name;?></div>
+
+            <div class="item-control__menu">
+                <a href="#" class="tooltiped">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="3" viewBox="0 0 15 3"><defs><path id="27h7a" d="M388.5 356a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></defs><g><g transform="translate(-375 -356)"><use fill="#d4d6d9" xlink:href="#27h7a"/></g></g></svg>
+                    <div class="tooltip">
+                        <button class="change">
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14"><defs><path id="q4iwa" d="M440.737 384.61l-2.04 2.045-.001.002a4624.42 4624.42 0 0 1-7.343 7.342H428a.98.98 0 0 1-.481-.129 1 1 0 0 1-.326-.285 1.024 1.024 0 0 1-.064-.104.983.983 0 0 1-.108-.28A1 1 0 0 1 427 393v-2.884l.005-.465c2.444-2.45 4.892-4.897 7.343-7.342.002-.002.006-.003.008-.006l2.04-2.033a.938.938 0 0 1 .694-.286c.255.004.514.107.715.308l2.91 2.91c.402.402.412 1.032.022 1.408zm-5.654-.148zm-6.083 5.94V392h1.605c1.981-2.025 3.96-4.05 5.938-6.078l-1.46-1.46c-2.03 1.978-4.058 3.959-6.083 5.94zm8.142-7.995l-.651.634 1.474 1.474.634-.65-1.457-1.458z"/></defs><g><g transform="translate(-427 -380)"><use fill="#939499" xlink:href="#q4iwa"/></g></g></svg>
+                            </div>
+                            <div class="text">Редактировать</div>
+                        </button>
+                        <button class="delete">
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="15" viewBox="0 0 13 15"><defs><path id="j8sua" d="M430 415v6.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V415h2v8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-8zm1 0h2v6h-2zm3 0h2v6h-2zm-7-3h3v-2a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2h3v2h-13zm8-1h-3v1h3z"/></defs><g><g transform="translate(-427 -409)"><use fill="#939499" xlink:href="#j8sua"/></g></g></svg>
+                            </div>
+                            <div class="text">Удалить</div>
+                        </button>
+                    </div>
+                </a>
+            </div>
+
         </div>
         <div class="item-content">
             <div class="wrap">
