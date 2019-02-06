@@ -140,20 +140,29 @@ class CategoriesController extends Controller
 					
 						$brand_saved = $brand_model->save();
 					
-					}
+					} else {
+                        $brand_model = new Brands();
+
+
+
+                        $brand_model->name = Yii::$app->request->post()["brand_name"];
+                        $brand_model->category_id = $model->id;
+
+                        $brand_saved = $brand_model->save();
+                    }
 				} else {
 					$brand_saved = true;
 				}
 				
 				$brand_status = $brand_saved?'ok':'error';
 				
-				return json_encode(array('status'=>'ok','brand_status'=>$brand_status,'errors'=>$brand_model->getErrors()));
+				return json_encode(array('status'=>'ok','brand_status'=>$brand_status));
 			} else {
-				return json_encode(array('status'=>'error','errors'=>$model->getErrors()));
+				return json_encode(array('status'=>'error'));
 			}
 			
 		} else {
-			return json_encode(array('status'=>'error','errors'=>$model->getErrors()));
+			return json_encode(array('status'=>'error'));
 		}
     }
 

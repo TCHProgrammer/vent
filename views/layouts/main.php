@@ -605,7 +605,7 @@ AppAsset::register($this);
         $('.add-brands__input input[name="brand_name"]').val('');
         $('.last-brand__input input[name="last_brand_id"]').val('');
 
-        $('.add-brands__input input[name="name"]').attr('readonly',false);
+        $('.add-brands__input input[name="name"]').attr('readonly',false).attr('to_edit','');
         $('.add-brands__input input[name="brand_name"]').attr('readonly',false);
     }
 
@@ -619,7 +619,7 @@ AppAsset::register($this);
             url: "<?=Yii::$app->urlManager->createUrl('categories/get-ajax-category-name')?>" + "?id=" + category_id,
             data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
             success: function(data){
-                $('.add-brands__input input[name="name"]').attr('readonly',false).attr('category_id',category_id).val(data);
+                $('.add-brands__input input[name="name"]').attr('readonly',false).attr('category_id',category_id).attr('to_edit','').val(data);
                 $('.add-brands__input input[name="brand_name"]').attr('readonly',false).attr('brand_id',null).val('');
                 $('.last-brand__input input[name="last_brand_id"]').val('');
 
@@ -627,6 +627,28 @@ AppAsset::register($this);
             },
             //dataType: dataType
         });
+    }
+
+
+
+    function getAjaxCategoryNameToEdit(category_id){
+
+        $('.add-brands__input input[name="name"]').val('');
+        $('.add-brands__input input[name="brand_name"]').val('');
+
+        $.ajax({
+            type: "POST",
+            url: "<?=Yii::$app->urlManager->createUrl('categories/get-ajax-category-name')?>" + "?id=" + category_id,
+            data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
+        success: function(data){
+            $('.add-brands__input input[name="name"]').attr('readonly',false).attr('category_id',category_id).attr('to_edit','true').val(data);
+            $('.add-brands__input input[name="brand_name"]').attr('readonly',false).attr('brand_id',null).val('');
+            $('.last-brand__input input[name="last_brand_id"]').val('');
+
+            CategoryEditControlObject.rememberFields();
+        },
+        //dataType: dataType
+    });
     }
 
 
@@ -642,7 +664,7 @@ AppAsset::register($this);
             url: "<?=Yii::$app->urlManager->createUrl('categories/get-ajax-category-name')?>" + "?id=" + category_id,
             data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
         success: function(data){
-            $('.add-brands__input input[name="name"]').attr('readonly',true).attr('category_id',category_id).val(data);
+            $('.add-brands__input input[name="name"]').attr('readonly',true).attr('category_id',category_id).attr('to_edit','').val(data);
             $('.add-brands__input input[name="brand_name"]').attr('readonly',false).attr('brand_id',null).val('');
             $('.last-brand__input input[name="last_brand_id"]').val('');
 
@@ -666,7 +688,7 @@ AppAsset::register($this);
             data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
         success: function(data){
 
-            $('.add-brands__input input[name="name"]').attr('readonly',true).attr('category_id',data.category_id).val(data.category_name);
+            $('.add-brands__input input[name="name"]').attr('readonly',true).attr('category_id',data.category_id).attr('to_edit','').val(data.category_name);
             $('.add-brands__input input[name="brand_name"]').attr('readonly',false).attr('brand_id',brand_id).val(data.brand_name);
             $('.last-brand__input input[name="last_brand_id"]').val('');
 
@@ -686,7 +708,7 @@ AppAsset::register($this);
             data: {<?=Yii::$app->getRequest()->csrfParam;?>:'<?=Yii::$app->getRequest()->getCsrfToken();?>'},
         success: function(data){
 
-            $('.add-brands__input input[name="name"]').attr('readonly',true).attr('category_id',data.category_id).val(data.category_name);
+            $('.add-brands__input input[name="name"]').attr('readonly',true).attr('category_id',data.category_id).attr('to_edit','').val(data.category_name);
             $('.add-brands__input input[name="brand_name"]').attr('readonly',false).attr('brand_id',null).val(data.brand_name);
             $('.last-brand__input input[name="last_brand_id"]').val(brand_id);
 
@@ -704,6 +726,17 @@ AppAsset::register($this);
         var category_id = $(element).attr('category_id');
         getAjaxCategoryName(category_id);
     }
+
+
+    function setElementCategoryNameToEdit(element){
+        $('.add-brands__input input[name="name"]').val('');
+        $('.add-brands__input input[name="brand_name"]').val('');
+        $('.last-brand__input input[name="last_brand_id"]').val('');
+
+        var category_id = $(element).attr('category_id');
+        getAjaxCategoryNameToEdit(category_id);
+    }
+
 
     function setElementBrandName(element){
         $('.add-brands__input input[name="name"]').val('');
@@ -766,7 +799,7 @@ AppAsset::register($this);
             done(function () {
                 location.reload();
             });
-        } else if(!$('.add-brands__input input[name="brand_name"]').attr('brand_id')){
+        } else if(!$('.add-brands__input input[name="brand_name"]').attr('brand_id') && $('.add-brands__input input[name="name"]').attr('to_edit') != 'true'){
 
             $.post("<?=Yii::$app->urlManager->createUrl('categories/add-brand')?>" + "?id=" + $('.add-brands__input input[name="name"]').attr('category_id'), {
 
