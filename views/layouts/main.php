@@ -1516,6 +1516,12 @@ AppAsset::register($this);
     }
 
     function toBorderEmptyRequiredFields(){
+
+        $('.empty-required-field').removeClass('empty-required-field');
+        $('.empty-required-field-simple').removeClass('empty-required-field-simple');
+
+
+
         var emptyRequiredFields = getFormToSendEmptyRequiredFields();
 
         $.each(emptyRequiredFields, function(i,val){
@@ -1531,12 +1537,18 @@ AppAsset::register($this);
                default: break;
            }
         });
+
+
+
+
+
     }
 
     function removeIdToFormToSend(){
 
-
-        $('#save-work-form').attr('action', '/works/update?brands_id=' + current_brands_id);
+        if(window.current_brands_id) {
+            $('#save-work-form').attr('action', '/works/update?brands_id=' + current_brands_id);
+        }
     }
 
     function setWorkTitleOnAddWorkToBrand(){
@@ -2090,6 +2102,8 @@ AppAsset::register($this);
     $(document)
         .on('click', '#save-work-form button[type="submit"]', function (e) {
 
+            SAVE_WORK_BUTTON_CLICKED = true;
+
             $('.empty-required-field').removeClass('empty-required-field');
 
             $('.empty-required-field-simple').removeClass('empty-required-field-simple');
@@ -2113,6 +2127,30 @@ AppAsset::register($this);
         $('.aside-menu__menu ul li .cat .plus').click();
 
         $('.add-brands .add-brands__title').text('Редактирование категории');
+    });
+
+
+    SAVE_WORK_BUTTON_CLICKED = false;
+
+    $(document).on('click','.add-works__info ul li', function(e){
+        if(SAVE_WORK_BUTTON_CLICKED) {
+            setTimeout(function () {
+                fillFormToSend();
+                toBorderEmptyRequiredFields();
+            }, 100);
+        }
+
+
+    });
+
+    $(document).on('change','.add-works__info input', function(e){
+        //alert('changed');
+        if(SAVE_WORK_BUTTON_CLICKED) {
+            setTimeout(function () {
+                fillFormToSend();
+                toBorderEmptyRequiredFields();
+            }, 100);
+        }
     });
 
 
