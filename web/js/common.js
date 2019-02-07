@@ -278,6 +278,7 @@ $(document).ready(function(){
 
 			if(!WorksEditControlObject.noChanges()){
                 $(this).find('.to-save').fadeIn();
+                return;
 			}
 		} else {
 
@@ -287,11 +288,26 @@ $(document).ready(function(){
 
             	if(!CategoryEditControlObject.noChanges()){
                     $(this).find('.to-save').fadeIn();
+                    return
 				}
 			}
 
             //$(this).find('.to-save').fadeIn();
         }
+
+
+        e.preventDefault();
+        e.stopPropagation();
+        enableScroll()
+        setTimeout(function(){
+            $('.aside-menu .inner-block').removeClass('blured');
+        },300);
+        $('.scroller__track').css('opacity','1');
+        $('.add-works').removeClass('open-add');
+        $('.add-brands').removeClass('open-add');
+        $('.sure-close').fadeOut();
+        $('.sure-closes').fadeOut();
+        $('.to-save').fadeOut();
 	});
 
 	$('body').on('click','.sure-closes', function(e){
