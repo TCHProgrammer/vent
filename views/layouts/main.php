@@ -1433,6 +1433,9 @@ AppAsset::register($this);
 
 
         $('.add-works__info').eq(2).find('input').eq(0).css('border','').css('border-color','');
+
+
+        SAVE_WORK_BUTTON_CLICKED = false;
     }
 
 
