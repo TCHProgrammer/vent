@@ -261,6 +261,49 @@ $(document).ready(function(){
 		$('.sure-close').fadeIn();
 	});
 
+
+	function closePopupWindowLogic(element,e){
+        if(window.WorksEditControlObject && $('.add-works').hasClass('open-add')){
+            WorksEditControlObject.rememberFieldsAfterEditing();
+
+
+
+            if(!WorksEditControlObject.noChanges()){
+                $(element).find('.to-save').fadeIn();
+                return;
+            }
+        } else {
+
+            if(window.CategoryEditControlObject && $('.add-brands').hasClass('open-add')){
+
+                CategoryEditControlObject.rememberFieldsAfterEditing();
+
+                if(!CategoryEditControlObject.noChanges()){
+                    $(element).find('.to-save').fadeIn();
+                    return
+                }
+            }
+
+            //$(this).find('.to-save').fadeIn();
+        }
+
+
+        e.preventDefault();
+        e.stopPropagation();
+        enableScroll()
+        setTimeout(function(){
+            $('.aside-menu .inner-block').removeClass('blured');
+        },300);
+        $('.scroller__track').css('opacity','1');
+        $('.add-works').removeClass('open-add');
+        $('.add-brands').removeClass('open-add');
+        $('.sure-close').fadeOut();
+        $('.sure-closes').fadeOut();
+        $('.to-save').fadeOut();
+	}
+
+
+
 	$('body').on('click','.sure-close', function(e){
 
 		//alert(window.WorksEditControlObject);
@@ -268,9 +311,9 @@ $(document).ready(function(){
         //WorksEditControlObject.rememberFieldsAfterEditing();
         //alert(WorksEditControlObject.noChanges());
 
+        closePopupWindowLogic(this,e);
 
-
-
+		/*
 		if(window.WorksEditControlObject && $('.add-works').hasClass('open-add')){
             WorksEditControlObject.rememberFieldsAfterEditing();
 
@@ -308,7 +351,62 @@ $(document).ready(function(){
         $('.sure-close').fadeOut();
         $('.sure-closes').fadeOut();
         $('.to-save').fadeOut();
+        */
 	});
+
+    $('body').on('click','.sure-close .close', function(e){
+
+        //alert(window.WorksEditControlObject);
+        //alert($('.add-works').hasClass('open-add'));
+        //WorksEditControlObject.rememberFieldsAfterEditing();
+        //alert(WorksEditControlObject.noChanges());
+
+
+        closePopupWindowLogic($(this).parent()[0],e);
+
+
+        /*
+
+        if(window.WorksEditControlObject && $('.add-works').hasClass('open-add')){
+            WorksEditControlObject.rememberFieldsAfterEditing();
+
+
+
+            if(!WorksEditControlObject.noChanges()){
+                $(this).find('.to-save').fadeIn();
+                return;
+            }
+        } else {
+
+            if(window.CategoryEditControlObject && $('.add-brands').hasClass('open-add')){
+
+                CategoryEditControlObject.rememberFieldsAfterEditing();
+
+                if(!CategoryEditControlObject.noChanges()){
+                    $(this).find('.to-save').fadeIn();
+                    return
+                }
+            }
+
+            //$(this).find('.to-save').fadeIn();
+        }
+
+
+        e.preventDefault();
+        e.stopPropagation();
+        enableScroll()
+        setTimeout(function(){
+            $('.aside-menu .inner-block').removeClass('blured');
+        },300);
+        $('.scroller__track').css('opacity','1');
+        $('.add-works').removeClass('open-add');
+        $('.add-brands').removeClass('open-add');
+        $('.sure-close').fadeOut();
+        $('.sure-closes').fadeOut();
+        $('.to-save').fadeOut();
+        */
+    });
+
 
 	$('body').on('click','.sure-closes', function(e){
 
@@ -991,6 +1089,8 @@ $(document).ready(function(){
 
     $('body').on('click','.close', function(e){
         e.stopPropagation();
+        //removed to apply new close logic
+        /*
         enableScroll()
         setTimeout(function(){
             $('.aside-menu .inner-block').removeClass('blured');
@@ -1001,6 +1101,7 @@ $(document).ready(function(){
         $('.sure-close').fadeOut();
         $('.sure-closes').fadeOut();
         $('.to-save').fadeOut();
+        */
     });
 
 
