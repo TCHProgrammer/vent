@@ -1462,7 +1462,11 @@ AppAsset::register($this);
                 return;
             }
 
-            if (!$(this).val() || $(this).val() == '') {
+            if ($(this).attr('name') == 'execution_time') {
+                return;
+            }
+
+            if (!$(this).val() || $(this).val() == '' || $(this).val() == 0) {
                 result = false;
             }
         });
@@ -1483,6 +1487,10 @@ AppAsset::register($this);
         $('#save-work-form .work-fields input').each(function () {
 
             if ($(this).attr('name') == 'total_composition_description') {
+                return;
+            }
+
+            if ($(this).attr('name') == 'execution_time') {
                 return;
             }
 
@@ -1517,7 +1525,7 @@ AppAsset::register($this);
                case 'work_types_id': $('.add-works__info').eq(4).find('div').eq(0).addClass('empty-required-field');break;
                case 'period_id': $('.add-works__info').eq(5).find('div').eq(0).addClass('empty-required-field');break;
                case 'checked_report_forms': $('.add-works__info').eq(8).find('div').eq(0).addClass('empty-required-field');break;
-               case 'execution_time': $('.time-tabs-pane').eq(0).addClass('empty-required-field');break;
+               //case 'execution_time': $('.time-tabs-pane').eq(0).addClass('empty-required-field');break;
                default: break;
            }
         });
