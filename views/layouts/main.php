@@ -1429,6 +1429,8 @@ AppAsset::register($this);
 
 
         $('.empty-required-field').removeClass('empty-required-field');
+        $('.empty-required-field-simple').removeClass('empty-required-field-simple');
+
 
         $('.add-works__info').eq(2).find('input').eq(0).css('border','').css('border-color','');
     }
@@ -1520,11 +1522,11 @@ AppAsset::register($this);
            switch(val){
                case 'categories_id': $('.add-works__info').eq(0).find('div').eq(0).addClass('empty-required-field');break;
                case 'brands_id': $('.add-works__info').eq(1).find('div').eq(0).addClass('empty-required-field');break;
-               case 'name': $('.add-works__info').eq(2).find('input').eq(0).addClass('empty-required-field').css('border-color','red').css('border','2px solid red');break;
+               case 'name': $('.add-works__info').eq(2).find('input').eq(0).addClass('empty-required-field');break;//.css('border-color','red').css('border','2px solid red');break;
                case 'worker_types_id': $('.add-works__info').eq(3).find('div').eq(0).addClass('empty-required-field');break;
                case 'work_types_id': $('.add-works__info').eq(4).find('div').eq(0).addClass('empty-required-field');break;
                case 'period_id': $('.add-works__info').eq(5).find('div').eq(0).addClass('empty-required-field');break;
-               case 'checked_report_forms': $('.add-works__info').eq(8).find('div').eq(0).addClass('empty-required-field');break;
+               case 'checked_report_forms': $('.add-works__info').eq(8).find('div').eq(0).addClass('empty-required-field-simple');break;
                //case 'execution_time': $('.time-tabs-pane').eq(0).addClass('empty-required-field');break;
                default: break;
            }
@@ -2089,6 +2091,8 @@ AppAsset::register($this);
         .on('click', '#save-work-form button[type="submit"]', function (e) {
 
             $('.empty-required-field').removeClass('empty-required-field');
+
+            $('.empty-required-field-simple').removeClass('empty-required-field-simple');
 
             $('.add-works__info').eq(2).find('input').eq(0).css('border','').css('border-color','');
 
