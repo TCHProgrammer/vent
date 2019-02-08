@@ -1529,13 +1529,13 @@ AppAsset::register($this);
 
         $.each(emptyRequiredFields, function(i,val){
            switch(val){
-               case 'categories_id': $('.add-works__info').eq(0).find('div').eq(0).addClass('empty-required-field');break;
-               case 'brands_id': $('.add-works__info').eq(1).find('div').eq(0).addClass('empty-required-field');break;
-               case 'name': $('.add-works__info').eq(2).find('input').eq(0).addClass('empty-required-field');break;//.css('border-color','red').css('border','2px solid red');break;
-               case 'worker_types_id': $('.add-works__info').eq(3).find('div').eq(0).addClass('empty-required-field');break;
-               case 'work_types_id': $('.add-works__info').eq(4).find('div').eq(0).addClass('empty-required-field');break;
-               case 'period_id': $('.add-works__info').eq(5).find('div').eq(0).addClass('empty-required-field');break;
-               case 'checked_report_forms': $('.add-works__info').eq(8).find('div').eq(0).addClass('empty-required-field-simple');break;
+               case 'categories_id': $('.add-works__info').eq(0).find('select').eq(0).addClass('error-type');break;
+               case 'brands_id': $('.add-works__info').eq(1).find('select').eq(0).addClass('error-type');break;
+               case 'name': $('.add-works__info').eq(2).find('input').eq(0).addClass('error-type');break;//.css('border-color','red').css('border','2px solid red');break;
+               case 'worker_types_id': $('.add-works__info').eq(3).find('select').eq(0).addClass('error-type');break;
+               case 'work_types_id': $('.add-works__info').eq(4).find('select').eq(0).addClass('error-type');break;
+               case 'period_id': $('.add-works__info').eq(5).find('select').eq(0).addClass('error-type');break;
+               case 'checked_report_forms': $('.add-works__info').eq(8).find('label').addClass('error-type');$('.add-works__info').eq(8).find('input').addClass('error-type');break;
                //case 'execution_time': $('.time-tabs-pane').eq(0).addClass('empty-required-field');break;
                default: break;
            }

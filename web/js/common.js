@@ -793,38 +793,52 @@ $(document).ready(function(){
     	$('.main-content__works-menu_selected').find('.brand').text(brand);
     });
 
-	$('select').styler({
- 		selectSmartPositioning: false,
- 		selectVisibleOptions: 10,
- 		onSelectOpened: function() {
- 			$(this).find('.jq-selectbox__select').addClass('active');
- 			$(this).find('.jq-selectbox__select').append('<div class="shadow"></div>');
- 			let height = $(this).find('.jq-selectbox__select').height() + $(this).find(".jq-selectbox__dropdown").height();
- 			$(this).find('.shadow').css({
- 				'height': height,
- 				'width': '100%',
- 				'position': 'absolute',
- 				'top': '0px',
- 				'left': '0px',
- 				'border-radius': '2px',
- 				'box-shadow': '0 0 6px #6d67f9'
- 			});
-			$(this).find(".jq-selectbox__dropdown ul").mCustomScrollbar({mouseWheelPixels: 300, scrollInertia: 100});
-			let self = $(this);
-			$(this).find('select').change(function(){
-				self.find('.jq-selectbox__select').addClass('change-select');
-			});
-			$('.select-razdel').find('.jq-selectbox__dropdown ul li').click(function(){
-				$('.select-brand').parents('.add-works__info').removeClass('disabled');
-                setSelectedBrand(0);
-			});
- 		},
- 		onSelectClosed: function() {
- 			$(this).find('.jq-selectbox__select').removeClass('active');
- 			$(this).find(".jq-selectbox__dropdown ul").mCustomScrollbar("destroy");
- 			$(this).find('.jq-selectbox__select').find('.shadow').remove();
- 		}
- 	});
+    $('select').styler({
+        selectSmartPositioning: false,
+        selectVisibleOptions: 10,
+        onSelectOpened: function() {
+
+            $(this).find('.jq-selectbox__select').addClass('active');
+            $(this).find('.jq-selectbox__select').append('<div class="shadow"></div>');
+            let height = $(this).find('.jq-selectbox__select').height() + $(this).find(".jq-selectbox__dropdown").height();
+            if ($(this).hasClass('error-type')) {
+                $(this).find('.shadow').css({
+                    'height': height,
+                    'width': '100%',
+                    'position': 'absolute',
+                    'top': '0px',
+                    'left': '0px',
+                    'border-radius': '2px',
+                    'box-shadow': '0 0 6px #ff4019'
+
+                });
+            } else {
+                $(this).find('.shadow').css({
+                    'height': height,
+                    'width': '100%',
+                    'position': 'absolute',
+                    'top': '0px',
+                    'left': '0px',
+                    'border-radius': '2px',
+                    'box-shadow': '0 0 6px #6d67f9'
+                });
+            }
+
+            $(this).find(".jq-selectbox__dropdown ul").mCustomScrollbar({mouseWheelPixels: 300, scrollInertia: 100});
+            let self = $(this);
+            $(this).find('select').change(function(){
+                self.find('.jq-selectbox__select').addClass('change-select');
+            });
+            $('.select-razdel').find('.jq-selectbox__dropdown ul li').click(function(){
+                $('.select-brand').parents('.add-works__info').removeClass('disabled');
+            });
+        },
+        onSelectClosed: function() {
+            $(this).find('.jq-selectbox__select').removeClass('active');
+            $(this).find(".jq-selectbox__dropdown ul").mCustomScrollbar("destroy");
+            $(this).find('.jq-selectbox__select').find('.shadow').remove();
+        }
+    });
 
 
 	function getPresentableNumber(number,max_digits_after_point){
