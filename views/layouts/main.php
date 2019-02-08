@@ -1428,11 +1428,7 @@ AppAsset::register($this);
         $('.add-works__info.inp .new-form .inputs input').remove();
 
 
-        $('.empty-required-field').removeClass('empty-required-field');
-        $('.empty-required-field-simple').removeClass('empty-required-field-simple');
-
-
-        $('.add-works__info').eq(2).find('input').eq(0).css('border','').css('border-color','');
+        $('.error-type').removeClass('error-type');
 
 
         SAVE_WORK_BUTTON_CLICKED = false;
@@ -1521,7 +1517,7 @@ AppAsset::register($this);
     function toBorderEmptyRequiredFields(){
 
         $('.error-type').removeClass('error-type');
-        $('.empty-required-field-simple').removeClass('error-type');
+
 
         /*
         $('select').styler({

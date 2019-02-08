@@ -1,13 +1,12 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 19, 2019 at 06:38 AM
--- Server version: 5.7.21-20-beget-5.7.21-20-1-log
--- PHP Version: 5.6.30
+-- Хост: 127.0.0.1:3306
+-- Время создания: Фев 08 2019 г., 16:40
+-- Версия сервера: 8.0.12
+-- Версия PHP: 7.1.22
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -20,22 +19,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `supporfm_ventyii`
+-- База данных: `vent`
 --
 
 --
--- Truncate table before insert `worker_types`
+-- Очистить таблицу перед добавлением данных `worker_types`
 --
 
 TRUNCATE TABLE `worker_types`;
 --
--- Dumping data for table `worker_types`
+-- Дамп данных таблицы `worker_types`
 --
 
 INSERT INTO `worker_types` (`id`, `name`, `symbole_code`, `priority`) VALUES
 (1, 'Механики', 'mech', 500),
-(3, 'Автоматчики', 'autom', 1000);
-SET FOREIGN_KEY_CHECKS=1;
+(3, 'Автоматчики', 'autom', 1000),
+(4, 'Тепловики', 'tepl', 1500),
+(6, 'Холодильщики', 'refrigeratorers', 2000),
+(8, 'Инженеры', 'ingenieers', 2500),
+(10, 'Менеджеры', 'managers', 3000);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
