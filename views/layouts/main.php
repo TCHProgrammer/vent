@@ -607,12 +607,15 @@ AppAsset::register($this);
 
         $('.add-brands__input input[name="name"]').attr('readonly',false).attr('to_edit','');
         $('.add-brands__input input[name="brand_name"]').attr('readonly',false);
+
+        $('.add-brands__input input[name="name"]').removeClass('error');
     }
 
     function getAjaxCategoryName(category_id){
 
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
 
         $.ajax({
             type: "POST",
@@ -635,6 +638,7 @@ AppAsset::register($this);
 
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
 
         $.ajax({
             type: "POST",
@@ -658,6 +662,7 @@ AppAsset::register($this);
 
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
 
         $.ajax({
             type: "POST",
@@ -682,6 +687,8 @@ AppAsset::register($this);
 
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
+
         $.ajax({
             type: "POST",
             url: "<?=Yii::$app->urlManager->createUrl('categories/get-ajax-brand-name')?>" + "?id=" + brand_id,
@@ -702,6 +709,8 @@ AppAsset::register($this);
 
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
+
         $.ajax({
             type: "POST",
             url: "<?=Yii::$app->urlManager->createUrl('categories/get-ajax-brand-name')?>" + "?id=" + brand_id,
@@ -722,6 +731,7 @@ AppAsset::register($this);
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
         $('.last-brand__input input[name="last_brand_id"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
 
         var category_id = $(element).attr('category_id');
         getAjaxCategoryName(category_id);
@@ -732,6 +742,7 @@ AppAsset::register($this);
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
         $('.last-brand__input input[name="last_brand_id"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
 
         var category_id = $(element).attr('category_id');
         getAjaxCategoryNameToEdit(category_id);
@@ -742,6 +753,7 @@ AppAsset::register($this);
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
         $('.last-brand__input input[name="last_brand_id"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
 
         var brand_id = $(element).attr('brand_id');
         getAjaxBrandName(brand_id);
@@ -751,6 +763,7 @@ AppAsset::register($this);
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
         $('.last-brand__input input[name="last_brand_id"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
 
         var brand_id = $(element).attr('brand_id');
         getAjaxBrandNameToCopyBrand(brand_id);
@@ -760,6 +773,7 @@ AppAsset::register($this);
         $('.add-brands__input input[name="name"]').val('');
         $('.add-brands__input input[name="brand_name"]').val('');
         $('.last-brand__input input[name="last_brand_id"]').val('');
+        $('.add-brands__input input[name="name"]').removeClass('error');
 
         var category_id = $(element).attr('category_id');
         getAjaxCategoryNameToAddBrand(category_id);
@@ -811,6 +825,7 @@ AppAsset::register($this);
         $('.add-brands__input input[name="brand_name"]').attr('readonly',false);
 
         if(!($('.add-brands__input input[name="name"]').val() && $('.add-brands__input input[name="name"]').val().trim() != '')){
+            $('.add-brands__input input[name="name"]').addClass('error');
             return;
         }
 
