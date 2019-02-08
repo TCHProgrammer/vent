@@ -4,14 +4,14 @@ IndexIgnore */*
 RewriteEngine on
 
 # if a directory or a file exists, use it directly
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteCond %{SERVER_PORT} ^80$ [OR]
+#RewriteCond %{SERVER_PORT} ^80$ [OR]
 RewriteCond %{HTTPS} !=on
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 # otherwise forward it to index.php
-RewriteRule . index.php
+#RewriteRule . index.php
 
 
