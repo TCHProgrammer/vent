@@ -78,7 +78,7 @@ class CategoriesController extends Controller
     public function actionCreate()
     {
         $model = new Categories();
-		if(isset(Yii::$app->request->post()["name"])){
+		if(isset(Yii::$app->request->post()["name"]) && !empty(Yii::$app->request->post()["name"]) && trim(Yii::$app->request->post()["name"]) != '' && Yii::$app->request->post()["name"]){
 			$model->name = Yii::$app->request->post()["name"];
 			
 			if ($model->save()) {

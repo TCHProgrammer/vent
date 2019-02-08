@@ -810,6 +810,10 @@ AppAsset::register($this);
         $('.add-brands__input input[name="name"]').attr('readonly',false);
         $('.add-brands__input input[name="brand_name"]').attr('readonly',false);
 
+        if(!($('.add-brands__input input[name="name"]').val() && $('.add-brands__input input[name="name"]').val().trim() != '')){
+            return;
+        }
+
         if(!$('.add-brands__input input[name="name"]').attr('category_id')) {
             $.post('<?=Yii::$app->urlManager->createUrl('categories/create')?>', {
                 name: $(".add-brands input[name='name']").eq(0).val(),
