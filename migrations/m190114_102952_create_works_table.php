@@ -23,7 +23,7 @@ class m190114_102952_create_works_table extends Migration
             'name' => $this->string(512),
             'brands_id' => $this->integer()->notNull(),
             'worker_types_id' => $this->integer()->notNull(),
-            'work_types_id' => $this->integer()->notNull(),
+            //'work_types_id' => $this->integer()->notNull(),
             'period_id' => $this->integer()->notNull(),
             'execution_time' => $this->integer(),
             'report_forms_id' => $this->integer()->notNull(),
