@@ -1690,7 +1690,7 @@ AppAsset::register($this);
 
         setTimeout(function(){
             $('.add-works__title .divide, .add-works__title .brand').text('');
-        },100)
+        },100);
 
 
     }

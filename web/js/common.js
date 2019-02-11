@@ -420,6 +420,14 @@ $(document).ready(function(){
 	});
 
 	$('body').on('click','.to-save .save', function(e){
+		if($('.add-works').hasClass('open-add') && !formToSendValidate()){
+			return;
+        }
+
+        if($('.add-brands').hasClass('open-add') && (!$('.add-brands__input input[name="name"]').val() || $('.add-brands__input input[name="name"]').val().trim() == '')){
+        	return;
+		}
+
 		e.preventDefault();
 		e.stopPropagation();
 		enableScroll()
