@@ -183,7 +183,7 @@ class Categories extends \yii\db\ActiveRecord
             foreach($children_map as $key=>$value){
 
                 foreach($value->brands as $brand_item){
-                   $result[] = $brand_item->getBrandCategoriesString();
+                   $result[] = array('id'=>$brand_item->id,'string'=>$brand_item->getBrandCategoriesString());
                 }
 
 
@@ -199,7 +199,7 @@ class Categories extends \yii\db\ActiveRecord
             foreach($children_map as $key=>$value){
 
                 foreach($value->brands as $brand_item){
-                    $result[] = $brand_item->getBrandCategoriesString();
+                    $result[] = array('id'=>$brand_item->id,'string'=>$brand_item->getBrandCategoriesString());
                 }
 
 

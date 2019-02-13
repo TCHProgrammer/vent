@@ -8,10 +8,11 @@ use app\models\Brands;
 <!--<div class="main-content">-->
 <!--
 <div>
-    <? //print_r(Brands::getAllBrandCategoriesStringsByNameOrder(7)); ?>
+    <? //print_r(Categories::displayCategoriesBrandsStrings()); ?>
 </div>
 <? //die(); ?>
 -->
+
 
 
 <div class="open-overlay"></div>

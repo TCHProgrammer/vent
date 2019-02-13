@@ -116,7 +116,7 @@ class Brands extends \yii\db\ActiveRecord
 
 
             foreach($brands as $brand_item){
-                $result[] = $brand_item->getBrandCategoriesString();
+                $result[$brand_item->id] = $brand_item->getBrandCategoriesString();
             }
         } else {
             $brands = Brands::find()->orderBy(array('name'=>SORT_ASC))->all();
@@ -124,7 +124,7 @@ class Brands extends \yii\db\ActiveRecord
 
             foreach($brands as $brand_item){
                 if($brand_item->category->categoryIsChild($parent_category_id)) {
-                    $result[] = $brand_item->getBrandCategoriesString();
+                    $result[$brand_item->id] = $brand_item->getBrandCategoriesString();
                 }
             }
         }
