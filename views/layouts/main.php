@@ -1775,7 +1775,7 @@ AppAsset::register($this);
                 total_composition_description:$('.add-works__info.op textarea').eq(0).val()
             };
 
-            
+
 
 
             var compositions_already_exists = [
