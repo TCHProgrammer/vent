@@ -215,6 +215,10 @@ class Categories extends \yii\db\ActiveRecord
     }
 
 
+
+
+
+
     public function getAllParentCategories(){
         $result = array();
 
@@ -225,6 +229,22 @@ class Categories extends \yii\db\ActiveRecord
                 array_unshift($result,$curr_parent);
             }
         } while($curr_parent = $curr_parent->parent);
+
+        return $result;
+    }
+
+
+    public function categoryIsChild($category_id){
+        $parent_categories = $this->getAllParentCategories();
+
+        $result = false;
+
+        foreach($parent_categories as $category_item){
+            if($category_item->id == $category_id){
+                $result = true;
+                break;
+            }
+        }
 
         return $result;
     }

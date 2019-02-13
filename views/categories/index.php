@@ -6,11 +6,12 @@ use app\models\Brands;
 
 ?>
 <!--<div class="main-content">-->
-
+<!--
 <div>
-    <? print_r(Categories::displayCategoriesBrandsStrings()); ?>
+    <? //print_r(Brands::getAllBrandCategoriesStringsByNameOrder(7)); ?>
 </div>
-<? die(); ?>
+<? //die(); ?>
+-->
 
 
 <div class="open-overlay"></div>

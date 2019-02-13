@@ -105,4 +105,32 @@ class Brands extends \yii\db\ActiveRecord
 
         return $result;
     }
+
+
+    static public function getAllBrandCategoriesStringsByNameOrder($parent_category_id=null){
+
+        $result = array();
+
+        if($parent_category_id === null){
+            $brands = Brands::find()->orderBy(array('name'=>SORT_ASC))->all();
+
+
+            foreach($brands as $brand_item){
+                $result[] = $brand_item->getBrandCategoriesString();
+            }
+        } else {
+            $brands = Brands::find()->orderBy(array('name'=>SORT_ASC))->all();
+
+
+            foreach($brands as $brand_item){
+                if($brand_item->category->categoryIsChild($parent_category_id)) {
+                    $result[] = $brand_item->getBrandCategoriesString();
+                }
+            }
+        }
+
+
+
+        return $result;
+    }
 }
