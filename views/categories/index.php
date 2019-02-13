@@ -6,12 +6,12 @@ use app\models\Brands;
 
 ?>
 <!--<div class="main-content">-->
-<!--
+
 <div>
-    <? //echo Categories::displayCategoriesMap(); ?>
+    <? print_r(Categories::displayCategoriesBrandsStrings()); ?>
 </div>
-<? //die(); ?>
--->
+<? die(); ?>
+
 
 <div class="open-overlay"></div>
 <div class="main-content__search-block">

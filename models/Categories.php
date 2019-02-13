@@ -65,15 +65,17 @@ class Categories extends \yii\db\ActiveRecord
         orderBy(['name' => SORT_ASC]);
     }
 
-    static public function getChildrenMap($id=null){
+    static public function getChildrenMap($id=null, $onlyFirstLevelChildren=false){
         $result = array();
 
         if($id === null){
             $list = Categories::find()->where('parent_id IS NULL')->orderBy(array('name'=>SORT_ASC))->all();
 
             foreach($list as $item){
-                $result[$item->id] = self::getChildrenMap($item->id);
-                $result[$item->id]['brands'] = $item->brands;
+                $result[$item->id] = $onlyFirstLevelChildren === false?self::getChildrenMap($item->id):$item;
+                if($onlyFirstLevelChildren === false) {
+                    $result[$item->id]['brands'] = $item->brands;
+                }
             }
 
 
@@ -83,14 +85,20 @@ class Categories extends \yii\db\ActiveRecord
                 $list = Categories::find()->where(array('parent_id'=>$model->id))->orderBy(array('name'=>SORT_ASC))->all();
 
                 foreach($list as $item){
-                    $result[$item->id] = self::getChildrenMap($item->id);
-                    $result[$item->id]['brands'] = $item->brands;
+                    $result[$item->id] = $onlyFirstLevelChildren === false?self::getChildrenMap($item->id):$item;
+                    if($onlyFirstLevelChildren === false) {
+                        $result[$item->id]['brands'] = $item->brands;
+                    }
                 }
 
-                $result['brands'] = $model->brands;
+                if($onlyFirstLevelChildren === false) {
+                    $result['brands'] = $model->brands;
+                }
 
             } else  {
-                $result['brands'] = $model->brands;
+                if($onlyFirstLevelChildren === false) {
+                    $result['brands'] = $model->brands;
+                }
             }
         }
 
@@ -103,12 +111,12 @@ class Categories extends \yii\db\ActiveRecord
         $result = '';
 
         if($id === null){
-            $children_map = self::getChildrenMap();
+            $children_map = self::getChildrenMap(null,true);
 
             foreach($children_map as $key=>$value){
                 $result .= '<div class="main-category">';
                 $result .= '<div class="main-category-title">';
-                $result .= Categories::findOne($key)->name;
+                $result .= $value->name;
                 $result .= '</div>';
                 $result .= '<div class="category-children">';
                 $result .= self::displayCategoriesMap($key);
@@ -118,7 +126,7 @@ class Categories extends \yii\db\ActiveRecord
 
                 $result .= '<div category-brands>';
 
-                foreach(Categories::findOne($key)->brands as $brand_item){
+                foreach($value->brands as $brand_item){
                     $result .= '<div class="brand">'.$brand_item->name.'</div>';
                 }
 
@@ -129,7 +137,7 @@ class Categories extends \yii\db\ActiveRecord
 
 
         } else {
-            $children_map = self::getChildrenMap($id);
+            $children_map = self::getChildrenMap($id,true);
 
             foreach($children_map as $key=>$value){
 
@@ -139,7 +147,7 @@ class Categories extends \yii\db\ActiveRecord
 
                 $result .= '<div class="category">';
                 $result .= '<div class="category-title">';
-                $result .= Categories::findOne($key)->name;
+                $result .= $value->name;
                 $result .= '</div>';
                 $result .= '<div class="category-children">';
                 $result .= self::displayCategoriesMap($key);
@@ -148,7 +156,7 @@ class Categories extends \yii\db\ActiveRecord
 
                 $result .= '<div category-brands>';
 
-                foreach(Categories::findOne($key)->brands as $brand_item){
+                foreach($value->brands as $brand_item){
                     $result .= '<div class="brand">'.$brand_item->name.'</div>';
                 }
 
@@ -162,6 +170,63 @@ class Categories extends \yii\db\ActiveRecord
 
         return $result;
 
+    }
+
+
+    static public function displayCategoriesBrandsStrings($id=null){
+
+        $result = array();
+
+        if($id === null){
+            $children_map = self::getChildrenMap(null,true);
+
+            foreach($children_map as $key=>$value){
+
+                foreach($value->brands as $brand_item){
+                   $result[] = $brand_item->getBrandCategoriesString();
+                }
+
+
+                $result = array_merge($result,self::displayCategoriesBrandsStrings($key));
+
+            }
+
+
+
+        } else {
+            $children_map = self::getChildrenMap($id,true);
+
+            foreach($children_map as $key=>$value){
+
+                foreach($value->brands as $brand_item){
+                    $result[] = $brand_item->getBrandCategoriesString();
+                }
+
+
+                $result = array_merge($result,self::displayCategoriesBrandsStrings($key));
+
+            }
+
+
+        }
+
+        return $result;
+
+    }
+
+
+    public function getAllParentCategories(){
+        $result = array();
+
+        $curr_parent = $this->parent;
+
+        do{
+            if($curr_parent){
+                array_unshift($result,$curr_parent);
+            }
+        } while($curr_parent = $curr_parent->parent);
+
+        return $result;
     }
 
 

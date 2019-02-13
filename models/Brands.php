@@ -77,4 +77,32 @@ class Brands extends \yii\db\ActiveRecord
         return $works;
 
     }
+
+    public function getBrandParentCategories(){
+        $category = $this->category;
+
+        $parent_categories = $category->getAllParentCategories();
+
+        $parent_categories[] = $category;
+
+        return $parent_categories;
+    }
+
+    public function getBrandCategoriesString(){
+        $parent_categories = $this->getBrandParentCategories();
+
+        $result = '';
+
+        foreach($parent_categories as $k=>$value){
+            if($k == 0){
+                $result .= $value->name;
+            } else {
+                $result .= '|'.$value->name;
+            }
+        }
+
+        $result .= '|'.$this->name;
+
+        return $result;
+    }
 }
