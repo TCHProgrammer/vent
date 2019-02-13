@@ -88,7 +88,7 @@ class Brands extends \yii\db\ActiveRecord
         return $parent_categories;
     }
 
-    public function getBrandCategoriesString(){
+    public function getBrandCategoriesString($only_categories=false){
         $parent_categories = $this->getBrandParentCategories();
 
         $result = '';
@@ -101,13 +101,15 @@ class Brands extends \yii\db\ActiveRecord
             }
         }
 
-        $result .= '|'.$this->name;
+        if($only_categories === false) {
+            $result .= '|' . $this->name;
+        }
 
         return $result;
     }
 
 
-    static public function getAllBrandCategoriesStringsByNameOrder($parent_category_id=null){
+    static public function getAllBrandCategoriesStringsByNameOrder($parent_category_id=null,$only_categories=false){
 
         $result = array();
 
@@ -130,6 +132,58 @@ class Brands extends \yii\db\ActiveRecord
         }
 
 
+
+        return $result;
+    }
+
+    static private function getBrandsByName($name){
+        $result = self::find()->where(array('like', 'name', $name, false))->all();
+        return $result;
+    }
+
+    static private function getBrandsGroupByName(){
+        $rows = (new \yii\db\Query())
+            ->select(['UPPER(name) as name'])
+            ->from('brands')
+            ->groupBy('name')
+            ->orderBy('name')
+            ->all();
+
+        return $rows;
+    }
+
+    static private function getBrandCategoriesStringsByBrandName($name, $parent_category_id=null){
+
+        $result = array();
+
+        $brands = self::getBrandsByName($name);
+
+        if($parent_category_id !== null) {
+            foreach ($brands as $brand_item) {
+                if ($brand_item->category->categoryIsChild($parent_category_id)) {
+                    $result[] = $brand_item->getBrandCategoriesString();
+                }
+            }
+        } else {
+            foreach ($brands as $brand_item) {
+
+                    $result[] = $brand_item->getBrandCategoriesString();
+
+            }
+        }
+
+        return $result;
+    }
+
+    static public function getBrandNamesCategories($parent_category_id=null){
+
+        $result = array();
+
+        $brand_names = self::getBrandsGroupByName();
+
+        foreach($brand_names as $brand_name_item){
+            $result[] = array('name'=>$brand_name_item['name'], 'categories'=>self::getBrandCategoriesStringsByBrandName($brand_name_item['name'],$parent_category_id));
+        }
 
         return $result;
     }
