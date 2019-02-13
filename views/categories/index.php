@@ -6,6 +6,13 @@ use app\models\Brands;
 
 ?>
 <!--<div class="main-content">-->
+<!--
+<div>
+    <? //echo Categories::displayCategoriesMap(); ?>
+</div>
+<? //die(); ?>
+-->
+
 <div class="open-overlay"></div>
 <div class="main-content__search-block">
     <div class="main-content__page-title">
@@ -74,6 +81,7 @@ use app\models\Brands;
 
     <?$categories = Categories::find()->orderBy('name')->all();?>
 
+
     <?foreach($categories as $cat_index=>$category):?>
 
     <div class="main-content__categories-item">
@@ -91,6 +99,8 @@ use app\models\Brands;
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13" height="8" viewBox="0 0 13 8"><defs><path id="ldxya" d="M334.59 239.531a1.5 1.5 0 0 1-2.121-2.121l4.961-4.962a1.495 1.495 0 0 1 1.07-.439c.387-.002.775.144 1.07.44l4.961 4.96a1.5 1.5 0 0 1-2.121 2.122l-3.91-3.91z"/></defs><g><g transform="translate(-332 -232)"><use fill="#232226" xlink:href="#ldxya"/></g></g></svg>
             </div>
             <div class="title"><?=$category->name;?></div>
+            <!--<div class="title"><? //var_dump($category->children);?></div>-->
+
 
             <div class="item-control__menu">
                 <a href="#" class="tooltiped">
