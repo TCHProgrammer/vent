@@ -215,7 +215,19 @@ class Categories extends \yii\db\ActiveRecord
     }
 
 
+    static public function getLevelCategories($level=1){
+        $result = array();
 
+        $categories = Categories::find()->orderBy(array('name'=>SORT_ASC))->all();
+
+        foreach($categories as $category_item){
+            if(count($category_item->getAllParentCategories()) + 1 == $level){
+                $result[$category_item->id] = $category_item;
+            }
+        }
+
+        return $result;
+    }
 
 
 

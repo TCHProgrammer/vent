@@ -8,7 +8,7 @@ use app\models\Brands;
 <!--<div class="main-content">-->
 <!--
 <div>
-    <? //print_r(Categories::displayCategoriesBrandsStrings()); ?>
+    <? //print_r(Categories::getLevelCategories(1)); ?>
 </div>
 <? //die(); ?>
 -->
