@@ -1771,8 +1771,11 @@ AppAsset::register($this);
                 name : $('.add-works__info').eq(2).find('input').val(),
                 work_types_id : getSelectedWorkTypeId(),
                 worker_types_id : getSelectedWorkerTypeId(),
-                execution_time: getWorkTimeInMinutes()
+                execution_time: getWorkTimeInMinutes(),
+                total_composition_description:$('.add-works__info.op textarea').eq(0).val()
             };
+
+            
 
 
             var compositions_already_exists = [
